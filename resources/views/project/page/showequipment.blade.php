@@ -90,12 +90,12 @@
 <p>
 </div>
 <strong>ภาพอุปกรณ์  </strong>
-<h1><img src="{{asset('upload/repair/')}}/{{$v->photo_repair}}" class="w3-border w3-padding-4 w3-padding-tiny" alt="Norway" style="width:50%"></h1></p>
+<h1><img src="{{asset('upload/repair/')}}/{{$v->photo_repair}}" class="w3-border w3-padding-4 w3-padding-tiny" alt="Norway" style="width:30%"></h1></p>
 </div>
 <footer class="w3-container w3-blue">
  <!-- <p><center><button class="w3-btn w3-pink"><a href="{{url('/record')}}">บันทึกการซ่อม</a></button></center></p> -->
 
- <form action="{{url('/record')}}" method="get">
+ <form action="{{url('sh/recordequipment')}}/{{$v->id}}" method="get">
  <p><center><button class="w3-btn w3-pink">บันทึกการซ่อม</button></center></p>
  </form>
 </footer>

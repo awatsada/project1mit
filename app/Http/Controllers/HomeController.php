@@ -15,6 +15,9 @@ use App\Http\Controllers\Controller;
 use App\NameEquipment;
 use App\Equipment;
 use App\Equipmentdetail;
+use App\Change;
+use App\repair;
+use App\unrepair;
 class HomeController extends Controller
 {
     /**
@@ -78,11 +81,108 @@ class HomeController extends Controller
     }
 
 
-    public function record()
-    {   
+    // public function record()
+    // {   
    
-        return view('project/page/record');
+    //     return view('project/page/record');
+    // }
+
+
+    public function record($id)
+    {   
+        $user1 = Equipmentdetail::where('id',$id)->first();
+        return view('project/page/record')->with('user1',$user1);
     }
+
+
+    // public function saverecord($id)
+    // {   
+    //     $recordequipment = new Recordequipment;
+    //     $equipment = Equipment::all();
+    //     $user1 = Equipmentdetail::where('id',$id)->first();
+    //     // dd($user1);
+    //     // echo $user1;
+    //     $a=$user1->id;
+    //     // echo $a;
+    //     $b=Equipment::where('id_equipment',$a)->first();
+    //     // echo $b;
+    //     $c=($b->id_user);
+    //     // echo $c;
+    //     // dd('stop');
+
+    //     $recordequipment->id_user = $c;
+    //     $recordequipment->id_equipmentdetail = $id;
+    //     $recordequipment->date_finish_repair = date("Y-m-d");
+    //     $recordequipment->date_depart_equipment = date("Y-m-d");
+    //     $recordequipment->detail_repair = input::get('list_detail_repair');
+    //     $recordequipment->detail_use_equipment = input::get('list_use_equipment');
+    //     $recordequipment->name_technical = Auth::user()->name;
+    //     $recordequipment->name_technical_depart = Auth::user()->name;
+    //     $recordequipment->status = input::get('status');
+    //     $recordequipment->save();
+
+    //     return view('project/index')->with('equipment',$equipment);
+    // }
+
+    public function saverecord($id)
+    {   
+        $change = new Change;
+        $repair = new Repair;
+        $unrepair = new Unrepair;
+        $equipment = Equipment::all();
+        $user1 = Equipmentdetail::where('id',$id)->first();
+        // dd($user1);
+        // echo $user1;
+        $a=$user1->id;
+        // echo $a;
+        $b=Equipment::where('id_equipment',$a)->first();
+        // echo $b;
+        $c=($b->id_user);
+        // echo $c;
+        // dd('stop');
+
+        if (input::get('status')=="change") 
+        {
+        $change->id_user = $c;
+        $change->id_equipmentdetail = $id;
+        $change->date_finish_repair = date("Y-m-d");
+        $change->date_depart_equipment = date("Y-m-d");
+        $change->detail_repair = input::get('list_detail_repair');
+        $change->detail_use_equipment = input::get('list_use_equipment');
+        $change->name_technical = Auth::user()->name;
+        $change->name_technical_depart = Auth::user()->name;
+        $change->save();
+        }
+
+        if (input::get('status')=="repair") 
+        {
+        $repair->id_user = $c;
+        $repair->id_equipmentdetail = $id;
+        $repair->date_finish_repair = date("Y-m-d");
+        $repair->date_depart_equipment = date("Y-m-d");
+        $repair->detail_repair = input::get('list_detail_repair');
+        $repair->detail_use_equipment = input::get('list_use_equipment');
+        $repair->name_technical = Auth::user()->name;
+        $repair->name_technical_depart = Auth::user()->name;
+        $repair->save();
+        }        
+
+        if (input::get('status')=="unrepair") 
+        {
+        $unrepair->id_user = $c;
+        $unrepair->id_equipmentdetail = $id;
+        $unrepair->date_finish_repair = date("Y-m-d");
+        $unrepair->date_depart_equipment = date("Y-m-d");
+        $unrepair->detail_repair = input::get('list_detail_repair');
+        $unrepair->detail_use_equipment = input::get('list_use_equipment');
+        $unrepair->name_technical = Auth::user()->name;
+        $unrepair->name_technical_depart = Auth::user()->name;
+        $unrepair->save();
+        }
+
+        return view('project/index')->with('equipment',$equipment);
+    }
+
 
 
     public function savefix(Request $data)

@@ -233,9 +233,7 @@
             <br>
         </form>
         <br>
-        <br>
-        <br>
-        <br>
+      
     </div>
 
     <h1 style="background-color:#FFFFCC" class="w3-center">  </h1>

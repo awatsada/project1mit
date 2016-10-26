@@ -54,10 +54,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('fix', 'HomeController@fix');
     Route::post('fixxx', 'HomeController@savefix');
 
-    Route::get('record', 'HomeController@record');
+    
     Route::get('show', 'HomeController@show');
     Route::get('sh/equipment/{id}', 'HomeController@showequipment');
+
+    Route::get('sh/recordequipment/{id}', 'HomeController@record');
     // Route::get('sh/rocord/{id}', 'HomeController@record');
+    Route::post('record/{id}', 'HomeController@saverecord');
 
     Route::post('search', 'HomeController@search');
 

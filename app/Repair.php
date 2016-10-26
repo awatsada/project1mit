@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Recordequipment extends Model
+class Repair extends Model
 {
     //
 }

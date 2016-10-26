@@ -37,21 +37,25 @@
     <br>
    </div>
 
+{{$user1}}
+
+
+
 
 
    <br>
    <div class="w3-content" style="max-width:800px">
     <br>
 
-    <form class="w3-container">
+
 
 <h3 class="w3-text-blue">รายละเอียดการซ่อม</h3>     
-<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-     
-     <form method="post">
 
-        
-        <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายละเอียดการซ่อม" ></textarea>
+     
+     <form action="{{url('record/')}}/{{$user1->id}}" method="post">
+
+  <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">      
+        <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายละเอียดการซ่อม" name="list_detail_repair"></textarea>
 
 
 
@@ -63,7 +67,7 @@
        <p>ช่างผู้ดำเนินงาน :</p>
       </div>
       <div class="w3-col m10">
-       <input class="w3-input w3-animate-input" type="text" style="width:70%"></p>
+       <input class="w3-input w3-animate-input" value="{{ Auth::user()->name }}" type="text" style="width:70%"></p>
       </div>
      </div>
        
@@ -81,7 +85,7 @@
 
 
 
-      </form>
+ 
 
 
 
@@ -89,14 +93,14 @@
 
 
 
- <form class="w3-container">
+
 
 <h3 class="w3-text-blue">รายการเบิกอุปกรณ์</h3>     
-<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-     
-     <form method="post">
 
-        <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายการเบิกอุปกรณ์"></textarea>
+     
+   
+
+        <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายการเบิกอุปกรณ์" name="list_use_equipment" ></textarea>
 
        
 
@@ -107,7 +111,7 @@
        <p>ลงชื่อผู้เบิกของ :</p>
       </div>
       <div class="w3-col m10">
-       <input class="w3-input w3-animate-input" type="text" style="width:70%"></p>
+       <input class="w3-input w3-animate-input" value="{{ Auth::user()->name }}" type="text" style="width:70%"></p>
       </div>
      </div>
        
@@ -129,21 +133,21 @@
               <h3 class="w3-text-blue">สถานะการซ่อม</h3>
             
               <p>
-                <input class="w3-radio" type="radio" name="gender" value="male" checked>
+                <input class="w3-radio" type="radio" name="status" value="repair" checked>
                 <label class="w3-validate">ซ่อม</label></p>
        
                 <p>
-                  <input class="w3-radio" type="radio" name="gender" value="male" checked>
-                  <label class="w3-validate">เปลี่ยน</label></p>
+                  <input class="w3-radio" type="radio" name="status" value="unrepair" checked>
+                  <label class="w3-validate">ซ่อมไม่ได้</label></p>
            
                 <p>
-                  <input class="w3-radio" type="radio" name="gender" value="male" checked>
-                  <label class="w3-validate">ซ่อมไม่ได้</label></p>
+                  <input class="w3-radio" type="radio" name="status" value="change" checked>
+                  <label class="w3-validate">เปลี่ยน</label></p>
               
 </div>
 
 
-      </form>
+     
 
 
       
@@ -167,10 +171,10 @@
                 </div>
                 <div class="w3-col m6">
                   <!-- <a href="w3css_templates.asp" class="w3-btn w3-padding-12 w3-dark-grey" style="width:98.5%">ย้อนกลับ</a> -->
-                  <center><p><button class="w3-btn w3-padding-12 w3-red" type="submit" style="width:80%" >ย้อนกลับ</button></p></center>
+                  <center><p><button class="w3-btn w3-padding-12 w3-red" style="width:80%" >ย้อนกลับ</button></p></center>
                 </div>
               </div>
-
+ </form>
        <br>
        <br>
 </div>

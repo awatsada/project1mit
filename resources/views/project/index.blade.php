@@ -156,7 +156,7 @@ input[type=searchh]:focus {
     <h2>รายการซ่อมเสร็จ</h2>
     <table class="w3-table w3-striped w3-border">
       <thead>
-        <tr class="w3-red">
+        <tr class="w3-green">
           <th>ลำดับ</th>
           <th>ห้อง</th>
           <th>วันที่เจ้งซ่อม</th>
@@ -186,7 +186,7 @@ input[type=searchh]:focus {
     <h2>รายการซ่อมไม่ได้</h2>
     <table class="w3-table w3-striped w3-border">
       <thead>
-        <tr class="w3-red">
+        <tr class="w3-pink">
           <th>ลำดับ</th>
           <th>ห้อง</th>
           <th>วันที่เจ้งซ่อม</th>

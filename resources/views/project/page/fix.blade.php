@@ -88,7 +88,7 @@
 							<p><label>ห้อง </label></p>
 						</div>
 						<div class="w3-col m11">
-							<input class="w3-input w3-animate-input" name="num_room" type="text" style="width:70%" value="2222">
+							<input class="w3-input w3-animate-input" name="num_room" type="text" style="width:70%" value="2325">
 						</div>
 					</div>
 
@@ -153,10 +153,10 @@
 
 
 
-									อุปกรณ์ <input class="w3-input w3-animate-input" id="tags" name="eq0" value="sss" type="text"  style="width:70%" /></div>
+									อุปกรณ์ <input class="w3-input w3-animate-input" id="tags" name="eq0"  type="text"  style="width:70%" /></div>
 									<br>
 									<i> รายละเอียดและปัญหา</i>  
-									<input class="w3-input w3-animate-input" name="eqdetail0" value="aaa" type="text"  style="width:70%" />
+									<input class="w3-input w3-animate-input" name="eqdetail0" type="text"  style="width:70%" />
 									<br>
 
 									<input type="file" multiple="" name="eqpho0"><br><br> 
