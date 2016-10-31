@@ -165,8 +165,10 @@ input[type=searchh]:focus {
           <th>สถานะ</th>
         </tr>
       </thead>
-      @foreach($equipment as $v) 
 
+
+      @foreach($equipment as $v) 
+   
       <tr>       
         <td>{{$v->id_equipment}}</td>
         <td>{{$v->num_room}}</td>
@@ -189,25 +191,47 @@ input[type=searchh]:focus {
         <tr class="w3-pink">
           <th>ลำดับ</th>
           <th>ห้อง</th>
-          <th>วันที่เจ้งซ่อม</th>
+          <th>วันที่แจ้งซ่อม</th>
           <th>วันที่ซ่อมได้</th>
           <th>เวลาที่ซ่อมได้</th>
           <th>สถานะ</th>
         </tr>
-      </thead>
-      @foreach($equipment as $v) 
+      </thead> 
+      
+      
+      @foreach($unrepair as $w) 
+      {
 
-      <tr>       
-        <td>{{$v->id_equipment}}</td>
-        <td>{{$v->num_room}}</td>
-        <td>{{$v->date_in}}</td>
-        <td>{{$v->date_repair}}</td>
-        <td>{{$v->time_repair}}</td>
-        <td>ซ่อมไม่ได้</td>
-      </tr>
 
+      @foreach($equipmentdetail as $x)
+      {
+       @if($w->id_equipmentdetail==$x->id_equipmentdetail)
+  {
+  {{$x->id_equipmentdetail}}
+ <!--  @foreach($equipment as $v)
+  @if($x->id_equipment==$v->id_equipment) -->
+      <!-- <tr>       
+        <td>{{$x->id_equipment}}</td> -->
+       <!--  <td>{{$x->num_room}}</td>
+        <td>{{$x->date_in}}</td>
+        <td>{{$x->date_repair}}</td>
+        <td>{{$x->time_repair}}</td> -->
+      <!--   <td>ซ่อมไม่ได้</td>
+      </tr> -->
+ <!-- 
+      @endif
+      @endforeach -->
+  }
+      @endif
+      }
+
+ 
 
       @endforeach
+
+ }
+      @endforeach
+
     </table>
   </div>
 

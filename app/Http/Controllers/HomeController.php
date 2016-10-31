@@ -38,7 +38,11 @@ class HomeController extends Controller
     public function index()
     {
         $equipment = Equipment::all();
-        return view('project/index')->with('equipment',$equipment);
+        $equipmentdetail = Equipmentdetail::all();
+        $change = Change::all();
+        $repair = Repair::all();
+        $unrepair = Unrepair::all();
+        return view('project/index')->with('equipment',$equipment)->with('equipmentdetail',$equipmentdetail)->with('change',$change)->with('repair',$repair)->with('unrepair',$unrepair);
     }
 
 

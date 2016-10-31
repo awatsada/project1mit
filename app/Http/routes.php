@@ -34,6 +34,12 @@ Route::get('shr', function(){
 Route::get('she', function(){
     return view('project/page/showequipment');
 });
+
+Route::get('pdf', function () {
+    $pdf = PDF::loadView('pdf');
+    return $pdf->stream('archivo.pdf');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
