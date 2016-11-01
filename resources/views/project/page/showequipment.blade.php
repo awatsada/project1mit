@@ -38,7 +38,7 @@
 
 
   <div class="w3-container w3-padding-32" style="padding-left:32px">
-    <h2>รายละเอียดการแจ้งซ่อมทั่วไป</h2> <a href="{{url('getpdf')}}/{{$user->id_equipment}}">Export to PDF</a>
+    <h2>รายละเอียดการแจ้งซ่อมทั่วไป</h2> <a href="{{url('getpdf')}}/{{$user->id_equipment}}">Export PDF</a>
     <hr>
     <div class="w3-container w3-sand w3-leftbar">
       <p><strong>ลำดับ : </strong><i>{{$user->id_equipment}}</i></p>

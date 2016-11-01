@@ -1,23 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
 
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
+<meta http-equiv="Content-Language" content="th"> 
+<meta http-equiv="content-Type" content="text/html; charset=window-874"> 
+<meta http-equiv="content-Type" content="text/html; charset=tis-620"> 
 
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
 </head>
 <body>
 

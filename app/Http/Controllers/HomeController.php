@@ -52,10 +52,10 @@ class HomeController extends Controller
         $user = Equipment::where('id_equipment',$id)->first();
         $user1 = Equipmentdetail::where('id_equipment',$id)->get();
         
+        // return view('project/page/getpdf')->with('user',$user)->with('user1',$user1);
 
         $pdf = PDF::loadView('project/page/getpdf',compact('user','user1'));
         return $pdf->stream('equipment.pdf');
-
     }
 
 
