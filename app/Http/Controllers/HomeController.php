@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 use Auth;
+use PDF;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -43,6 +44,18 @@ class HomeController extends Controller
         $repair = Repair::all();
         $unrepair = Unrepair::all();
         return view('project/index')->with('equipment',$equipment)->with('equipmentdetail',$equipmentdetail)->with('change',$change)->with('repair',$repair)->with('unrepair',$unrepair);
+    }
+
+
+    public function getPDF($id)
+    {
+        $user = Equipment::where('id_equipment',$id)->first();
+        $user1 = Equipmentdetail::where('id_equipment',$id)->get();
+        
+
+        $pdf = PDF::loadView('project/page/getpdf',compact('user','user1'));
+        return $pdf->stream('equipment.pdf');
+
     }
 
 
@@ -98,35 +111,6 @@ class HomeController extends Controller
         return view('project/page/record')->with('user1',$user1);
     }
 
-
-    // public function saverecord($id)
-    // {   
-    //     $recordequipment = new Recordequipment;
-    //     $equipment = Equipment::all();
-    //     $user1 = Equipmentdetail::where('id',$id)->first();
-    //     // dd($user1);
-    //     // echo $user1;
-    //     $a=$user1->id;
-    //     // echo $a;
-    //     $b=Equipment::where('id_equipment',$a)->first();
-    //     // echo $b;
-    //     $c=($b->id_user);
-    //     // echo $c;
-    //     // dd('stop');
-
-    //     $recordequipment->id_user = $c;
-    //     $recordequipment->id_equipmentdetail = $id;
-    //     $recordequipment->date_finish_repair = date("Y-m-d");
-    //     $recordequipment->date_depart_equipment = date("Y-m-d");
-    //     $recordequipment->detail_repair = input::get('list_detail_repair');
-    //     $recordequipment->detail_use_equipment = input::get('list_use_equipment');
-    //     $recordequipment->name_technical = Auth::user()->name;
-    //     $recordequipment->name_technical_depart = Auth::user()->name;
-    //     $recordequipment->status = input::get('status');
-    //     $recordequipment->save();
-
-    //     return view('project/index')->with('equipment',$equipment);
-    // }
 
     public function saverecord($id)
     {   

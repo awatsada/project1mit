@@ -70,6 +70,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::post('search', 'HomeController@search');
 
+    Route::get('getpdf/{id}', 'HomeController@getPDF');
+
 
 
 
