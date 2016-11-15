@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUnrepairTable extends Migration
+class CreateRepairEquipmentdetailTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,16 @@ class CreateUnrepairTable extends Migration
      */
     public function up()
     {
-        Schema::create('unrepairs', function (Blueprint $table) {
+        Schema::create('repair_equipmentdetails', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('id_repairequipment')->unsigned();
+            $table->foreign('id_repairequipment')->references('id')->on('repair_equipments')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('photo_repair',20);
+            $table->string('equiment',100);
+            $table->string('detail_equiment',300);
 
-            $table->integer('id_user')->unsigned();
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('id_equipmentdetail')->unsigned();
-            $table->foreign('id_equipmentdetail')->references('id')->on('equipment_details')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('id_usersaverepair')->unsigned();
+            $table->foreign('id_usersaverepair')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->date('date_finish_repair');
             $table->date('date_depart_equipment');
             $table->string('detail_repair',500);
@@ -37,6 +40,6 @@ class CreateUnrepairTable extends Migration
      */
     public function down()
     {
-        Schema::drop('unrepairs');
+        Schema::drop('repair_equipmentdetails');
     }
 }

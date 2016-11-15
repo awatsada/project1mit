@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('in', function () {
     return view('project/page/inindex');
 });
@@ -21,7 +22,6 @@ Route::get('in', function () {
 Route::get('fixx', function(){
     return view('project/page/fix');
 });
-
 
 Route::get('re', function(){
     return view('project/page/record');
@@ -33,6 +33,10 @@ Route::get('shr', function(){
 
 Route::get('she', function(){
     return view('project/page/showequipment');
+});
+
+Route::get('st', function(){
+    return view('project/page/stat');
 });
 
 Route::get('pdf', function () {
@@ -54,6 +58,8 @@ Route::get('pdf', function () {
 
 
 Route::group(['middleware' => 'web'], function () {
+    
+
     Route::auth();
 
     Route::get('home', 'HomeController@index');
@@ -66,13 +72,11 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('sh/recordequipment/{id}', 'HomeController@record');
     // Route::get('sh/rocord/{id}', 'HomeController@record');
-    Route::post('record/{id}', 'HomeController@saverecord');
+    Route::post('record/{id}', 'SaverepairController@saverecord');
 
     Route::post('search', 'HomeController@search');
 
     Route::get('getpdf/{id}', 'HomeController@getPDF');
-
-
 
 
 });

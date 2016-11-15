@@ -4,46 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-deep-purple.css"> -->
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-
-<link rel="stylesheet" href="{{url('w3css/w3.css')}}">
-<link rel="stylesheet" href="{{url('w3css/w3-theme-deep-purple.css')}}">
-<!-- <link rel="stylesheet" href="w3css/font-awesome.min.css"> -->
-
-
-<!--  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"> -->
-
-
-
-<!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
-
-
-
-<link rel="stylesheet" href="{{url('jquery/jquery-ui.css')}}"> 
+  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-deep-purple.css"> -->
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{{url('w3css/w3.css')}}">
+  <link rel="stylesheet" href="{{url('w3css/w3-theme-deep-purple.css')}}">
+  <!-- <link rel="stylesheet" href="w3css/font-awesome.min.css"> -->
+  <!--  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"> -->
+  <!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
+  <link rel="stylesheet" href="{{url('jquery/jquery-ui.css')}}"> 
   <script src="{{url('jquery/external/jquery/jquery.js')}}"></script>
   <script src="{{url('jquery/jquery-ui.js')}}"></script>
 <!--   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script> -->
-
-<!-- Open-materialize CSS -->
-<!-- Compiled and minified CSS -->
-<!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"> -->
-
+  <!-- Open-materialize CSS -->
+  <!-- Compiled and minified CSS -->
+  <!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"> -->
   <!-- Compiled and minified JavaScript -->
-<!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script> -->
+  <!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script> -->
+  <!-- Off-materialize CSS -->
 
-<!-- Off-materialize CSS -->
-
-
-
-
-
-
-
-
-<style>
-  .w3-sidenav a {padding:16px;font-weight:bold}
+  <style>
+    .w3-sidenav a {padding:16px;font-weight:bold}
 
 /*#para1 {
     background-image: -webkit-gradient(linear, left top, right top, from(#F90), to(#FFF));
@@ -56,7 +37,6 @@
 <body>
 
   <nav class="w3-sidenav w3-collapse w3-white w3-animate-left w3-card-2" style="z-index:3;width:250px;" id="mySidenav">
-  
     <a href="{{url('/home')}}" class="w3-border-bottom w3-large"><img src="https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-9/14053948_907940599310962_5923993153439261598_n.jpg?oh=885dea1f642f5c5f204b03f53c9e1822&oe=585C0BCD" style="width:100%;"></a>
     <a href="javascript:void(0)" onclick="w3_close()" 
     class="w3-text-deep-purple w3-hide-large w3-closenav w3-large">Close <i class="fa fa-remove"></i></a>
@@ -81,12 +61,10 @@
     @else
     <a href="{{url('/fix')}}">ใบแจ้งซ่อม</a>
     <a href="{{url('/show')}}">บันทึกการซ่อม</a>
-   <!--  <a href="{{url('/record')}}">หน้าบันทึกการซ่อม</a> -->
+    <a href="{{url('/show')}}">สถิติ</a>
+    <!--  <a href="{{url('/record')}}">หน้าบันทึกการซ่อม</a> -->
     @endif
-
   </nav>
-
-
 <!--   <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
 
   <div class="w3-main" style="margin-left:250px;">
@@ -99,16 +77,7 @@
     <header class="w3-container w3-theme w3-padding-64" style="padding-left:32px" >
       <h1 class="w3-xxxlarge w3-padding-16">Dormitory Repairing System for PSU</h1>
     </header> -->
-
-
-
     @yield("content")
-
-
-
-
-
-
     <footer class="w3-container w3-theme w3-padding-32" style="padding-left:32px" >
       <h3 >ติดต่อสำนักงานหอพักนักศึกษาในกำกับ </h3>
       <p>ที่อยู่ : สำนักงานหอพักนักศึกษาในกำกับ มหาวิทยาลัยสงขลานครินทร์ วิทยาเขตภูเก็ต 1,2, และ 3 --80 หมู่ 1 ถนนวิชิตสงคราม ตำบลกะทู้ อำเภอกะทู้ จังหวัดภูเก็ต 83120</p>
@@ -153,12 +122,6 @@ function myAccordion(id) {
     x.previousElementSibling.className.replace(" w3-theme", "");
   }
 }
-
-
-
-
-
-
 
 </script>
 

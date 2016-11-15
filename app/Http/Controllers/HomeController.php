@@ -13,12 +13,17 @@ use PDF;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 use App\NameEquipment;
 use App\Equipment;
 use App\Equipmentdetail;
-use App\Change;
-use App\repair;
-use App\unrepair;
+
+use App\Change_equipment;
+use App\Change_equipmentdetail;
+use App\Repair_equipment;
+use App\Repair_equipmentdetail;
+use App\Unrepair_equipment;
+use App\Unrepair_equipmentdetail;
 class HomeController extends Controller
 {
     /**
@@ -40,21 +45,22 @@ class HomeController extends Controller
     {
         $equipment = Equipment::all();
         $equipmentdetail = Equipmentdetail::all();
-        $change = Change::all();
-        $repair = Repair::all();
-        $unrepair = Unrepair::all();
-        return view('project/index')->with('equipment',$equipment)->with('equipmentdetail',$equipmentdetail)->with('change',$change)->with('repair',$repair)->with('unrepair',$unrepair);
+        // $change = Change::all();
+        // $repair = Repair::all();
+        // $unrepair = Unrepair::all();
+        // return view('project/index')->with('equipment',$equipment)->with('equipmentdetail',$equipmentdetail)->with('change',$change)->with('repair',$repair)->with('unrepair',$unrepair);
+        return view('project/index')->with('equipment',$equipment)->with('equipmentdetail',$equipmentdetail);
     }
 
 
     public function getPDF($id)
     {
-        $user = Equipment::where('id_equipment',$id)->first();
-        $user1 = Equipmentdetail::where('id_equipment',$id)->get();
+        $Eq = Equipment::where('id_equipment',$id)->first();
+        $Eqd = Equipmentdetail::where('id_equipment',$id)->get();
         
         // return view('project/page/getpdf')->with('user',$user)->with('user1',$user1);
 
-        $pdf = PDF::loadView('project/page/getpdf',compact('user','user1'));
+        $pdf = PDF::loadView('project/page/getpdf',compact('Eq','Eqd'));
         return $pdf->stream('equipment.pdf');
     }
 
@@ -67,14 +73,15 @@ class HomeController extends Controller
         return view('project/page/showrepair')->with('equipment',$equipment);
     }
 
+
+
     public function showequipment($id)
     {
-        $user = Equipment::where('id_equipment',$id)->first();
-        $user1 = Equipmentdetail::where('id_equipment',$id)->get();
+        $Eq = Equipment::where('id_equipment',$id)->first();
+        $Eqd = Equipmentdetail::where('id_equipment',$id)->get();
         
-        return view('project/page/showequipment')->with('user',$user)->with('user1',$user1);
+        return view('project/page/showequipment')->with('Eq',$Eq)->with('Eqd',$Eqd);
     }
-  
 
 
 
@@ -100,76 +107,78 @@ class HomeController extends Controller
 
     // public function record()
     // {   
-   
+
     //     return view('project/page/record');
     // }
 
 
     public function record($id)
-    {   
-        $user1 = Equipmentdetail::where('id',$id)->first();
-        return view('project/page/record')->with('user1',$user1);
+    { 
+
+        $Eq = Equipment::where('id_equipment',$id)->first();
+        $Eqd = Equipmentdetail::where('id_equipment',$id)->get();
+        $count = Equipmentdetail::where('id_equipment',$id)->count();
+        return view('project/page/record')->with('Eq',$Eq)->with('Eqd',$Eqd)->with('count',$count);
     }
 
 
-    public function saverecord($id)
-    {   
-        $change = new Change;
-        $repair = new Repair;
-        $unrepair = new Unrepair;
-        $equipment = Equipment::all();
-        $user1 = Equipmentdetail::where('id',$id)->first();
-        // dd($user1);
-        // echo $user1;
-        $a=$user1->id;
-        // echo $a;
-        $b=Equipment::where('id_equipment',$a)->first();
-        // echo $b;
-        $c=($b->id_user);
-        // echo $c;
-        // dd('stop');
+    // public function saverecord($id)
+    // {   
+    //     $change = new Change;
+    //     $repair = new Repair;
+    //     $unrepair = new Unrepair;
+    //     $equipment = Equipment::all();
+    //     $user1 = Equipmentdetail::where('id',$id)->first();
+    //     // dd($user1);
+    //     // echo $user1;
+    //     $a=$user1->id;
+    //     // echo $a;
+    //     $b=Equipment::where('id_equipment',$a)->first();
+    //     // echo $b;
+    //     $c=($b->id_user);
+    //    ('id_equipment',$id)
 
-        if (input::get('status')=="change") 
-        {
-        $change->id_user = $c;
-        $change->id_equipmentdetail = $id;
-        $change->date_finish_repair = date("Y-m-d");
-        $change->date_depart_equipment = date("Y-m-d");
-        $change->detail_repair = input::get('list_detail_repair');
-        $change->detail_use_equipment = input::get('list_use_equipment');
-        $change->name_technical = Auth::user()->name;
-        $change->name_technical_depart = Auth::user()->name;
-        $change->save();
-        }
+    //     if (input::get('status')=="change") 
+    //     {
+    //     $change->id_user = $c;
+    //     $change->id_equipmentdetail = $id;
+    //     $change->date_finish_repair = date("Y-m-d");
+    //     $change->date_depart_equipment = date("Y-m-d");
+    //     $change->detail_repair = input::get('list_detail_repair');
+    //     $change->detail_use_equipment = input::get('list_use_equipment');
+    //     $change->name_technical = Auth::user()->name;
+    //     $change->name_technical_depart = Auth::user()->name;
+    //     $change->save();
+    //     }
 
-        if (input::get('status')=="repair") 
-        {
-        $repair->id_user = $c;
-        $repair->id_equipmentdetail = $id;
-        $repair->date_finish_repair = date("Y-m-d");
-        $repair->date_depart_equipment = date("Y-m-d");
-        $repair->detail_repair = input::get('list_detail_repair');
-        $repair->detail_use_equipment = input::get('list_use_equipment');
-        $repair->name_technical = Auth::user()->name;
-        $repair->name_technical_depart = Auth::user()->name;
-        $repair->save();
-        }        
+    //     if (input::get('status')=="repair") 
+    //     {
+    //     $repair->id_user = $c;
+    //     $repair->id_equipmentdetail = $id;
+    //     $repair->date_finish_repair = date("Y-m-d");
+    //     $repair->date_depart_equipment = date("Y-m-d");
+    //     $repair->detail_repair = input::get('list_detail_repair');
+    //     $repair->detail_use_equipment = input::get('list_use_equipment');
+    //     $repair->name_technical = Auth::user()->name;
+    //     $repair->name_technical_depart = Auth::user()->name;
+    //     $repair->save();
+    //     }        
 
-        if (input::get('status')=="unrepair") 
-        {
-        $unrepair->id_user = $c;
-        $unrepair->id_equipmentdetail = $id;
-        $unrepair->date_finish_repair = date("Y-m-d");
-        $unrepair->date_depart_equipment = date("Y-m-d");
-        $unrepair->detail_repair = input::get('list_detail_repair');
-        $unrepair->detail_use_equipment = input::get('list_use_equipment');
-        $unrepair->name_technical = Auth::user()->name;
-        $unrepair->name_technical_depart = Auth::user()->name;
-        $unrepair->save();
-        }
+    //     if (input::get('status')=="unrepair") 
+    //     {
+    //     $unrepair->id_user = $c;
+    //     $unrepair->id_equipmentdetail = $id;
+    //     $unrepair->date_finish_repair = date("Y-m-d");
+    //     $unrepair->date_depart_equipment = date("Y-m-d");
+    //     $unrepair->detail_repair = input::get('list_detail_repair');
+    //     $unrepair->detail_use_equipment = input::get('list_use_equipment');
+    //     $unrepair->name_technical = Auth::user()->name;
+    //     $unrepair->name_technical_depart = Auth::user()->name;
+    //     $unrepair->save();
+    //     }
 
-        return view('project/index')->with('equipment',$equipment);
-    }
+    //     return view('project/index')->with('equipment',$equipment);
+    // }
 
 
 

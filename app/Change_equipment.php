@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Unrepair extends Model
+class Change_equipment extends Model
 {
     //
 }
