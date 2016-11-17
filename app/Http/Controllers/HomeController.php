@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 use Auth;
 use PDF;
+use DB;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -51,6 +52,113 @@ class HomeController extends Controller
         // return view('project/index')->with('equipment',$equipment)->with('equipmentdetail',$equipmentdetail)->with('change',$change)->with('repair',$repair)->with('unrepair',$unrepair);
         return view('project/index')->with('equipment',$equipment)->with('equipmentdetail',$equipmentdetail);
     }
+
+    public function stat()
+    {
+        $Change_equipment = new Change_equipment;
+        $Change_equipmentdetail = new Change_equipmentdetail;
+        $Repair_equipment = new Repair_equipment;
+        $Repair_equipmentdetail = new Repair_equipmentdetail;
+        $Unrepair_equipment = new Unrepair_equipment;
+        $Unrepair_equipmentdetail = new Unrepair_equipmentdetail;
+        $name_equipment = new NameEquipment;
+
+        // $users = DB::table('users')->get();
+
+        
+
+        $g = NameEquipment::all();
+        $d = Change_equipmentdetail::all();
+        $c = $d->count();
+        $c_name= NameEquipment::all()->count(); 
+
+        // $e = array();
+        // $d = array();
+        // $f = array();
+        // $g = array();
+        // $k = array();
+        // $ccount = array();
+
+
+        // for ($i=0; $i < $c; $i++) 
+        // { 
+        //     $e = $d[$i]->equiment;
+        //     for ($j=1; $j <= $c_name ; $j++) 
+        //     {
+        //         $f = $g[$j]->name; 
+        //         if ($e==$f) 
+        //         {
+        //             $h = $e;
+        //             $k[$i] = $h;  
+        //             $l = Change_equipmentdetail::where('equiment','LIKE','%'.$k[$i].'%')->get();
+        //             $ccount[$i] = Change_equipmentdetail::where('equiment','LIKE','%'.$k[$i].'%')->count();
+                    
+        //             echo $l; 
+        //             echo $ccount[0]; 
+        //         }
+        //         else
+        //         {
+                  
+
+        //         }                
+        //     }                          
+        // }
+
+        
+
+        for ($i=0; $i < $c; $i++) 
+        { 
+            $e = $d[$i]->equiment;
+            for ($j=1; $j <= $c_name ; $j++) 
+            {
+                $f = $g[$j]->name; 
+                if ($e==$f) 
+                {
+                    $h = $e;
+                    $k[$i] = $h;  
+                    $l = Change_equipmentdetail::where('equiment','LIKE','%'.$k[$i].'%')->get();
+                    $ccount[$i] = Change_equipmentdetail::where('equiment','LIKE','%'.$k[$i].'%')->count();
+                    
+                    echo $l; 
+                    echo $ccount[0]; 
+                }
+                else
+                {
+                  
+
+                }                
+            }                          
+        }
+
+        
+
+        
+                  
+       
+        // $chh = Change_equipmentdetail::whereRow('eqiument')->get(); 
+        
+        // 
+      
+
+        // for ($i=0; $i <$c_name ; $i++) { 
+        //   $ch = Change_equipmentdetail::where('equipment','sss')->get();  
+        // }
+
+        
+
+
+
+
+        // $equipment = Equipmentdetail::where('equipment','LIKE','%'.$query.'%')->get();
+        // $count = Equipmentdetail::where('equipment','LIKE','%'.$query.'%')->count();
+
+        // return view('pdf');
+        return view('project/page/stat');
+       
+
+        // return view('pdf')->with('ccount[]',$ccount[])->with('c',$c);
+    }
+
 
 
     public function getPDF($id)
@@ -120,66 +228,6 @@ class HomeController extends Controller
         $count = Equipmentdetail::where('id_equipment',$id)->count();
         return view('project/page/record')->with('Eq',$Eq)->with('Eqd',$Eqd)->with('count',$count);
     }
-
-
-    // public function saverecord($id)
-    // {   
-    //     $change = new Change;
-    //     $repair = new Repair;
-    //     $unrepair = new Unrepair;
-    //     $equipment = Equipment::all();
-    //     $user1 = Equipmentdetail::where('id',$id)->first();
-    //     // dd($user1);
-    //     // echo $user1;
-    //     $a=$user1->id;
-    //     // echo $a;
-    //     $b=Equipment::where('id_equipment',$a)->first();
-    //     // echo $b;
-    //     $c=($b->id_user);
-    //    ('id_equipment',$id)
-
-    //     if (input::get('status')=="change") 
-    //     {
-    //     $change->id_user = $c;
-    //     $change->id_equipmentdetail = $id;
-    //     $change->date_finish_repair = date("Y-m-d");
-    //     $change->date_depart_equipment = date("Y-m-d");
-    //     $change->detail_repair = input::get('list_detail_repair');
-    //     $change->detail_use_equipment = input::get('list_use_equipment');
-    //     $change->name_technical = Auth::user()->name;
-    //     $change->name_technical_depart = Auth::user()->name;
-    //     $change->save();
-    //     }
-
-    //     if (input::get('status')=="repair") 
-    //     {
-    //     $repair->id_user = $c;
-    //     $repair->id_equipmentdetail = $id;
-    //     $repair->date_finish_repair = date("Y-m-d");
-    //     $repair->date_depart_equipment = date("Y-m-d");
-    //     $repair->detail_repair = input::get('list_detail_repair');
-    //     $repair->detail_use_equipment = input::get('list_use_equipment');
-    //     $repair->name_technical = Auth::user()->name;
-    //     $repair->name_technical_depart = Auth::user()->name;
-    //     $repair->save();
-    //     }        
-
-    //     if (input::get('status')=="unrepair") 
-    //     {
-    //     $unrepair->id_user = $c;
-    //     $unrepair->id_equipmentdetail = $id;
-    //     $unrepair->date_finish_repair = date("Y-m-d");
-    //     $unrepair->date_depart_equipment = date("Y-m-d");
-    //     $unrepair->detail_repair = input::get('list_detail_repair');
-    //     $unrepair->detail_use_equipment = input::get('list_use_equipment');
-    //     $unrepair->name_technical = Auth::user()->name;
-    //     $unrepair->name_technical_depart = Auth::user()->name;
-    //     $unrepair->save();
-    //     }
-
-    //     return view('project/index')->with('equipment',$equipment);
-    // }
-
 
 
     public function savefix(Request $data)

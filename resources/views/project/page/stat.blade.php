@@ -47,7 +47,9 @@
 
     <div class="w3-container w3-sand w3-leftbar">
       <br>
-      <h1 class="w3-center w3-text-indigo">บันทึกผลการซ่อม</h1>
+      
+     
+      
       <br>
     </div>
 

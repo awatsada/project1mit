@@ -61,7 +61,7 @@
     @else
     <a href="{{url('/fix')}}">ใบแจ้งซ่อม</a>
     <a href="{{url('/show')}}">บันทึกการซ่อม</a>
-    <a href="{{url('/show')}}">สถิติ</a>
+    <a href="{{url('/stat')}}">สถิติ</a>
     <!--  <a href="{{url('/record')}}">หน้าบันทึกการซ่อม</a> -->
     @endif
   </nav>

@@ -93,7 +93,7 @@ class SaverepairController extends Controller
 				$Repair_equipment->note = $Eq->note;
 				$Repair_equipment->save();
 
-				$Repair_equipmentdetail->id_repairequipment = $Change_equipment->id; 
+				$Repair_equipmentdetail->id_repairequipment = $Repair_equipment->id; 
 				$Repair_equipmentdetail->photo_repair = $Eqd[$i]->photo_repair;
 				$Repair_equipmentdetail->equiment = $Eqd[$i]->equipment;
 				$Repair_equipmentdetail->detail_equiment = $Eqd[$i]->detail_equipment;
@@ -120,7 +120,7 @@ class SaverepairController extends Controller
 				$Unrepair_equipment->note = $Eq->note;
 				$Unrepair_equipment->save();
 
-				$Unrepair_equipmentdetail->id_unrepairequipment = $Change_equipment->id; 
+				$Unrepair_equipmentdetail->id_unrepairequipment = $Unrepair_equipment->id; 
 				$Unrepair_equipmentdetail->photo_repair = $Eqd[$i]->photo_repair;
 				$Unrepair_equipmentdetail->equiment = $Eqd[$i]->equipment;
 				$Unrepair_equipmentdetail->detail_equiment = $Eqd[$i]->detail_equipment;

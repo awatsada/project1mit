@@ -78,5 +78,9 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('getpdf/{id}', 'HomeController@getPDF');
 
+    Route::get('stat/', 'HomeController@stat');
+
+
+
 
 });
