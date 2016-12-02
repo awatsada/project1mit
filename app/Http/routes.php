@@ -36,13 +36,26 @@ Route::get('she', function(){
 });
 
 Route::get('st', function(){
-    return view('project/page/stat');
+    return view('project/page/statpdf');
 });
 
 Route::get('pdf', function () {
     $pdf = PDF::loadView('pdf');
     return $pdf->stream('archivo.pdf');
 });
+
+Route::get('/ppp', function (Codedge\Fpdf\Fpdf\FPDF $fpdf) {
+
+        $fpdf->AddPage();
+        $fpdf->AddFont('angsa','','angsa.php');
+        $fpdf->SetFont('angsa','',36);
+        $fpdf->Cell( 0  , 5 , iconv( 'UTF-8','cp874' , 'พิมพ์ให้อยู่ตรงกลาง' ) , 0 , 1 , 'C' );
+        // $fpdf->Cell( 0  , 5 , iconv( 'UTF-8','cp874' , 'พิมพ์ให้อยู่ตรงกลาง' ) , 0 , 1 , 'C' );
+        $fpdf->Output();
+        exit;
+
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +92,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('getpdf/{id}', 'HomeController@getPDF');
 
     Route::get('stat/', 'HomeController@stat');
+
+    Route::post('statt/', 'HomeController@statt');
+
+    Route::post('stat/print', 'HomeController@statprint');
+
+    Route::get('re/report/{id}', 'HomeController@rereport');
+
+    Route::post('stat/pdf', 'HomeController@statpdf');
 
 
 

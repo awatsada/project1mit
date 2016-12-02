@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Auth;
 use PDF;
 use DB;
+use Fpdf;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -55,121 +56,153 @@ class HomeController extends Controller
 
     public function stat()
     {
-        $Change_equipment = new Change_equipment;
-        $Change_equipmentdetail = new Change_equipmentdetail;
-        $Repair_equipment = new Repair_equipment;
-        $Repair_equipmentdetail = new Repair_equipmentdetail;
-        $Unrepair_equipment = new Unrepair_equipment;
-        $Unrepair_equipmentdetail = new Unrepair_equipmentdetail;
-        $name_equipment = new NameEquipment;
-
-        // $users = DB::table('users')->get();
-
+        $dm = date("Y-m-");
+        $count_change = DB::table('change_equipmentdetails')
+        ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
+        ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE','%'.$dm.'%')
+        ->groupBy('change_equipmentdetails.equiment')
+        ->get();
         
-
-        $g = NameEquipment::all();
-        $d = Change_equipmentdetail::all();
-        $c = $d->count();
-        $c_name= NameEquipment::all()->count(); 
-
-        // $e = array();
-        // $d = array();
-        // $f = array();
-        // $g = array();
-        // $k = array();
-        // $ccount = array();
-
-
-        // for ($i=0; $i < $c; $i++) 
-        // { 
-        //     $e = $d[$i]->equiment;
-        //     for ($j=1; $j <= $c_name ; $j++) 
-        //     {
-        //         $f = $g[$j]->name; 
-        //         if ($e==$f) 
-        //         {
-        //             $h = $e;
-        //             $k[$i] = $h;  
-        //             $l = Change_equipmentdetail::where('equiment','LIKE','%'.$k[$i].'%')->get();
-        //             $ccount[$i] = Change_equipmentdetail::where('equiment','LIKE','%'.$k[$i].'%')->count();
-                    
-        //             echo $l; 
-        //             echo $ccount[0]; 
-        //         }
-        //         else
-        //         {
-                  
-
-        //         }                
-        //     }                          
-        // }
-
-        
-
-        for ($i=0; $i < $c; $i++) 
-        { 
-            $e = $d[$i]->equiment;
-            for ($j=1; $j <= $c_name ; $j++) 
-            {
-                $f = $g[$j]->name; 
-                if ($e==$f) 
-                {
-                    $h = $e;
-                    $k[$i] = $h;  
-                    $l = Change_equipmentdetail::where('equiment','LIKE','%'.$k[$i].'%')->get();
-                    $ccount[$i] = Change_equipmentdetail::where('equiment','LIKE','%'.$k[$i].'%')->count();
-                    
-                    echo $l; 
-                    echo $ccount[0]; 
-                }
-                else
-                {
-                  
-
-                }                
-            }                          
-        }
-
-        
-
-        
-                  
+        // dd($count_change);
        
-        // $chh = Change_equipmentdetail::whereRow('eqiument')->get(); 
-        
-        // 
-      
+       $count_repair = DB::table('Repair_equipmentdetails')
+        ->leftJoin('name_equipments','Repair_equipmentdetails.id','=','name_equipments.id')
+        ->select('Repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))
+        ->groupBy('Repair_equipmentdetails.equiment')
+        ->get();
 
-        // for ($i=0; $i <$c_name ; $i++) { 
-        //   $ch = Change_equipmentdetail::where('equipment','sss')->get();  
-        // }
+       $count_unrepair = DB::table('Unrepair_equipmentdetails')
+        ->leftJoin('name_equipments','Unrepair_equipmentdetails.id','=','name_equipments.id')
+        ->select('Unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))
+        ->groupBy('Unrepair_equipmentdetails.equiment')
+        ->get();
 
-        
-
-
-
-
-        // $equipment = Equipmentdetail::where('equipment','LIKE','%'.$query.'%')->get();
-        // $count = Equipmentdetail::where('equipment','LIKE','%'.$query.'%')->count();
-
-        // return view('pdf');
-        return view('project/page/stat');
+        return view('project/page/stat')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair);
        
 
-        // return view('pdf')->with('ccount[]',$ccount[])->with('c',$c);
+        
     }
 
+    public function statt()
+    {
+       // dd(input::get('month'));
+       $month = input::get('month');
+       
+
+
+        $count_change = DB::table('change_equipmentdetails')
+        ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
+        ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE',$month.'%')
+        ->groupBy('change_equipmentdetails.equiment')
+        ->get();
+        
+        // dd($count_change);
+       
+       $count_repair = DB::table('Repair_equipmentdetails')
+        ->leftJoin('name_equipments','Repair_equipmentdetails.id','=','name_equipments.id')
+        ->select('Repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))->where('Repair_equipmentdetails.created_at','LIKE',$month.'%')
+        ->groupBy('Repair_equipmentdetails.equiment')
+        ->get();
+
+       $count_unrepair = DB::table('Unrepair_equipmentdetails')
+        ->leftJoin('name_equipments','Unrepair_equipmentdetails.id','=','name_equipments.id')
+        ->select('Unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))->where('Unrepair_equipmentdetails.created_at','LIKE',$month.'%')
+        ->groupBy('Unrepair_equipmentdetails.equiment')
+        ->get();
+
+        return view('project/page/stat')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair);
+       
+
+        
+    }
+
+
+    public function statprint()
+    {
+        $month = input::get('month');
+       
+
+
+        $count_change = DB::table('change_equipmentdetails')
+        ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
+        ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE',$month.'%')
+        ->groupBy('change_equipmentdetails.equiment')
+        ->get();
+        
+        // dd($count_change);
+       
+       $count_repair = DB::table('Repair_equipmentdetails')
+        ->leftJoin('name_equipments','Repair_equipmentdetails.id','=','name_equipments.id')
+        ->select('Repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))->where('Repair_equipmentdetails.created_at','LIKE',$month.'%')
+        ->groupBy('Repair_equipmentdetails.equiment')
+        ->get();
+
+       $count_unrepair = DB::table('Unrepair_equipmentdetails')
+        ->leftJoin('name_equipments','Unrepair_equipmentdetails.id','=','name_equipments.id')
+        ->select('Unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))->where('Unrepair_equipmentdetails.created_at','LIKE',$month.'%')
+        ->groupBy('Unrepair_equipmentdetails.equiment')
+        ->get();
+
+       
+
+
+        return view('project/page/statprint')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair);
+    
+    }
+
+
+
+    public function statpdf()
+    {
+        $month = input::get('month');
+       
+
+
+        $count_change = DB::table('change_equipmentdetails')
+        ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
+        ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE',$month.'%')
+        ->groupBy('change_equipmentdetails.equiment')
+        ->get();
+        
+        // dd($count_change);
+       
+       $count_repair = DB::table('Repair_equipmentdetails')
+        ->leftJoin('name_equipments','Repair_equipmentdetails.id','=','name_equipments.id')
+        ->select('Repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))->where('Repair_equipmentdetails.created_at','LIKE',$month.'%')
+        ->groupBy('Repair_equipmentdetails.equiment')
+        ->get();
+
+       $count_unrepair = DB::table('Unrepair_equipmentdetails')
+        ->leftJoin('name_equipments','Unrepair_equipmentdetails.id','=','name_equipments.id')
+        ->select('Unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))->where('Unrepair_equipmentdetails.created_at','LIKE',$month.'%')
+        ->groupBy('Unrepair_equipmentdetails.equiment')
+        ->get();
+
+
+        // return view('project/page/statpdf')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair);
+
+        $pdf = PDF::loadView('project/page/statpdf',compact('count_change','count_repair','count_unrepair'));
+        return $pdf->stream('equipment.pdf');
+    
+    }
+
+    public function rereport($id)
+    {
+        $Eq = Equipment::where('id_equipment',$id)->first();
+        $Eqd = Equipmentdetail::where('id_equipment',$id)->get();
+        return view('project/page/print_eq')->with('Eq',$Eq)->with('Eqd',$Eqd);
+
+    }
 
 
     public function getPDF($id)
     {
         $Eq = Equipment::where('id_equipment',$id)->first();
         $Eqd = Equipmentdetail::where('id_equipment',$id)->get();
-        
-        // return view('project/page/getpdf')->with('user',$user)->with('user1',$user1);
-
+        // return view('project/page/getpdf')->with('Eq',$Eq)->with('Eqd',$Eqd);
         $pdf = PDF::loadView('project/page/getpdf',compact('Eq','Eqd'));
         return $pdf->stream('equipment.pdf');
+
     }
 
 

@@ -2,12 +2,21 @@
 <html lang="en">
 <title>DRsystem</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-deep-purple.css"> -->
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+ -->  
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{url('w3css/w3.css')}}">
-  <link rel="stylesheet" href="{{url('w3css/w3-theme-deep-purple.css')}}">
+
+
+
+
+  <!-- <link rel="stylesheet" href="{{url('w3css/w3-theme-deep-purple.css')}}"> -->
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-deep-purple.css">
+
+
+
+
   <!-- <link rel="stylesheet" href="w3css/font-awesome.min.css"> -->
   <!--  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"> -->
   <!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
@@ -36,7 +45,7 @@
 
 <body>
 
-  <nav class="w3-sidenav w3-collapse w3-white w3-animate-left w3-card-2" style="z-index:3;width:250px;" id="mySidenav">
+  <nav class="w3-sidenav w3-collapse w3-white w3-animate-left w3-card-2 w3-padding-4" style="z-index:3;width:250px;" id="mySidenav">
     <a href="{{url('/home')}}" class="w3-border-bottom w3-large"><img src="https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-9/14053948_907940599310962_5923993153439261598_n.jpg?oh=885dea1f642f5c5f204b03f53c9e1822&oe=585C0BCD" style="width:100%;"></a>
     <a href="javascript:void(0)" onclick="w3_close()" 
     class="w3-text-deep-purple w3-hide-large w3-closenav w3-large">Close <i class="fa fa-remove"></i></a>
@@ -78,7 +87,7 @@
       <h1 class="w3-xxxlarge w3-padding-16">Dormitory Repairing System for PSU</h1>
     </header> -->
     @yield("content")
-    <footer class="w3-container w3-theme w3-padding-32" style="padding-left:32px" >
+    <footer class="w3-container w3-theme w3-padding-4" style="padding-left:24px" >
       <h3 >ติดต่อสำนักงานหอพักนักศึกษาในกำกับ </h3>
       <p>ที่อยู่ : สำนักงานหอพักนักศึกษาในกำกับ มหาวิทยาลัยสงขลานครินทร์ วิทยาเขตภูเก็ต 1,2, และ 3 --80 หมู่ 1 ถนนวิชิตสงคราม ตำบลกะทู้ อำเภอกะทู้ จังหวัดภูเก็ต 83120</p>
       <p>หมายเลขโทรศัพท์ : สำนักงานหอพักนักศึกษาในกำกับฯ 1,2 = 076-248-006 ถึง 20 , สำนักงานหอพักนักศึกษาในกำกับ 3 = 076-361-501</p>

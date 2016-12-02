@@ -8,8 +8,14 @@
     <span id="myIntro" class="w3-hide">DR system: Statistic</span>
   </div>
 
-  <header class="w3-container w3-theme w3-padding-32" style="padding-left:32px" >
-    <h1 class="w3-xxxlarge w3-padding-16">Dormitory Repairing System for PSU</h1>
+  <header class="w3-container w3-theme w3-padding-24" style="padding-left:24px" >
+    <h1 class="w3-xxxlarge w3-padding-5">Dormitory Repairing System for PSU</h1>
+
+    <!-- tab -->
+    <style>
+      .city {display:none;}
+    </style>
+
 
     <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script type="text/javascript">
@@ -18,19 +24,25 @@
         var chart = new CanvasJS.Chart("chartContainer", {
     theme: "theme2",//theme1
     title:{
-      text: "Basic Column Chart - CanvasJS"              
+      text: ""              
     },
     animationEnabled: false,   // change to true
     data: [              
     {
-      // Change type to "bar", "area", "spline", "pie",etc.
+      // Change type to "bar", "area", "spline", "pie",etc.     
       type: "column",
       dataPoints: [
-      { label: "apple",  y: 10  },
-      { label: "orange", y: 15  },
-      { label: "banana", y: 25  },
-      { label: "mango",  y: 30  },
-      { label: "grape",  y: 28  }
+      @foreach($count_change as $v)
+      {  label: "{{$v->equiment}} (เปลี่ยน)",  y: {{$v->count_c}}  },
+      @endforeach
+
+      @foreach($count_repair as $v)
+      {  label: "{{$v->equiment}} (ซ่อม)",  y: {{$v->count_r}}  },
+      @endforeach
+
+      @foreach($count_unrepair as $v)
+      {  label: "{{$v->equiment}} (ซ่อมไม่ได้)",  y: {{$v->count_u}}  },
+      @endforeach
       ]
     }
     ]
@@ -42,22 +54,82 @@
   </header>
   
 
-<div class="w3-container w3-padding-32" style="padding-left:32px">
-  <div class="w3-container w3-padding-16 w3-card-2" style="background-color:#FFFFFF">
+  <div class="w3-container w3-padding-32" style="padding-left:32px">
+    <div class="w3-container w3-padding-16 w3-card-2" style="background-color:#FFFFFF">
 
-    <div class="w3-container w3-sand w3-leftbar">
+      <div class="w3-container w3-section w3-topbar w3-bottombar w3-border-green w3-pale-green">
+        <center>
+          <h1>สถิติการซ่อม</h1>
+        </center>
+      </div>
       <br>
-      
-     
-      
-      <br>
-    </div>
+      <form class="w3-container" action="statt" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+        <p>
+
+          <input name="month" type="month" />
+          <button class="w3-btn w3-blue w3-border" type="submit">แสดง</button></p>
+        </form>
 
 
-    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-       </div>
-    </div>
+        <br>
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
+        <br>
+        <hr>
+
+        <br>
+        <div class="w3-container">
+          <center>
+          <form class="w3-container" action="stat/print" enctype="multipart/form-data" method="post">
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <p>
+              <input name="month" type="month" />
+              <button class="w3-btn w3-yellow w3-border" type="submit">Print</button></p>
+            </form>
+
+          <form class="w3-container" action="stat/pdf" enctype="multipart/form-data" method="post">
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <p>
+              <input name="month" type="month" />
+              <button class="w3-btn w3-green w3-border" type="submit">Export PDF</button></p>
+            </form>
+</center>
+<!--             <a class="w3-btn w3-yellow w3-border" href="stat/report">Export PDF</a>
+            <a class="w3-btn w3-blue w3-border" href="#">Export Excel</a> -->
+            
+
+
+          </div>
+
+
+          <br>
+
+        </div>
+      </div>
+
+      <!-- tab -->
+      <script>
+        function openCity(evt, cityName) {
+          var i, x, tablinks;
+          x = document.getElementsByClassName("city");
+          for (i = 0; i < x.length; i++) {
+           x[i].style.display = "none";
+         }
+         tablinks = document.getElementsByClassName("tablink");
+         for (i = 0; i < x.length; i++) {
+           tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
+         }
+         document.getElementById(cityName).style.display = "block";
+         evt.currentTarget.firstElementChild.className += " w3-border-red";
+       }
+     </script>
 
 
 
-@endsection
+
+
+
+
+
+     @endsection

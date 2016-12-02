@@ -8,10 +8,10 @@
     <span id="myIntro" class="w3-hide">DR system: Home</span>
   </div>
 
-  <header class="w3-container w3-theme w3-padding-32" style="padding-left:32px" >
-    <h1 class="w3-xxxlarge w3-padding-16">Dormitory Repairing System for PSU</h1>
+  <header class="w3-container w3-theme w3-padding-24" style="padding-left:24px" >
+    <h3 class="w3-xxxlarge w3-padding-5">Dormitory Repairing System for PSU</h3>
   </header>
-
+<!-- tab -->
   <style>
     .city {display:none;}
   </style>
@@ -112,7 +112,7 @@
 
             <table class="w3-table w3-striped w3-border order-table table">
               <thead>
-                <tr class="w3-red">
+                <tr class="w3-pale-yellow">
                   <th>ลำดับ</th>
                   <th>ห้อง</th>
                   <th>วันที่เจ้งซ่อม</th>
@@ -207,7 +207,7 @@
     </div>
     
     <br>
-
+        //tab
         <script>
             function openCity(evt, cityName) {
               var i, x, tablinks;

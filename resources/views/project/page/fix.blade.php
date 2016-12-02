@@ -6,8 +6,8 @@
 		<i class="fa fa-bars w3-opennav w3-hide-large w3-xlarge w3-margin-left w3-margin-right" onclick="w3_open()"></i>
 		<span id="myIntro" class="w3-hide">DR system: repair</span>
 	</div>
-	<header class="w3-container w3-theme w3-padding-32" style="padding-left:32px" >
-		<h1 class="w3-xxxlarge w3-padding-16">Dormitory Repairing System for PSU</h1>
+	<header class="w3-container w3-theme w3-padding-24" style="padding-left:24px" >
+		<h1 class="w3-xxxlarge w3-padding-5">Dormitory Repairing System for PSU</h1>
 	</header>
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 	<div class="w3-container w3-padding-32" style="padding-left:32px">

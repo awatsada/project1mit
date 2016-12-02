@@ -3,16 +3,7 @@
 <head>
 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8">
-    
-    <style>
- body {
-   font-family: 'Kanit', sans-serif;
- }
- h2 {
-   font-family: 'Kanit', sans-serif;
- }
-    </style>
+
 </head>
 <body onload=" window.print();">
  
@@ -35,18 +26,18 @@
     @endif
 
     <br>
-
+    <br>
     <h2>รายละเอียดอุปกรณ์</h2>
     <hr>
     <br>
 
     @foreach($Eqd as $v)
-    
-      <p>ลำดับ {{$v->id}}</p>
-    
+    <header class="w3-container w3-blue">
+      <h2>ลำดับ {{$v->id}}</h2>
+    </header>
 
     <p><strong>ลำดับอุปกรณ์ : </strong><i>{{$v->id_equipment}}</i></p> 
-    <p><strong>อุปกรณ์ : </strong><i>{{ $v->equipment}}</i></p> 
+    <p><strong>อุปกรณ์ : </strong><i>{{$v->equipment}}</i></p> 
     <p><strong>รายละเอียดอุปกรณ์ : </strong><i>{{$v->detail_equipment}}</i></p> 
     <p>  
       <strong>ภาพอุปกรณ์  </strong>

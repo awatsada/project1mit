@@ -8,8 +8,8 @@
     <span id="myIntro" class="w3-hide">DR system: Show Equipment</span>
   </div>
 
-  <header class="w3-container w3-theme w3-padding-32" style="padding-left:32px" >
-    <h1 class="w3-xxxlarge w3-padding-16">Dormitory Repairing System for PSU</h1>
+  <header class="w3-container w3-theme w3-padding-24" style="padding-left:24px" >
+    <h1 class="w3-xxxlarge w3-padding-5">Dormitory Repairing System for PSU</h1>
   </header>
 
 
@@ -33,7 +33,14 @@
   </style> -->
 
   <div class="w3-container w3-padding-32" style="padding-left:32px">
-    <h2>รายละเอียดการแจ้งซ่อมทั่วไป</h2> <a href="{{url('getpdf')}}/('id_equipment',$id)">Export PDF</a>
+    <h2>รายละเอียดการแจ้งซ่อมทั่วไป</h2> 
+    <a class="w3-btn w3-teal" href="{{url('getpdf')}}/{{$Eq->id_equipment}}">Export PDF</a>
+   <!--  <form class="w3-container" action="re/report" enctype="multipart/form-data" method="post">
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <p>
+              <button class="w3-btn w3-yellow w3-border" type="submit" >Export PDF</button></p>
+            </form> -->
+<a class="w3-btn w3-blue" href="{{url('re/report')}}/{{$Eq->id_equipment}}">Print</a>
     <hr>
 
     <div class="w3-container w3-sand w3-leftbar">
