@@ -33,7 +33,7 @@
   </style>
 
   <!-- css textbox search -->
-  <style>
+<!--   <style>
     input[type=searchh] {
       width: 80%
       box-sizing: border-box;
@@ -52,7 +52,7 @@
     input[type=searchh]:focus {
       width: 100%;
     }
-  </style>
+  </style> -->
   
 
   <div class="w3-container w3-padding-32" style="padding-left:32px">
@@ -72,9 +72,9 @@
           <input type="searchh" name="search" placeholder="Search...">
         </form>  -->
 
-        <input type="searchh" name="search" class="light-table-filter" data-table="order-table" placeholder="Search...">
+        <input type="searchh" name="search" class="w3-input w3-animate-input" data-table="order-table" placeholder="Search...">
         <br>
-        <br>
+        
         <table class="order-table table">
           <thead>
             <tr>

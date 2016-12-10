@@ -11,7 +11,7 @@
 <header class="w3-container w3-theme w3-padding-24" style="padding-left:24px" >
   <h1 class="w3-xxxlarge w3-padding-5">Dormitory Repairing System for PSU</h1>
 </header>
-
+ 
 <div class="w3-container w3-padding-32" style="padding-left:32px">
   <div class="w3-container w3-padding-16 w3-card-2" style="background-color:#FFFFFF">
 
@@ -21,24 +21,29 @@
       <br>
     </div>
 
-    {{$Eq}}
+<!--     {{$Eq}}
     {{$Eqd}}
     {{$count}}
+
+    
 
     @for ($i = 0; $i < $count; $i++)
     Theeeeeeeeeeeeeeeee current value is {{ $i }}
     {{$Eqd[$i]}}
-    @endfor
+    @endfor -->
 
-    <br>
+@for ($i = 0; $i < $count; $i++) 
+
+   
     <div class="w3-content" style="max-width:800px">
       <br>
+      <div class="w3-panel w3-light-grey w3-border w3-round">
 
-      @for ($i = 0; $i < $count; $i++)  
-      {{$Eqd[$i]->id}} 
-      {{$Eqd[$i]->id_equipment}}
-      {{$Eqd[$i]->equipment}} 
-      {{$Eqd[$i]->detail_equipment}}   
+      
+      <p><strong>ห้อง : </strong><i>{{$Eq->num_room}}</i></p>
+      <p><strong>อุปกรณ์ : </strong><i>{{$Eqd[$i]->equipment}}</i></p>
+      <p><strong>รายละเอียด : </strong><i>{{$Eqd[$i]->detail_equipment}} </i></p>   
+      </div>
 
       <h3 class="w3-text-blue">รายละเอียดการซ่อม</h3>     
 
@@ -114,10 +119,15 @@
           <label class="w3-validate">เปลี่ยน</label>
         </p>
       </div>
+      </div>
+       
+            
+
       @endfor
 
       <br>
       <br>
+
 
             <!-- <div class="w3-row">
               <div class="w3-col m6">
@@ -131,11 +141,11 @@
             <div class="w3-row">
               <div class="w3-col m6">
                 <!-- <a href="tryw3css_templates_blog.htm" target="_blank" type="submit"  class="w3-btn w3-padding-12 w3-dark-grey" style="width:98.5%">บันทึก</a> -->
-                <center><p><button class="w3-btn w3-padding-12 w3-green" type="submit" style="width:80%" >บันทึก</button></p></center>
+                <center><p><button class="w3-btn w3-padding-12 w3-green" type="submit" style="width:50%" >บันทึก</button></p></center>
               </div>
               <div class="w3-col m6">
                 <!-- <a href="w3css_templates.asp" class="w3-btn w3-padding-12 w3-dark-grey" style="width:98.5%">ย้อนกลับ</a> -->
-                <center><p><button class="w3-btn w3-padding-12 w3-red" style="width:80%" >ย้อนกลับ</button></p></center>
+                <center><p><button class="w3-btn w3-padding-12 w3-red" style="width:50%" >ย้อนกลับ</button></p></center>
               </div>
             </div>
 
@@ -145,5 +155,5 @@
           <br>
         </div>
       </div>
-    </div>
+
 @endsection

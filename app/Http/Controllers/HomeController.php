@@ -46,20 +46,50 @@ class HomeController extends Controller
     public function index()
     {
         $equipment = Equipment::all();
-        $equipmentdetail = Equipmentdetail::all();
-        // $change = Change::all();
-        // $repair = Repair::all();
-        // $unrepair = Unrepair::all();
-        // return view('project/index')->with('equipment',$equipment)->with('equipmentdetail',$equipmentdetail)->with('change',$change)->with('repair',$repair)->with('unrepair',$unrepair);
-        return view('project/index')->with('equipment',$equipment)->with('equipmentdetail',$equipmentdetail);
-    }
+        // $change_equipment = Change_equipment::all();
+        // $repair_equipment = Repair_equipment::all();
+        $unrepair_equipment = Unrepair_equipment::all();
+
+        // $count_change = Change_equipment::count();
+        // $count_repair = Repair_equipment::count();
+        // echo $count_repair;
+        // echo $count_change;
+        // $count_id = $count_change;
+        // $count_id = $count_change + $count_repair;
+        // echo $count_id;
+        // $a = array();
+
+
+        // function online($repair_equipment, &$change_equipment) 
+        // {
+        //    $a = array_push($change_equipment,$repair_equipment);
+        // }
+        // foreach ($repair_equipment as $key => $value) {
+        //     $a = array_merge($change_equipment, $value->id);
+        // }
+        $num_change = DB::table('change_equipments');
+        $num_change_and_repair = DB::table('repair_equipments')->union($num_change)->get();
+
+
+// dd($a);
+
+
+
+    
+       return view('project/index')->with('equipment',$equipment)
+       ->with('unrepair_equipment',$unrepair_equipment) 
+       ->with('num_change_and_repair',$num_change_and_repair)
+       ;
+
+   }
 
     public function stat()
     {
-        $dm = date("Y-m-");
+        $ym = date("Y-m-");
+        // dd($ym);
         $count_change = DB::table('change_equipmentdetails')
         ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
-        ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE','%'.$dm.'%')
+        ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE','%'.$ym.'%')
         ->groupBy('change_equipmentdetails.equiment')
         ->get();
         
@@ -67,13 +97,13 @@ class HomeController extends Controller
        
        $count_repair = DB::table('Repair_equipmentdetails')
         ->leftJoin('name_equipments','Repair_equipmentdetails.id','=','name_equipments.id')
-        ->select('Repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))
+        ->select('Repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))->where('Repair_equipmentdetails.created_at','LIKE',$ym.'%')
         ->groupBy('Repair_equipmentdetails.equiment')
         ->get();
 
        $count_unrepair = DB::table('Unrepair_equipmentdetails')
         ->leftJoin('name_equipments','Unrepair_equipmentdetails.id','=','name_equipments.id')
-        ->select('Unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))
+        ->select('Unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))->where('Unrepair_equipmentdetails.created_at','LIKE',$ym.'%')
         ->groupBy('Unrepair_equipmentdetails.equiment')
         ->get();
 
@@ -144,8 +174,6 @@ class HomeController extends Controller
         ->get();
 
        
-
-
         return view('project/page/statprint')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair);
     
     }

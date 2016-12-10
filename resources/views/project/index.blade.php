@@ -39,6 +39,12 @@
     <div class="w3-container w3-sand w3-leftbar">
       <p><i>เมื่อผู้ใช้บริการทำการแจ้งซ่อมเรียบร้อยแล้ว สามารถตรวจสอบลำดับและสถานะการซ่อมได้ในตารางรายการซ่อม</i><br>
         หากไม่พบสถานะกรุณาทำการแจ้งซ่อมใหม่ หรือติดต่อเจ้าหน้าที่</p>
+
+
+
+<p id="id_table_two"></p>
+
+
       </div>
 
       <br>
@@ -76,7 +82,7 @@
 
 
           <!-- css textbox search -->
-          <style>
+      <!--     <style>
             input[type=searchh] {
               width: 80%
               box-sizing: border-box;
@@ -95,21 +101,23 @@
             input[type=searchh]:focus {
               width: 100%;
             }
-          </style>
+          </style> -->
 
 
           <div id="London" class="w3-container city" style="display: block;">
             <div class="w3-row">
-              <div class="w3-col m4">
+              <!-- <div class="w3-col m4"> -->
                 <h2>รายการแจ้งซ่อม</h2>
-              </div>
 
-              <div class="w3-col m8">
-                <input type="searchh" name="search" class="light-table-filter" data-table="order-table" placeholder="Search...">
+
+             <!--  </div>
+
+              <div class="w3-col m8"> -->
+                <input type="searchh" name="search" class="w3-input w3-animate-input" data-table="order-table" placeholder="Search...">
                 <!-- <input class="w3-input w3-animate-input" type="search" name="search" class="light-table-filter" data-table="order-table" style="width:70%" placeholder="Search..."> -->
-              </div>
+              <!-- </div> -->
             </div>
-
+<br>
             <table class="w3-table w3-striped w3-border order-table table">
               <thead>
                 <tr class="w3-pale-yellow">
@@ -142,24 +150,29 @@
                 <tr class="w3-green">
                   <th>ลำดับ</th>
                   <th>ห้อง</th>
-                  <th>วันที่เจ้งซ่อม</th>
+                  <th>วันที่แจ้งซ่อม</th>
                   <th>วันที่ซ่อมได้</th>
                   <th>เวลาที่ซ่อมได้</th>
                   <th>สถานะ</th>
                 </tr>
               </thead>
-              @foreach($equipment as $v) 
-              <tr>       
-                <td>{{$v->id_equipment}}</td>
-                <td>{{$v->num_room}}</td>
-                <td>{{$v->date_in}}</td>
-                <td>{{$v->date_repair}}</td>
-                <td>{{$v->time_repair}}</td>
-                <td>ซ่อมแล้ว</td>
-              </tr>
-              @endforeach
+
+                @foreach($num_change_and_repair as $key => $v) 
+                <tr>       
+                  <td>{{$key+1}}</td>
+                  <td>{{$v->num_room}}</td>
+                  <td>{{$v->date_in}}</td>
+                  <td>{{$v->date_repair}}</td>
+                  <td>{{$v->time_repair}}</td>
+                  <td>ซ่อมแล้ว</td>
+                </tr>
+               
+                @endforeach
+              
             </table>
           </div>
+
+
 
           <div id="Tokyo" class="w3-container city">
             <h2>รายการซ่อมไม่ได้</h2>
@@ -174,9 +187,10 @@
                   <th>สถานะ</th>
                 </tr>
               </thead> 
-              @foreach($equipment as $v)
+
+              @foreach($unrepair_equipment as $v)
               <tr>       
-                <td>{{$v->id_equipment}}</td>
+                <td>{{$v->id}}</td>
                 <td>{{$v->num_room}}</td>
                 <td>{{$v->date_in}}</td>
                 <td>{{$v->date_repair}}</td>
@@ -186,7 +200,6 @@
               @endforeach
             </table>
           </div>
-
           <br>
           <div class="w3-row">
             <center>
@@ -207,7 +220,10 @@
     </div>
     
     <br>
-        //tab
+
+
+   
+        <!-- tab -->
         <script>
             function openCity(evt, cityName) {
               var i, x, tablinks;
@@ -222,6 +238,7 @@
              document.getElementById(cityName).style.display = "block";
              evt.currentTarget.firstElementChild.className += " w3-border-red";
            }
+        
         </script>
 
 

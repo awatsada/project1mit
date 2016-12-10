@@ -120,7 +120,7 @@
 					</div>
 				</div>
 
-//ค้นหาอุปกรณ์				
+<!-- ค้นหาอุปกรณ์	 -->			
 <script>
 $( function() {
 var availableTags = [
@@ -162,6 +162,6 @@ function removeRow(rnum) {
 				//     selectMonths: true, // Creates a dropdown to control month
 				//     selectYears: 15 // Creates a dropdown of 15 years to control year
 				//   });
-			</script>
-			<br>
-			@endsection
+</script>
+<br>
+@endsection

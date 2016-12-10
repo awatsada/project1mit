@@ -81,22 +81,27 @@
             </div>
             <strong>ภาพอุปกรณ์  </strong>
             <h1><img src="{{asset('upload/repair/')}}/{{$v->photo_repair}}" class="w3-border w3-padding-4 w3-padding-tiny" alt="Norway" style="width:30%"></h1>
-          </div>
-          @endforeach
-
-
-          <footer class="w3-container w3-blue"></footer>
+         </div>
+        <footer class="w3-container w3-blue"></footer>
         </div>
+
+           @endforeach
+
+
+
+         
 
         <br>
 
         <form action="{{url('sh/recordequipment')}}/{{$Eq->id_equipment}}" method="get">
          <p><center><button class="w3-btn w3-pink">บันทึกการซ่อม</button></center></p>
        </form>
+  
 
-       <br>
-     </div>
-   </div>
+     </div> 
+     </div> 
+     </div> 
 
-   <br>
+
+ 
 @endsection

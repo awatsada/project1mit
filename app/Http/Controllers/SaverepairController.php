@@ -36,7 +36,12 @@ class SaverepairController extends Controller
 		$Repair_equipmentdetail = new Repair_equipmentdetail;
 		$Unrepair_equipment = new Unrepair_equipment;
 		$Unrepair_equipmentdetail = new Unrepair_equipmentdetail;
+
+		
 		$equipment = Equipment::all();
+        $unrepair_equipment = Unrepair_equipment::all();
+        $num_change = DB::table('change_equipments');
+        $num_change_and_repair = DB::table('repair_equipments')->union($num_change)->get();
 
         // $Eq is 1 column in table eqipment
 		$Eq = Equipment::where('id_equipment',$id)->first();
@@ -79,6 +84,8 @@ class SaverepairController extends Controller
 				$Change_equipmentdetail->name_technical = Auth::user()->name;
 				$Change_equipmentdetail->name_technical_depart = Auth::user()->name;
 				$Change_equipmentdetail->save();
+
+
 			}
 
 			if (input::get('status'.$i)=="repair") 
@@ -134,9 +141,25 @@ class SaverepairController extends Controller
 				$Unrepair_equipmentdetail->name_technical_depart = Auth::user()->name;
 				$Unrepair_equipmentdetail->save();
 			}
-
+                
+         
 		}
+        $delEqd = Equipmentdetail::where('id_equipment',$id)->delete();
+		$delEq = Equipment::where('id_equipment',$id)->delete();
 
-		return view('project/index')->with('equipment',$equipment);
+
+//variable from index
+        $count_change = Change_equipment::count();
+        $count_repair = Repair_equipment::count();
+        $count_id = $count_change;
+        $i=0;
+
+
+
+        
+		return view('project/index')->with('equipment',$equipment)
+		                            ->with('num_change_and_repair',$num_change_and_repair)
+                                    ->with('unrepair_equipment',$unrepair_equipment)
+                                    
 	}
 }
