@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 use Auth;
 use PDF;
+use DB;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -159,7 +160,7 @@ class SaverepairController extends Controller
         
 		return view('project/index')->with('equipment',$equipment)
 		                            ->with('num_change_and_repair',$num_change_and_repair)
-                                    ->with('unrepair_equipment',$unrepair_equipment)
+                                    ->with('unrepair_equipment',$unrepair_equipment);
                                     
 	}
 }

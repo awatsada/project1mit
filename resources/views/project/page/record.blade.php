@@ -50,7 +50,7 @@
 
       <form action="{{url('record/')}}/{{$Eq->id_equipment}}" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">  
-        <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายละเอียดการซ่อม{{$i}}" name="list_detail_repair{{$i}}"></textarea>
+        <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายละเอียดการซ่อม" name="list_detail_repair{{$i}}"></textarea>
         <br>
 
         <div class="w3-row">
@@ -77,7 +77,7 @@
         <br>
 
         <h3 class="w3-text-blue">รายการเบิกอุปกรณ์</h3>     
-        <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายการเบิกอุปกรณ์{{$i}}" name="list_use_equipment{{$i}}" ></textarea>
+        <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายการเบิกอุปกรณ์" name="list_use_equipment{{$i}}" ></textarea>
 
         <br>
 
