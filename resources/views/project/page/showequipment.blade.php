@@ -40,7 +40,7 @@
             <p>
               <button class="w3-btn w3-yellow w3-border" type="submit" >Export PDF</button></p>
             </form> -->
-<a class="w3-btn w3-blue" href="{{url('re/report')}}/{{$Eq->id_equipment}}">Print</a>
+<!-- <a class="w3-btn w3-blue" href="{{url('re/report')}}/{{$Eq->id_equipment}}">Print</a> -->
     <hr>
 
     <div class="w3-container w3-sand w3-leftbar">

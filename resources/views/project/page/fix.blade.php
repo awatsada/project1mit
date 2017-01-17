@@ -20,7 +20,7 @@
 			<br>
 			<div class="w3-content" style="max-width:800px">
 				<br>
-				<form class="w3-container" action="fixxx" enctype="multipart/form-data" method="post">
+				<form class="w3-container" action="savestock" enctype="multipart/form-data" method="post">
 					<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 					<h3 class="w3-text-blue">รายละเอียดผู้แจ้ง</h3>
 					<div class="w3-row">

@@ -46,7 +46,7 @@
 <body>
 
   <nav class="w3-sidenav w3-collapse w3-white w3-animate-left w3-card-2 w3-padding-4" style="z-index:3;width:250px;" id="mySidenav">
-    <a href="{{url('/home')}}" class="w3-border-bottom w3-large"><img src="https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-9/14053948_907940599310962_5923993153439261598_n.jpg?oh=885dea1f642f5c5f204b03f53c9e1822&oe=585C0BCD" style="width:100%;"></a>
+    <a href="{{url('/home')}}" class="w3-border-bottom w3-large"><img src="https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/14053948_907940599310962_5923993153439261598_n.jpg?oh=104c4d504e8e005296b41f551f4ab003&oe=5921CCCD" style="width:100%;"></a>
     <a href="javascript:void(0)" onclick="w3_close()" 
     class="w3-text-deep-purple w3-hide-large w3-closenav w3-large">Close <i class="fa fa-remove"></i></a>
 
@@ -71,6 +71,8 @@
     <a href="{{url('/fix')}}">ใบแจ้งซ่อม</a>
     <a href="{{url('/show')}}">บันทึกการซ่อม</a>
     <a href="{{url('/stat')}}">สถิติ</a>
+    <a href="{{url('/savestock')}}">เพิ่มอุปกรณ์สำรอง</a>
+    <a href="{{url('/showstock')}}">จำนวนอุปกรณ์สำรอง</a>
     <!--  <a href="{{url('/record')}}">หน้าบันทึกการซ่อม</a> -->
     @endif
   </nav>

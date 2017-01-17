@@ -104,7 +104,7 @@
        <br>
 
        <div class="w3-row">
-        <h3 class="w3-text-blue">สถานะการซ่อม{{$i}}</h3>
+        <h3 class="w3-text-blue">สถานะการซ่อม</h3>
         <p>
           <input class="w3-radio" type="radio" name="status{{$i}}" value="repair" checked><label class="w3-validate">ซ่อม</label>
         </p>

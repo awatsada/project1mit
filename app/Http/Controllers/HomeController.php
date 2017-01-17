@@ -26,6 +26,10 @@ use App\Repair_equipment;
 use App\Repair_equipmentdetail;
 use App\Unrepair_equipment;
 use App\Unrepair_equipmentdetail;
+
+use App\Name_equipment_stock;
+use App\Save_stock;
+
 class HomeController extends Controller
 {
     /**
@@ -81,7 +85,10 @@ class HomeController extends Controller
        ->with('num_change_and_repair',$num_change_and_repair)
        ;
 
-   }
+    }
+
+
+
 
     public function stat()
     {
@@ -213,6 +220,8 @@ class HomeController extends Controller
         return $pdf->stream('equipment.pdf');
     
     }
+
+
 
     public function rereport($id)
     {

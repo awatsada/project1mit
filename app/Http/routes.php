@@ -101,6 +101,11 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::post('stat/pdf', 'HomeController@statpdf');
 
+    Route::get('savestock', 'StockController@showsavestock');
+    Route::post('savestock', 'StockController@savestock');
+    Route::get('showstock', 'StockController@showstock');
+
+
 
 
 

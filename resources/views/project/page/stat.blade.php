@@ -63,6 +63,7 @@
         </center>
       </div>
       <br>
+      
       <form class="w3-container" action="statt" enctype="multipart/form-data" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <p>
@@ -71,6 +72,12 @@
           <button class="w3-btn w3-blue w3-border" type="submit">แสดง</button></p>
         </form>
 
+<form class="w3-container" action="stat/pdf" enctype="multipart/form-data" method="post">
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <p>
+              <input name="month" type="month" />
+              <button class="w3-btn w3-green w3-border" type="submit">Export PDF</button></p>
+            </form>
 
         <br>
         <div id="chartContainer" style="height: 300px; width: 100%;"></div>
@@ -80,21 +87,16 @@
 
         <br>
         <div class="w3-container">
-          <center>
-          <form class="w3-container" action="stat/print" enctype="multipart/form-data" method="post">
+        <!--   <center> -->
+<!--           <form class="w3-container" action="stat/print" enctype="multipart/form-data" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <p>
               <input name="month" type="month" />
               <button class="w3-btn w3-yellow w3-border" type="submit">Print</button></p>
-            </form>
+            </form> -->
 
-          <form class="w3-container" action="stat/pdf" enctype="multipart/form-data" method="post">
-            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-            <p>
-              <input name="month" type="month" />
-              <button class="w3-btn w3-green w3-border" type="submit">Export PDF</button></p>
-            </form>
-</center>
+          
+<!-- </center> -->
 <!--             <a class="w3-btn w3-yellow w3-border" href="stat/report">Export PDF</a>
             <a class="w3-btn w3-blue w3-border" href="#">Export Excel</a> -->
             

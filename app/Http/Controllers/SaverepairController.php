@@ -158,9 +158,9 @@ class SaverepairController extends Controller
 
 
         
-		return view('project/index')->with('equipment',$equipment)
-		                            ->with('num_change_and_repair',$num_change_and_repair)
-                                    ->with('unrepair_equipment',$unrepair_equipment);
-                                    
+		// return view('project/index')->with('equipment',$equipment)
+		//                             ->with('num_change_and_repair',$num_change_and_repair)
+  //                                   ->with('unrepair_equipment',$unrepair_equipment);
+        return Redirect::to('home');
 	}
 }
