@@ -127,6 +127,7 @@
                   <th>วันที่ซ่อมได้</th>
                   <th>เวลาที่ซ่อมได้</th>
                   <th>สถานะ</th>
+                  
                 </tr>
               </thead>
               @foreach($equipment as $v) 
@@ -137,6 +138,7 @@
                 <td>{{$v->date_repair}}</td>
                 <td>{{$v->time_repair}}</td>
                 <td>รอการซ่อม</td>
+               
               </tr>
               @endforeach
             </table>

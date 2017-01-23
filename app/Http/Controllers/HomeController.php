@@ -50,36 +50,14 @@ class HomeController extends Controller
     public function index()
     {
         $equipment = Equipment::all();
-        // $change_equipment = Change_equipment::all();
-        // $repair_equipment = Repair_equipment::all();
+   
         $unrepair_equipment = Unrepair_equipment::all();
 
-        // $count_change = Change_equipment::count();
-        // $count_repair = Repair_equipment::count();
-        // echo $count_repair;
-        // echo $count_change;
-        // $count_id = $count_change;
-        // $count_id = $count_change + $count_repair;
-        // echo $count_id;
-        // $a = array();
-
-
-        // function online($repair_equipment, &$change_equipment) 
-        // {
-        //    $a = array_push($change_equipment,$repair_equipment);
-        // }
-        // foreach ($repair_equipment as $key => $value) {
-        //     $a = array_merge($change_equipment, $value->id);
-        // }
+    
         $num_change = DB::table('change_equipments');
         $num_change_and_repair = DB::table('repair_equipments')->union($num_change)->get();
 
 
-// dd($a);
-
-
-
-    
        return view('project/index')->with('equipment',$equipment)
        ->with('unrepair_equipment',$unrepair_equipment) 
        ->with('num_change_and_repair',$num_change_and_repair)
@@ -273,23 +251,6 @@ class HomeController extends Controller
         return view('project/page/showequipment', compact('equipment','count'));
     }
 
-
-
-
-    public function fix()
-    {
-        $name_equipment = NameEquipment::all();     
-        return view('project/page/fix')->with('name_equipment',$name_equipment);
-    }
-
-
-    // public function record()
-    // {   
-
-    //     return view('project/page/record');
-    // }
-
-
     public function record($id)
     { 
 
@@ -298,6 +259,51 @@ class HomeController extends Controller
         $count = Equipmentdetail::where('id_equipment',$id)->count();
         return view('project/page/record')->with('Eq',$Eq)->with('Eqd',$Eqd)->with('count',$count);
     }
+
+
+////////////////////////////***********************////////////////////////////////
+
+    public function fix()
+    {
+        $name_equipment = NameEquipment::all(); //name equipment for search
+
+        $id_user = Auth::user()->id;
+        $list_fix = Equipment::where('id_user',$id_user)->get();
+        
+
+        return view('project/page/fix')->with('name_equipment',$name_equipment)->with('list_fix',$list_fix);
+    }
+
+    public function detailfix($id)
+    {
+        $Eq = Equipment::where('id_equipment',$id)->first();
+        $Eqd = Equipmentdetail::where('id_equipment',$id)->get();
+        
+        return view('project/page/detailfix')->with('Eq',$Eq)->with('Eqd',$Eqd);
+    }
+///***********************************//////***********************************///
+    public function delete_fix($id)
+    {
+       $Eqd = Equipmentdetail::where('id_equipment',$id)->delete();
+       $Eq = Equipment::where('id_equipment',$id)->delete();  
+
+           
+
+        return Redirect::to('fix');  
+    }
+
+    public function delete_detail_fix($id)
+    {
+        $Eqd = Equipmentdetail::find($id);  
+        $Eqd->delete();
+
+        $Eq = Equipment::where('id_equipment',$id)->first();
+        $Eqd = Equipmentdetail::where('id_equipment',$id)->get();
+        
+        return view('project/page/detailfix')->with('Eq',$Eq)->with('Eqd',$Eqd);
+    }
+
+///***********************************//////***********************************///
 
 
     public function savefix(Request $data)

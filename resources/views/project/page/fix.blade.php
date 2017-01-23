@@ -1,5 +1,9 @@
 @extends("project.template")
 @section("content")
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
 <div class="w3-main" style="margin-left:250px;">
 	<div id="myTop" class="w3-top w3-container w3-padding-16 w3-theme w3-large">
@@ -19,10 +23,46 @@
 			</div>
 			<br>
 			<div class="w3-content" style="max-width:800px">
+
+
+	<form class="w3-container" action="savefix" enctype="multipart/form-data" method="post">
+					<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+
+  <div class="w3-container w3-section w3-round-xlarge w3-border">
+    <h3 class="w3-text-blue">ประวัติการแจ้งซ่อม</h2>
+     <table class="w3-table w3-striped w3-border">
+    <tr>
+      <th>ลำดับ</th>
+      <th>ห้อง</th>
+      <th>วันที่แจ้งซ่อม</th>
+      <th>วันที่ซ่อมได้</th>
+      <th>เวลาที่ซ่อมได้</th>
+      <th>รายละเอียด</th>
+    </tr>
+    @foreach($list_fix as $v) 
+    <tr>
+      <td>{{$v->id_equipment}}</td>
+      <td>{{$v->num_room}}</td>
+      <td>{{$v->date_in}}</td>
+      <td>{{$v->date_repair}}</td>
+      <td>{{$v->time_repair}}</td>
+      <td><a href="{{url('fix/detail')}}/{{$v->id_equipment}}">แสดง</a></td>
+    </tr>
+    @endforeach
+
+  </table>
+  <br>
+  </div>
+  </form>
+
+
+
+
 				<br>
-				<form class="w3-container" action="savestock" enctype="multipart/form-data" method="post">
+				<form class="w3-container" action="savefix" enctype="multipart/form-data" method="post">
 					<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 					<h3 class="w3-text-blue">รายละเอียดผู้แจ้ง</h3>
+					<br>
 					<div class="w3-row">
 						<div class="w3-col m2">
 							<p><label>ชื่อ - นามสกุล : </label></p>

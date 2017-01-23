@@ -77,7 +77,10 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('home', 'HomeController@index');
     Route::get('fix', 'HomeController@fix');
-    Route::post('fixxx', 'HomeController@savefix');
+    Route::post('savefix', 'HomeController@savefix');
+    Route::get('fix/detail/{id}', 'HomeController@detailfix');
+    Route::get('fix/detail/delete_fix/{id}', 'HomeController@delete_fix');
+    Route::get('fix/detail/delete_detail/{id}', 'HomeController@delete_detail_fix');
 
     
     Route::get('show', 'HomeController@show');
