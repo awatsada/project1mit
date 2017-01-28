@@ -38,13 +38,36 @@ class StockController extends Controller
         return view('project/page/show_stock')->with('equipment',$equipment);
     }
 
+    public function edit_stock($id)
+    {  
+        $Estock = Save_stock::where('id',$id)->first();  
+        $name_equipment = Name_equipment_stock::all();  
+        return view('project/page/stock_edit')->with('Estock',$Estock)->with('name_equipment',$name_equipment);
+    }
 
+    public function delete_stock($id)
+    {  
+        $Estock = Save_stock::where('id',$id)->delete();  
+         
+        return Redirect::to('showstock');
+    }
+
+    public function update_stock($id)
+    {  
+        $Estock = Save_stock::where('id',$id)->first();  
+        $Estock->name = input::get('name0'); 
+        $Estock->number = input::get('num0'); 
+        $Estock->save();
+        return Redirect::to('showstock');
+    }
 
     public function showsavestock()
     {
         $name_equipment = Name_equipment_stock::all();     
         return view('project/page/save_stock')->with('name_equipment',$name_equipment);
     }
+
+
 
 
     public function savestock()
@@ -76,7 +99,7 @@ class StockController extends Controller
     			$equipment->number = $sum;
     			$equipment->save();
     			//echo "success1";
-    			return Redirect::to('home');
+    			 return Redirect::to('showstock');
 
 
     		} 
@@ -91,7 +114,7 @@ class StockController extends Controller
     				$savestock->number = input::get('num0'); 
     				$savestock->save();
     				//echo "success2";
-    				return Redirect::to('home');
+    				 return Redirect::to('showstock');
     			}
     		}
     		$i++;
@@ -128,7 +151,7 @@ class StockController extends Controller
     			$equipment->number = $sum;
     			$equipment->save();
     			// echo "success1";
-    			return Redirect::to('home');
+    			 return Redirect::to('showstock');
 
 
     		} 
@@ -143,7 +166,7 @@ class StockController extends Controller
     				$savestock->number = input::get('num1'); 
     				$savestock->save();
     				// echo "success2";
-    				return Redirect::to('home');
+    				 return Redirect::to('showstock');
     			}
     		}
     		$i++;
@@ -179,7 +202,7 @@ class StockController extends Controller
     			$equipment->number = $sum;
     			$equipment->save();
     			// echo "success1";
-    			return Redirect::to('home');
+    			 return Redirect::to('showstock');
 
 
     		} 
@@ -194,7 +217,7 @@ class StockController extends Controller
     				$savestock->number = input::get('num2'); 
     				$savestock->save();
     				// echo "success2";
-    				return Redirect::to('showstock');
+    				 return Redirect::to('showstock');
     			}
     		}
     		$i++;

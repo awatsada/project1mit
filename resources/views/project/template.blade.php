@@ -69,10 +69,11 @@
     <a href="#">ติดต่อสอบถาม</a>
     @else
     <a href="{{url('/fix')}}">ใบแจ้งซ่อม</a>
-    <a href="{{url('/show')}}">บันทึกการซ่อม</a>
+    <a href="{{url('/showw')}}">บันทึกการซ่อม</a>
     <a href="{{url('/stat')}}">สถิติ</a>
     <a href="{{url('/savestock')}}">เพิ่มอุปกรณ์สำรอง</a>
     <a href="{{url('/showstock')}}">จำนวนอุปกรณ์สำรอง</a>
+    <!-- <a href="{{url('/editstock')}}">แก้ไขจำนวนอุปกรณ์สำรอง</a> -->
     <!--  <a href="{{url('/record')}}">หน้าบันทึกการซ่อม</a> -->
     @endif
   </nav>

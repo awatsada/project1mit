@@ -18,14 +18,11 @@
       border-collapse: collapse;
       width: 100%;
     }
-
     th, td {
       text-align: left;
       padding: 8px;
     }
-
     tr:nth-child(even){background-color: #f2f2f2}
-
     th {
       background-color: #4CAF50;
       color: white;
@@ -48,7 +45,6 @@
       -webkit-transition: width 0.4s ease-in-out;
       transition: width 0.4s ease-in-out;
     }
-
     input[type=searchh]:focus {
       width: 100%;
     }

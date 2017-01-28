@@ -223,10 +223,23 @@ class HomeController extends Controller
 
 
 
-    public function show()
+    public function showw()
     {
+       //  $equipment = Equipment::all();
+   
+       //  $unrepair_equipment = Unrepair_equipment::all();
+
+    
+       //  $num_change = DB::table('change_equipments');
+       //  $num_change_and_repair = DB::table('repair_equipments')->union($num_change)->get();
+
+
+       // return view('project/page/show')->with('equipment',$equipment)
+       // ->with('unrepair_equipment',$unrepair_equipment) 
+       // ->with('num_change_and_repair',$num_change_and_repair)
+       // ;
         $equipment = Equipment::all();
-        return view('project/page/showrepair')->with('equipment',$equipment);
+        return view('project/page/show')->with('equipment',$equipment);
     }
 
 
@@ -286,10 +299,7 @@ class HomeController extends Controller
     {
        $Eqd = Equipmentdetail::where('id_equipment',$id)->delete();
        $Eq = Equipment::where('id_equipment',$id)->delete();  
-
-           
-
-        return Redirect::to('fix');  
+       return Redirect::to('fix');  
     }
 
     public function delete_detail_fix($id)
@@ -305,6 +315,70 @@ class HomeController extends Controller
 
 ///***********************************//////***********************************///
 
+///***********************************//////***********************************///
+    public function edit_fix($id)
+    {
+       
+       $Eq = Equipment::where('id_equipment',$id)->first();  
+       
+       return view('project/page/editfix')->with('Eq',$Eq); 
+    }
+    public function update_fix($id)
+    {   
+       // echo $id;
+        $equipment = Equipment::where('id_equipment',$id)->first();   
+        // echo $equipment;   
+        $equipment->id_user = Auth::user()->id;   
+        $equipment->phone_number = input::get('phone_number');  
+        $equipment->num_room = input::get('num_room');
+        // $date = date("Y-m-d"); 
+        $equipment->date_in = date("Y-m-d");   
+        $equipment->date_repair = input::get('date_repair');    
+        $equipment->time_repair = input::get('time_repair');    
+        $equipment->live = input::get('live');
+        $equipment->note = input::get('note');
+        $equipment->save();
+        return Redirect::to('fix'); 
+        //echo "string";
+    }
+
+
+
+    public function editEq_fix($id)
+    {  
+        $Eqd = Equipmentdetail::where('id',$id)->first();  
+        return view('project/page/editfixequipment')->with('Eqd',$Eqd);
+    }
+
+    public function updateEq_fix(Request $data, $id)
+    {  
+        
+            $logo = $data->file('eqpho0');
+            $upload = 'upload/repair';
+            $filename = $logo->getClientOriginalName();
+            $success = $logo->move($upload, $filename);
+
+            $ep = $data->Input('eq0');
+            $epdetail = $data->Input('eqdetail0');
+
+            if($success)
+            {
+                $equipmentdetail = Equipmentdetail::where('id',$id)->first(); 
+                $equipmentdetail->photo_repair = $filename;
+                // $equipmentdetail->id_equipment = $equipment->id;
+                $equipmentdetail->equipment = $ep;
+                $equipmentdetail->detail_equipment = $epdetail;
+
+                $equipmentdetail->save();
+            } 
+      return Redirect::to('fix'); 
+  
+    }
+
+
+
+
+///***********************************//////***********************************///
 
     public function savefix(Request $data)
     {   

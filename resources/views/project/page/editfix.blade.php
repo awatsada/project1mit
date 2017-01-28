@@ -1,6 +1,6 @@
 @extends("project.template")
 @section("content")
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 
 
@@ -25,41 +25,8 @@
 			<div class="w3-content" style="max-width:800px">
 
 
-
-
-
-  <div class="w3-container w3-section w3-round-xlarge w3-border">
-    <h3 class="w3-text-blue">ประวัติการแจ้งซ่อม</h2>
-     <table class="w3-table w3-striped w3-border">
-    <tr>
-      <th>ลำดับ</th>
-      <th>ห้อง</th>
-      <th>วันที่แจ้งซ่อม</th>
-      <th>วันที่ซ่อมได้</th>
-      <th>เวลาที่ซ่อมได้</th>
-      <th>รายละเอียด</th>
-    </tr>
-    @foreach($list_fix as $v) 
-    <tr>
-      <td>{{$v->id_equipment}}</td>
-      <td>{{$v->num_room}}</td>
-      <td>{{$v->date_in}}</td>
-      <td>{{$v->date_repair}}</td>
-      <td>{{$v->time_repair}}</td>
-      <td><a href="{{url('fix/detail')}}/{{$v->id_equipment}}">แสดง</a></td>
-    </tr>
-    @endforeach
-
-  </table>
-  <br>
-  </div>
-
-
-
-
-
 				<br>
-				<form class="w3-container" action="savefix" enctype="multipart/form-data" method="post">
+				<form class="w3-container" action="{{url('fix/detail/update_fix')}}/{{$Eq->id_equipment}}" enctype="multipart/form-data" method="post">
 					<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 					<h3 class="w3-text-blue">รายละเอียดผู้แจ้ง</h3>
 					<br>
@@ -76,7 +43,7 @@
 							<p><label>เบอร์โทรศัพท์ : </label></p>
 						</div>
 						<div class="w3-col m10">
-							<input class="w3-input w3-animate-input" name="phone_number" type="text" style="width:70%" value="0883845297">
+							<input class="w3-input w3-animate-input" name="phone_number" type="text" style="width:70%" value="{{$Eq->phone_number}}">
 						</div>
 					</div>
 					<div class="w3-row">
@@ -84,7 +51,7 @@
 							<p><label>ห้อง </label></p>
 						</div>
 						<div class="w3-col m11">
-							<input class="w3-input w3-animate-input" name="num_room" type="text" style="width:70%" value="2325">
+							<input class="w3-input w3-animate-input" name="num_room" type="text" style="width:70%" value="{{$Eq->num_room}}">
 						</div>
 					</div>
 					<div class="w3-row">
@@ -100,7 +67,7 @@
 							<p><lavel>วันที่ให้เข้าซ่อมได้ : </lavel></p>
 						</div>
 						<div class="w3-col m10">
-							<input class="w3-input datepicker" name="date_repair"  type="date" style="width:70%">
+							<input class="w3-input datepicker" name="date_repair" value="{{$Eq->date_repair}}" type="date" style="width:70%">
 						</div>
 					</div>
 					<div class="w3-row">
@@ -108,7 +75,7 @@
 							<p><label>เวลา : </label></p>
 						</div>
 						<div class="w3-col m11">
-							<input class="w3-input w3-animate-input" name="time_repair" type="time" style="width:70%" value="12:10">
+							<input class="w3-input w3-animate-input" name="time_repair" value="{{$Eq->time_repair}}" type="time" style="width:70%" value="12:10">
 						</div>
 					</div>
 					<div class="w3-row">
@@ -127,21 +94,10 @@
 								</div>
 							</div>
 							<br>
-							<h3 class="w3-text-blue">รายการแจ้งซ่อม</h3>							
-							<div id="itemRows">
-								<div class="ui-widget">
-									<br>
-									อุปกรณ์ <input class="w3-input w3-animate-input" id="tags" name="eq0"  type="text"  style="width:70%" /></div>
-									<br>
-									<i> รายละเอียดและปัญหา</i>  
-									<input class="w3-input w3-animate-input" name="eqdetail0" type="text"  style="width:70%" />
-									<br>
-									<input type="file" multiple="" name="eqpho0"><br><br> 
-									<input onclick="addRow(this.form);" class="w3-btn w3-teal"  type="button" value="เพิ่มอุปกรณ์" />
-								</div>
+
 								<br>
 								<p>อื่น ๆ</p>
-								<textarea class="w3-input w3-animate-input" name="note" style="width:70%;" rows="4" cols="50" placeholder="กรณีไม่พบอุปกรณ์"></textarea>
+								<textarea class="w3-input w3-animate-input" name="note" style="width:70%;" rows="4" value="{{$Eq->note}}" cols="50" placeholder="กรณีไม่พบอุปกรณ์" ></textarea>
 								<br>
 								<br>
 								<div class="w3-row">
@@ -160,48 +116,9 @@
 					</div>
 				</div>
 
-<!-- ค้นหาอุปกรณ์	 -->			
-<script>
-$( function() {
-var availableTags = [
-@foreach($name_equipment as $a) 
-"{{$a->name}}",
-@endforeach
-];
-$("#tags" ).autocomplete({
-source: availableTags
-});
-} );
 
 
-//เพิ่มอุปกรณ์
-var rowNum = 0;
-function addRow(frm) {
-	rowNum ++;
-	var row = '<p  id="rowNum'+rowNum+'">อุปกรณ์ <input class="w3-input w3-animate-input ui-autocomplete-input"  type="text" name="eq'+rowNum+'" style="width:400px" autocomplete="off" > <br> <i>รายละเอียดและปัญหา</i> <input class="w3-input w3-animate-input" type="text" name="eqdetail'+rowNum+'" style="width:400px"><br> <input type="file" multiple="" name="eqpho'+rowNum+'"> <br> <br>  <input class="w3-btn w3-red" type="button"  value="ลบอุปกรณ์" onclick="removeRow('+rowNum+');"></p>';
-	jQuery('#itemRows').append(row);
-//	frm.add_qty.value = '';
-//	frm.add_name.value = '';
 
-//ค้นหาอุปกรณ์
-$( function() {
-	var availableTags = [
-	@foreach($name_equipment as $a) 
-	"{{$a->name}}",
-	@endforeach
-	];
-	$( "input.ui-autocomplete-input" ).autocomplete({
-		source: availableTags
-	});
-} );
-}
-function removeRow(rnum) {
-	jQuery('#rowNum'+rnum).remove();
-}
-				// $('.datepicker').pickadate({
-				//     selectMonths: true, // Creates a dropdown to control month
-				//     selectYears: 15 // Creates a dropdown of 15 years to control year
-				//   });
-</script>
+
 <br>
 @endsection

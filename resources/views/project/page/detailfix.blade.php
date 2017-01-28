@@ -40,7 +40,7 @@
   <div class="w3-container w3-padding-32" style="padding-left:32px">
     <h2>รายละเอียดการแจ้งซ่อมทั่วไป</h2> 
     <a class="w3-btn w3-teal" href="{{url('getpdf')}}/{{$Eq->id_equipment}}">Export PDF <i class="fa fa-file"></i></a>
-    <a class="w3-btn w3-blue" href="**">ลำดับ : {{$Eq->id_equipment}} <i class="fa fa-refresh"></i></a>
+    <a class="w3-btn w3-blue" href="{{url('fix/detail/edit_fix')}}/{{$Eq->id_equipment}}">ลำดับ : {{$Eq->id_equipment}} <i class="fa fa-refresh"></i></a>
     <a class="w3-btn w3-red" href="{{url('fix/detail/delete_fix')}}/{{$Eq->id_equipment}}">ลำดับ : {{$Eq->id_equipment}} <i class="fa fa-trash"></i></a>
    <!--  <form class="w3-container" action="re/report" enctype="multipart/form-data" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -51,7 +51,7 @@
     <hr>
 
     <div class="w3-container w3-sand w3-leftbar">
-      <p><strong>ลำดับ : </strong><i>{{$Eq->id_equipment}}</i></p>
+      <h1><strong>ลำดับ : </strong><i>{{$Eq->id_equipment}}</i></h1>
       <p><strong>ห้อง : </strong><i>{{$Eq->num_room}}</i></p>
       <p><strong>เบอร์โทรศัพท์ : </strong><i>{{$Eq->phone_number}}</i></p>
       <p><strong>วันที่แจ้งซ่อม : </strong><i>{{$Eq->date_in}}</i></p> 
@@ -76,14 +76,15 @@
         <div class="w3-card-4 test" style="width:100%"> 
 
           <header class="w3-container w3-blue">
-            <h2>ลำดับ {{$v->id}} [ <i class="fa fa-refresh"></i> : <a href="{{url('fix/detail/delete_detail')}}/{{$v->id}}">
+            <h2><strong>อุปกรณ์ : </strong><i>{{$v->equipment}}</i> [ <a href="{{url('fix/detail_Eq/edit_Eq')}}/{{$v->id}}">
+<i class="fa fa-refresh"></i></a> : <a href="{{url('fix/detail/delete_detail')}}/{{$v->id}}">
 <i class="fa fa-trash"></i></a> ]</h2>
           </header>
 
           <div class="w3-container">
             <div class="w3-panel w3-padding-4 w3-sand">
-              <p><strong>ลำดับอุปกรณ์ : </strong><i>{{$v->id_equipment}}</i></p> 
-              <p><strong>อุปกรณ์ : </strong><i>{{$v->equipment}}</i></p> 
+              <!-- <p><strong>ลำดับอุปกรณ์ : </strong><i>{{$v->id_equipment}}</i></p>  -->
+              <!-- <p><strong>อุปกรณ์ : </strong><i>{{$v->equipment}}</i></p>  -->
               <p><strong>รายละเอียดอุปกรณ์ : </strong><i>{{$v->detail_equipment}}</i></p> 
 
             </div>
