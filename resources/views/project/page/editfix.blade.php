@@ -94,7 +94,22 @@
 								</div>
 							</div>
 							<br>
-
+							<h3 class="w3-text-blue">รายการแจ้งซ่อม</h3>							
+							@foreach($Eqd as $key => $v) 
+							<div id="itemRows">
+							
+								<div class="ui-widget">
+								
+									<br>
+									อุปกรณ์ <input class="w3-input w3-animate-input" id="tags" name="eq{{$key}}" value="{{$v->equipment}}" type="text"  style="width:70%" /></div>
+									<br>
+									<i> รายละเอียดและปัญหา</i>  
+									<input class="w3-input w3-animate-input" name="eqdetail{{$key}}" value="{{$v->detail_equipment}}" type="text"  style="width:70%" />
+									<br>
+									<input type="file" multiple="" value="{{$v->photo_repair}}" name="eqpho{{$key}}"><br><br> 
+								
+								</div>
+                            @endforeach
 								<br>
 								<p>อื่น ๆ</p>
 								<textarea class="w3-input w3-animate-input" name="note" style="width:70%;" rows="4" value="{{$Eq->note}}" cols="50" placeholder="กรณีไม่พบอุปกรณ์" ></textarea>

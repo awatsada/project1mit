@@ -317,16 +317,17 @@ class HomeController extends Controller
 
 ///***********************************//////***********************************///
     public function edit_fix($id)
-    {
-       
+    {    
        $Eq = Equipment::where('id_equipment',$id)->first();  
-       
-       return view('project/page/editfix')->with('Eq',$Eq); 
+       $Eqd = Equipmentdetail::where('id_equipment',$id)->get();
+       // $count = Equipmentdetail::where('id_equipment',$id)->count();
+       return view('project/page/editfix')->with('Eq',$Eq)->with('Eqd',$Eqd);
     }
-    public function update_fix($id)
+    public function update_fix(Request $data, $id)
     {   
        // echo $id;
-        $equipment = Equipment::where('id_equipment',$id)->first();   
+        $equipment = Equipment::where('id_equipment',$id)->first();
+        $Eqd = Equipmentdetail::where('id_equipment',$id)->get();   
         // echo $equipment;   
         $equipment->id_user = Auth::user()->id;   
         $equipment->phone_number = input::get('phone_number');  
@@ -338,6 +339,40 @@ class HomeController extends Controller
         $equipment->live = input::get('live');
         $equipment->note = input::get('note');
         $equipment->save();
+
+        foreach ($Eqd as $key => $v) 
+        {
+            $k=$data->Input('eq'.$key);
+                if($k!=null)
+                {
+                    $logo = $data->file('eqpho'.$key);
+                    $upload = 'upload/repair';
+                    $filename = $logo->getClientOriginalName();
+                    $success = $logo->move($upload, $filename);
+
+                    $ep = $data->Input('eq'.$key);
+                    $epdetail = $data->Input('eqdetail'.$key);
+
+                if($success)
+                {
+                    
+                    $v->photo_repair = $filename;
+                    // $v->id_equipment = $equipment->id;
+                    $v->equipment = $ep;
+                    $v->detail_equipment = $epdetail;
+
+                    $v->save();
+                }
+        }
+
+            
+        }
+
+
+
+
+
+
         return Redirect::to('fix'); 
         //echo "string";
     }
