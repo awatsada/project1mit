@@ -17,40 +17,30 @@
 
     <div class="w3-container w3-sand w3-leftbar">
       <br>
-      <h1 class="w3-center w3-text-indigo">บันทึกผลการซ่อม</h1>
+      <h1 class="w3-center w3-text-indigo">แก้ไขผลการซ่อม ( ซ่อมไม่ได้ )</h1>
       <br>
     </div>
 
-<!--     {{$Eq}}
-    {{$Eqd}}
-    {{$count}}
 
-    
 
-    @for ($i = 0; $i < $count; $i++)
-    Theeeeeeeeeeeeeeeee current value is {{ $i }}
-    {{$Eqd[$i]}}
-    @endfor -->
-
-@for ($i = 0; $i < $count; $i++) 
-
+@foreach($Equ as $key => $v) 
    
     <div class="w3-content" style="max-width:800px">
       <br>
       <div class="w3-panel w3-light-grey w3-border w3-round">
 
       
-      <p><strong>ห้อง : </strong><i>{{$Eq->num_room}}</i></p>
-      <p><strong>อุปกรณ์ : </strong><i>{{$Eqd[$i]->equipment}}</i></p>
-      <p><strong>รายละเอียด : </strong><i>{{$Eqd[$i]->detail_equipment}} </i></p>   
+      <p><strong>ห้อง : </strong><i>{{$Equu->num_room}}</i></p>
+      <p><strong>อุปกรณ์ : </strong><i>{{$v->equiment}}</i></p>
+      <p><strong>รายละเอียด : </strong><i>{{$v->detail_equiment}} </i></p>   
       </div>
 
       <h3 class="w3-text-blue">รายละเอียดการซ่อม</h3>     
 
 
-      <form action="{{url('record/')}}/{{$Eq->id_equipment}}" method="post">
+      <form action="{{url('update_record_uncomplete/')}}/{{$v->id_unrepairequipment}}" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">  
-        <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายละเอียดการซ่อม" name="list_detail_repair{{$i}}"></textarea>
+        <textarea class="w3-input w3-animate-input" style="width:70%;"  rows="4"  cols="50"  name="list_detail_repair{{$key}}">{{$v->detail_repair}}</textarea>
         <br>
 
         <div class="w3-row">
@@ -77,14 +67,14 @@
         <br>
 
         <h3 class="w3-text-blue">รายการเบิกอุปกรณ์</h3>     
-        <!-- <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายการเบิกอุปกรณ์" name="list_use_equipment{{$i}}" ></textarea> -->
-                  <p>ชื่ออุปกรณ์</p> <input class="w3-input w3-animate-input" id="tags" name="list_use_equipment{{$i}}"  type="text"  style="width:70%" />
+        <!-- <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายการเบิกอุปกรณ์" name="list_use_equipment{{$key}}" ></textarea> -->
+                  <p>ชื่ออุปกรณ์</p> <input class="w3-input w3-animate-input" id="tags" value="{{$v->detail_use_equipment}}" name="list_use_equipment{{$key}}"  type="text"  style="width:70%" />
                   <br>
                   <i> จำนวนอุปกรณ์</i>  
-                  <input class="w3-input w3-animate-input" name="num{{$i}}" type="text"  style="width:70%" />
+                  <input class="w3-input w3-animate-input" value="{{$v->number}}" name="num{{$key}}" type="text"  style="width:70%" />
                   <br>
 
-     
+        <br>
 
         <div class="w3-row">
           <div class="w3-col m2">
@@ -111,37 +101,30 @@
        <div class="w3-row">
         <h3 class="w3-text-blue">สถานะการซ่อม</h3>
         <p>
-          <input class="w3-radio" type="radio" name="status{{$i}}" value="repair" checked><label class="w3-validate">ซ่อม</label>
+          <input class="w3-radio" type="radio" name="status{{$key}}" value="repair" checked><label class="w3-validate">ซ่อม</label>
         </p>
 
         <p>
-          <input class="w3-radio" type="radio" name="status{{$i}}" value="unrepair" checked>
+          <input class="w3-radio" type="radio" name="status{{$key}}" value="unrepair" checked>
           <label class="w3-validate">ซ่อมไม่ได้</label>
         </p>
 
         <p>
-          <input class="w3-radio" type="radio" name="status{{$i}}" value="change" checked>
+          <input class="w3-radio" type="radio" name="status{{$key}}" value="change" checked>
           <label class="w3-validate">เปลี่ยน</label>
         </p>
       </div>
- </div> 
-       
-            
+      </div>
+          
+      @endforeach
 
-      @endfor
+
+
+
+
 
       <br>
       <br>
-
-
-            <!-- <div class="w3-row">
-              <div class="w3-col m6">
-                <a href="tryw3css_templates_blog.htm" target="_blank" class="w3-btn w3-padding-12 w3-dark-grey" style="width:98.5%">บันทึก</a>
-              </div>
-              <div class="w3-col m6">
-                <a href="w3css_templates.asp" class="w3-btn w3-padding-12 w3-dark-grey" style="width:98.5%">ย้อนกลับ</a>
-              </div>
-            </div> -->
 
             <div class="w3-row">
               <div class="w3-col m6">
@@ -161,18 +144,4 @@
         </div>
       </div>
 
-<!-- ค้นหาอุปกรณ์  -->      
-<script>
-$( function() {
-var availableTags = [
-@foreach($name_equipment as $a) 
-"{{$a->name}}",
-@endforeach
-];
-$("#tags" ).autocomplete({
-source: availableTags
-});
-} );
-
-</script>
 @endsection

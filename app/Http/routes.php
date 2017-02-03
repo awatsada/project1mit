@@ -100,7 +100,15 @@ Route::group(['middleware' => 'web'], function () {
     // Route::get('sh/rocord/{id}', 'HomeController@record');
     Route::post('record/{id}', 'SaverepairController@saverecord');
 
-/////////////////////*********************************///////////////////////
+    Route::get('edit_record_complete/{id}', 'HomeController@edit_record_complete');
+    Route::post('update_record_complete/{id}', 'HomeController@update_record_complete');
+
+    Route::get('edit_record_uncomplete/{id}', 'HomeController@edit_record_uncomplete');
+    Route::post('update_record_uncomplete/{id}', 'HomeController@update_record_uncomplete');
+    Route::get('delete_record_uncomplete/{id}', 'HomeController@delete_record_uncomplete');
+
+
+/////////////////////*********************************///////////////////////ห
     Route::post('search', 'HomeController@search');
 
     Route::get('getpdf/{id}', 'HomeController@getPDF');

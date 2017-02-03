@@ -26,6 +26,9 @@ use App\Repair_equipmentdetail;
 use App\Unrepair_equipment;
 use App\Unrepair_equipmentdetail;
 
+use App\Name_equipment_stock;
+use App\Save_stock;
+
 class SaverepairController extends Controller
 {
 	public function saverecord($id)
@@ -82,9 +85,22 @@ class SaverepairController extends Controller
 				$Change_equipmentdetail->date_depart_equipment = date("Y-m-d");
 				$Change_equipmentdetail->detail_repair = input::get('list_detail_repair'.$i);
 				$Change_equipmentdetail->detail_use_equipment = input::get('list_use_equipment'.$i);
+				$Change_equipmentdetail->number = input::get('num'.$i);
 				$Change_equipmentdetail->name_technical = Auth::user()->name;
 				$Change_equipmentdetail->name_technical_depart = Auth::user()->name;
 				$Change_equipmentdetail->save();
+///////////*************************************************************////////////
+				$a = input::get('list_use_equipment'.$i);
+    			$equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
+    			$in = $equipment->number;
+
+    			$nb = input::get('num'.$i); 
+
+    			$sum = ($in-$nb);
+
+    			$equipment->number = $sum;
+    			$equipment->save();
+
 
 
 			}
@@ -111,9 +127,21 @@ class SaverepairController extends Controller
 				$Repair_equipmentdetail->date_depart_equipment = date("Y-m-d");
 				$Repair_equipmentdetail->detail_repair = input::get('list_detail_repair'.$i);
 				$Repair_equipmentdetail->detail_use_equipment = input::get('list_use_equipment'.$i);
+				$Change_equipmentdetail->number = input::get('num'.$i);
 				$Repair_equipmentdetail->name_technical = Auth::user()->name;
 				$Repair_equipmentdetail->name_technical_depart = Auth::user()->name;
 				$Repair_equipmentdetail->save();
+///////////*************************************************************////////////
+				$a = input::get('list_use_equipment'.$i);
+    			$equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
+    			$in = $equipment->number;
+
+    			$nb = input::get('num'.$i); 
+
+    			$sum = ($in-$nb);
+
+    			$equipment->number = $sum;
+    			$equipment->save();
 			}        
 
 			if (input::get('status'.$i)=="unrepair") 
@@ -138,9 +166,21 @@ class SaverepairController extends Controller
 				$Unrepair_equipmentdetail->date_depart_equipment = date("Y-m-d");
 				$Unrepair_equipmentdetail->detail_repair = input::get('list_detail_repair'.$i);
 				$Unrepair_equipmentdetail->detail_use_equipment = input::get('list_use_equipment'.$i);
+				$Change_equipmentdetail->number = input::get('num'.$i);
 				$Unrepair_equipmentdetail->name_technical = Auth::user()->name;
 				$Unrepair_equipmentdetail->name_technical_depart = Auth::user()->name;
 				$Unrepair_equipmentdetail->save();
+///////////*************************************************************////////////
+				$a = input::get('list_use_equipment'.$i);
+    			$equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
+    			$in = $equipment->number;
+
+    			$nb = input::get('num'.$i); 
+
+    			$sum = ($in-$nb);
+
+    			$equipment->number = $sum;
+    			$equipment->save();				
 			}
                 
          

@@ -225,21 +225,21 @@ class HomeController extends Controller
 
     public function showw()
     {
-       //  $equipment = Equipment::all();
+        $equipment = Equipment::all();
    
-       //  $unrepair_equipment = Unrepair_equipment::all();
+        $unrepair_equipment = Unrepair_equipment::all();
 
     
-       //  $num_change = DB::table('change_equipments');
-       //  $num_change_and_repair = DB::table('repair_equipments')->union($num_change)->get();
+        $num_change = DB::table('change_equipments');
+        $num_change_and_repair = DB::table('repair_equipments')->union($num_change)->get();
 
 
-       // return view('project/page/show')->with('equipment',$equipment)
-       // ->with('unrepair_equipment',$unrepair_equipment) 
-       // ->with('num_change_and_repair',$num_change_and_repair)
-       // ;
-        $equipment = Equipment::all();
-        return view('project/page/show')->with('equipment',$equipment);
+       return view('project/page/show')->with('equipment',$equipment)
+       ->with('unrepair_equipment',$unrepair_equipment) 
+       ->with('num_change_and_repair',$num_change_and_repair)
+       ;
+        // $equipment = Equipment::all();
+        // return view('project/page/show')->with('equipment',$equipment);
     }
 
 
@@ -270,7 +270,8 @@ class HomeController extends Controller
         $Eq = Equipment::where('id_equipment',$id)->first();
         $Eqd = Equipmentdetail::where('id_equipment',$id)->get();
         $count = Equipmentdetail::where('id_equipment',$id)->count();
-        return view('project/page/record')->with('Eq',$Eq)->with('Eqd',$Eqd)->with('count',$count);
+        $name_equipment = Name_equipment_stock::all(); 
+        return view('project/page/record')->with('Eq',$Eq)->with('Eqd',$Eqd)->with('count',$count)->with('name_equipment',$name_equipment);
     }
 
 
@@ -316,6 +317,433 @@ class HomeController extends Controller
 ///***********************************//////***********************************///
 
 ///***********************************//////***********************************///
+
+    public function edit_record_uncomplete($id)
+    {    
+       $Equ = Unrepair_equipmentdetail::where('id_unrepairequipment',$id)->get();
+       $Equu = Unrepair_equipment::where('id',$id)->first(); 
+       // echo $Equu;     
+       return view('project/page/edit_unrepair')->with('Equ',$Equ)->with('Equu',$Equu);
+
+    }
+
+    public function delete_record_uncomplete($id)
+    {    
+       $Equ = Unrepair_equipmentdetail::where('id_unrepairequipment',$id)->delete();
+       $Equu = Unrepair_equipment::where('id',$id)->delete(); 
+            
+       return Redirect::to('showw');
+
+    }
+
+    public function update_record_uncomplete($id)
+    {    
+       $Equ = Unrepair_equipmentdetail::where('id_unrepairequipment',$id)->get();
+       // $Equu = Unrepair_equipment::where('id',$id)->first(); 
+       foreach ($Equ as $key => $v) 
+            {
+                if (input::get('status'.$key)=="change") 
+                {
+                    //$Change_equipment->id_user = $Eq->id_user;
+                    //$Change_equipment->phone_number = $Eq->phone_number;
+                    //$Change_equipment->num_room = $Eq->num_room;
+                    //$Change_equipment->date_in = $Eq->date_in;
+                    //$Change_equipment->date_repair = $Eq->date_repair;
+                    //$Change_equipment->time_repair = $Eq->time_repair;
+                    //$Change_equipment->live = $Eq->live;
+                    //$Change_equipment->note = $Eq->note;
+                    //$Change_equipment->save();
+
+                    //$Change_equipmentdetail->id_changeequipment = $Change_equipment->id; 
+                    //$Change_equipmentdetail->photo_repair = $Eqd[$i]->photo_repair;
+                    //$Change_equipmentdetail->equiment = $Eqd[$i]->equipment;
+                    //$Change_equipmentdetail->detail_equiment = $Eqd[$i]->detail_equipment;
+
+                    //$Change_equipmentdetail->id_usersaverepair = Auth::user()->id;
+                    //$Change_equipmentdetail->date_finish_repair = date("Y-m-d");
+                    //$Change_equipmentdetail->date_depart_equipment = date("Y-m-d");
+                    $v->detail_repair = input::get('list_detail_repair'.$key);
+                    $v->detail_use_equipment = input::get('list_use_equipment'.$key);
+                    $v->number = input::get('num'.$key);
+                    //$Change_equipmentdetail->name_technical = Auth::user()->name;
+                    //$Change_equipmentdetail->name_technical_depart = Auth::user()->name;
+                    $v->save();
+    ///////////*************************************************************////////////
+
+ 
+
+
+                }
+
+                if (input::get('status'.$key)=="repair") 
+                {
+                    // $Repair_equipment->id_user = $Eq->id_user;
+                    // $Repair_equipment->phone_number = $Eq->phone_number;
+                    // $Repair_equipment->num_room = $Eq->num_room;
+                    // $Repair_equipment->date_in = $Eq->date_in;
+                    // $Repair_equipment->date_repair = $Eq->date_repair;
+                    // $Repair_equipment->time_repair = $Eq->time_repair;
+                    // $Repair_equipment->live = $Eq->live;
+                    // $Repair_equipment->note = $Eq->note;
+                    // $Repair_equipment->save();
+
+                    // $Repair_equipmentdetail->id_repairequipment = $Repair_equipment->id; 
+                    // $Repair_equipmentdetail->photo_repair = $Eqd[$i]->photo_repair;
+                    // $Repair_equipmentdetail->equiment = $Eqd[$i]->equipment;
+                    // $Repair_equipmentdetail->detail_equiment = $Eqd[$i]->detail_equipment;
+
+                    // $Repair_equipmentdetail->id_usersaverepair = Auth::user()->id;
+                    // $Repair_equipmentdetail->date_finish_repair = date("Y-m-d");
+                    // $Repair_equipmentdetail->date_depart_equipment = date("Y-m-d");
+                    $v->detail_repair = input::get('list_detail_repair'.$key);
+                    $v->detail_use_equipment = input::get('list_use_equipment'.$key);
+                    $v->number = input::get('num'.$key);
+                    // $Repair_equipmentdetail->name_technical = Auth::user()->name;
+                    // $Repair_equipmentdetail->name_technical_depart = Auth::user()->name;
+                    $v->save();
+    ///////////*************************************************************////////////
+                    // $a = input::get('list_use_equipment'.$key);
+                    // $equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
+                    // $in = $equipment->number;
+
+                    // $nb = input::get('num'.$key); 
+
+                    // $sum = ($in-$nb);
+
+                    // $equipment->number = $sum;
+                    // $equipment->save();
+                }        
+
+                if (input::get('status'.$key)=="unrepair") 
+                {
+                    // $Unrepair_equipment->id_user = $Eq->id_user;
+                    // $Unrepair_equipment->phone_number = $Eq->phone_number;
+                    // $Unrepair_equipment->num_room = $Eq->num_room;
+                    // $Unrepair_equipment->date_in = $Eq->date_in;
+                    // $Unrepair_equipment->date_repair = $Eq->date_repair;
+                    // $Unrepair_equipment->time_repair = $Eq->time_repair;
+                    // $Unrepair_equipment->live = $Eq->live;
+                    // $Unrepair_equipment->note = $Eq->note;
+                    // $Unrepair_equipment->save();
+
+                    // $Unrepair_equipmentdetail->id_unrepairequipment = $Unrepair_equipment->id; 
+                    // $Unrepair_equipmentdetail->photo_repair = $Eqd[$i]->photo_repair;
+                    // $Unrepair_equipmentdetail->equiment = $Eqd[$i]->equipment;
+                    // $Unrepair_equipmentdetail->detail_equiment = $Eqd[$i]->detail_equipment;
+
+                    // $Unrepair_equipmentdetail->id_usersaverepair = Auth::user()->id;
+                    // $Unrepair_equipmentdetail->date_finish_repair = date("Y-m-d");
+                    // $Unrepair_equipmentdetail->date_depart_equipment = date("Y-m-d");
+                    $v->detail_repair = input::get('list_detail_repair'.$key);
+                    $v->detail_use_equipment = input::get('list_use_equipment'.$key);
+                    $v->number = input::get('num'.$key);
+                    // $Unrepair_equipmentdetail->name_technical = Auth::user()->name;
+                    // $Unrepair_equipmentdetail->name_technical_depart = Auth::user()->name;
+                    $v->save();
+    ///////////*************************************************************////////////
+                    // $a = input::get('list_use_equipment'.$key);
+                    // $equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
+                    // $in = $equipment->number;
+
+                    // $nb = input::get('num'.$key); 
+
+                    // $sum = ($in-$nb);
+
+                    // $equipment->number = $sum;
+                    // $equipment->save();             
+                }
+           
+            }        
+       return Redirect::to('showw');
+
+    }
+
+
+///***********************************//////***********************************///
+
+///***********************************//////***********************************///
+
+
+    public function edit_record_complete($id)
+    {    
+       $Eqc = Change_equipmentdetail::where('id_changeequipment',$id)->get();
+       $Eqcc = Change_equipment::where('id',$id)->first(); 
+       $Eqr = Repair_equipmentdetail::where('id_repairequipment',$id)->get(); 
+       $Eqrr = Repair_equipment::where('id',$id)->first();
+       
+       
+       return view('project/page/edit_change_and_repair')->with('Eqc',$Eqc)->with('Eqr',$Eqr)->with('Eqcc',$Eqcc)->with('Eqrr',$Eqrr);
+
+    }
+
+    public function update_record_complete($id)
+    {
+       $Ec = Change_equipmentdetail::where('id_changeequipment',$id)->get();
+       $Er = Repair_equipmentdetail::where('id_repairequipment',$id)->get();
+
+       if ($Ec) //set 1
+       {
+            foreach ($Ec as $key => $v) 
+            {
+                if (input::get('status'.$key)=="change") 
+                {
+                    //$Change_equipment->id_user = $Eq->id_user;
+                    //$Change_equipment->phone_number = $Eq->phone_number;
+                    //$Change_equipment->num_room = $Eq->num_room;
+                    //$Change_equipment->date_in = $Eq->date_in;
+                    //$Change_equipment->date_repair = $Eq->date_repair;
+                    //$Change_equipment->time_repair = $Eq->time_repair;
+                    //$Change_equipment->live = $Eq->live;
+                    //$Change_equipment->note = $Eq->note;
+                    //$Change_equipment->save();
+
+                    //$Change_equipmentdetail->id_changeequipment = $Change_equipment->id; 
+                    //$Change_equipmentdetail->photo_repair = $Eqd[$i]->photo_repair;
+                    //$Change_equipmentdetail->equiment = $Eqd[$i]->equipment;
+                    //$Change_equipmentdetail->detail_equiment = $Eqd[$i]->detail_equipment;
+
+                    //$Change_equipmentdetail->id_usersaverepair = Auth::user()->id;
+                    //$Change_equipmentdetail->date_finish_repair = date("Y-m-d");
+                    //$Change_equipmentdetail->date_depart_equipment = date("Y-m-d");
+                    $v->detail_repair = input::get('list_detail_repair'.$key);
+                    $v->detail_use_equipment = input::get('list_use_equipment'.$key);
+                    $v->number = input::get('num'.$key);
+                    //$Change_equipmentdetail->name_technical = Auth::user()->name;
+                    //$Change_equipmentdetail->name_technical_depart = Auth::user()->name;
+                    $v->save();
+    ///////////*************************************************************////////////
+                    $a = input::get('list_use_equipment'.$key);
+                    $equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
+                    $in = $equipment->number;
+
+                    $nb = input::get('num'.$key); 
+
+                    $sum = ($in-$nb);
+
+                    $equipment->number = $sum;
+                    $equipment->save();
+
+
+
+                }
+
+                if (input::get('status'.$key)=="repair") 
+                {
+                    // $Repair_equipment->id_user = $Eq->id_user;
+                    // $Repair_equipment->phone_number = $Eq->phone_number;
+                    // $Repair_equipment->num_room = $Eq->num_room;
+                    // $Repair_equipment->date_in = $Eq->date_in;
+                    // $Repair_equipment->date_repair = $Eq->date_repair;
+                    // $Repair_equipment->time_repair = $Eq->time_repair;
+                    // $Repair_equipment->live = $Eq->live;
+                    // $Repair_equipment->note = $Eq->note;
+                    // $Repair_equipment->save();
+
+                    // $Repair_equipmentdetail->id_repairequipment = $Repair_equipment->id; 
+                    // $Repair_equipmentdetail->photo_repair = $Eqd[$i]->photo_repair;
+                    // $Repair_equipmentdetail->equiment = $Eqd[$i]->equipment;
+                    // $Repair_equipmentdetail->detail_equiment = $Eqd[$i]->detail_equipment;
+
+                    // $Repair_equipmentdetail->id_usersaverepair = Auth::user()->id;
+                    // $Repair_equipmentdetail->date_finish_repair = date("Y-m-d");
+                    // $Repair_equipmentdetail->date_depart_equipment = date("Y-m-d");
+                    $v->detail_repair = input::get('list_detail_repair'.$key);
+                    $v->detail_use_equipment = input::get('list_use_equipment'.$key);
+                    $v->number = input::get('num'.$key);
+                    // $Repair_equipmentdetail->name_technical = Auth::user()->name;
+                    // $Repair_equipmentdetail->name_technical_depart = Auth::user()->name;
+                    $v->save();
+    ///////////*************************************************************////////////
+                    $a = input::get('list_use_equipment'.$key);
+                    $equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
+                    $in = $equipment->number;
+
+                    $nb = input::get('num'.$key); 
+
+                    $sum = ($in-$nb);
+
+                    $equipment->number = $sum;
+                    $equipment->save();
+                }        
+
+                if (input::get('status'.$key)=="unrepair") 
+                {
+                    // $Unrepair_equipment->id_user = $Eq->id_user;
+                    // $Unrepair_equipment->phone_number = $Eq->phone_number;
+                    // $Unrepair_equipment->num_room = $Eq->num_room;
+                    // $Unrepair_equipment->date_in = $Eq->date_in;
+                    // $Unrepair_equipment->date_repair = $Eq->date_repair;
+                    // $Unrepair_equipment->time_repair = $Eq->time_repair;
+                    // $Unrepair_equipment->live = $Eq->live;
+                    // $Unrepair_equipment->note = $Eq->note;
+                    // $Unrepair_equipment->save();
+
+                    // $Unrepair_equipmentdetail->id_unrepairequipment = $Unrepair_equipment->id; 
+                    // $Unrepair_equipmentdetail->photo_repair = $Eqd[$i]->photo_repair;
+                    // $Unrepair_equipmentdetail->equiment = $Eqd[$i]->equipment;
+                    // $Unrepair_equipmentdetail->detail_equiment = $Eqd[$i]->detail_equipment;
+
+                    // $Unrepair_equipmentdetail->id_usersaverepair = Auth::user()->id;
+                    // $Unrepair_equipmentdetail->date_finish_repair = date("Y-m-d");
+                    // $Unrepair_equipmentdetail->date_depart_equipment = date("Y-m-d");
+                    $v->detail_repair = input::get('list_detail_repair'.$key);
+                    $v->detail_use_equipment = input::get('list_use_equipment'.$key);
+                    $v->number = input::get('num'.$key);
+                    // $Unrepair_equipmentdetail->name_technical = Auth::user()->name;
+                    // $Unrepair_equipmentdetail->name_technical_depart = Auth::user()->name;
+                    $v->save();
+    ///////////*************************************************************////////////
+                    $a = input::get('list_use_equipment'.$key);
+                    $equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
+                    $in = $equipment->number;
+
+                    $nb = input::get('num'.$key); 
+
+                    $sum = ($in-$nb);
+
+                    $equipment->number = $sum;
+                    $equipment->save();             
+                }
+           
+            }   
+       } 
+       else //set 2
+       {
+            foreach ($Er as $key => $v) 
+            {
+                if (input::get('status'.$key)=="change") 
+                {
+                    //$Change_equipment->id_user = $Eq->id_user;
+                    //$Change_equipment->phone_number = $Eq->phone_number;
+                    //$Change_equipment->num_room = $Eq->num_room;
+                    //$Change_equipment->date_in = $Eq->date_in;
+                    //$Change_equipment->date_repair = $Eq->date_repair;
+                    //$Change_equipment->time_repair = $Eq->time_repair;
+                    //$Change_equipment->live = $Eq->live;
+                    //$Change_equipment->note = $Eq->note;
+                    //$Change_equipment->save();
+
+                    //$Change_equipmentdetail->id_changeequipment = $Change_equipment->id; 
+                    //$Change_equipmentdetail->photo_repair = $Eqd[$i]->photo_repair;
+                    //$Change_equipmentdetail->equiment = $Eqd[$i]->equipment;
+                    //$Change_equipmentdetail->detail_equiment = $Eqd[$i]->detail_equipment;
+
+                    // $Change_equipmentdetail->id_usersaverepair = Auth::user()->id;
+                    // $Change_equipmentdetail->date_finish_repair = date("Y-m-d");
+                    // $Change_equipmentdetail->date_depart_equipment = date("Y-m-d");
+                    $v->detail_repair = input::get('list_detail_repair'.$key);
+                    $v->detail_use_equipment = input::get('list_use_equipment'.$key);
+                    $v->number = input::get('num'.$key);
+                    // $Change_equipmentdetail->name_technical = Auth::user()->name;
+                    // $Change_equipmentdetail->name_technical_depart = Auth::user()->name;
+                    $v->save();
+    ///////////*************************************************************////////////
+                    $a = input::get('list_use_equipment'.$key);
+                    $equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
+                    $in = $equipment->number;
+
+                    $nb = input::get('num'.$key); 
+
+                    $sum = ($in-$nb);
+
+                    $equipment->number = $sum;
+                    $equipment->save();
+
+
+
+                }
+
+                if (input::get('status'.$key)=="repair") 
+                {
+                    // $Repair_equipment->id_user = $Eq->id_user;
+                    // $Repair_equipment->phone_number = $Eq->phone_number;
+                    // $Repair_equipment->num_room = $Eq->num_room;
+                    // $Repair_equipment->date_in = $Eq->date_in;
+                    // $Repair_equipment->date_repair = $Eq->date_repair;
+                    // $Repair_equipment->time_repair = $Eq->time_repair;
+                    // $Repair_equipment->live = $Eq->live;
+                    // $Repair_equipment->note = $Eq->note;
+                    // $Repair_equipment->save();
+
+                    // $Repair_equipmentdetail->id_repairequipment = $Repair_equipment->id; 
+                    // $Repair_equipmentdetail->photo_repair = $Eqd[$i]->photo_repair;
+                    // $Repair_equipmentdetail->equiment = $Eqd[$i]->equipment;
+                    // $Repair_equipmentdetail->detail_equiment = $Eqd[$i]->detail_equipment;
+
+                    // $Repair_equipmentdetail->id_usersaverepair = Auth::user()->id;
+                    // $Repair_equipmentdetail->date_finish_repair = date("Y-m-d");
+                    // $Repair_equipmentdetail->date_depart_equipment = date("Y-m-d");
+                    $v->detail_repair = input::get('list_detail_repair'.$key);
+                    $v->detail_use_equipment = input::get('list_use_equipment'.$key);
+                    $v->number = input::get('num'.$key);
+                    // $Repair_equipmentdetail->name_technical = Auth::user()->name;
+                    // $Repair_equipmentdetail->name_technical_depart = Auth::user()->name;
+                    $v->save();
+    ///////////*************************************************************////////////
+                    $a = input::get('list_use_equipment'.$key);
+                    $equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
+                    $in = $equipment->number;
+
+                    $nb = input::get('num'.$key); 
+
+                    $sum = ($in-$nb);
+
+                    $equipment->number = $sum;
+                    $equipment->save();
+                }        
+
+                if (input::get('status'.$key)=="unrepair") 
+                {
+                    // $Unrepair_equipment->id_user = $Eq->id_user;
+                    // $Unrepair_equipment->phone_number = $Eq->phone_number;
+                    // $Unrepair_equipment->num_room = $Eq->num_room;
+                    // $Unrepair_equipment->date_in = $Eq->date_in;
+                    // $Unrepair_equipment->date_repair = $Eq->date_repair;
+                    // $Unrepair_equipment->time_repair = $Eq->time_repair;
+                    // $Unrepair_equipment->live = $Eq->live;
+                    // $Unrepair_equipment->note = $Eq->note;
+                    // $Unrepair_equipment->save();
+
+                    // $Unrepair_equipmentdetail->id_unrepairequipment = $Unrepair_equipment->id; 
+                    // $Unrepair_equipmentdetail->photo_repair = $Eqd[$i]->photo_repair;
+                    // $Unrepair_equipmentdetail->equiment = $Eqd[$i]->equipment;
+                    // $Unrepair_equipmentdetail->detail_equiment = $Eqd[$i]->detail_equipment;
+
+                    // $Unrepair_equipmentdetail->id_usersaverepair = Auth::user()->id;
+                    // $Unrepair_equipmentdetail->date_finish_repair = date("Y-m-d");
+                    // $Unrepair_equipmentdetail->date_depart_equipment = date("Y-m-d");
+                    $v->detail_repair = input::get('list_detail_repair'.$key);
+                    $v->detail_use_equipment = input::get('list_use_equipment'.$key);
+                    $v->number = input::get('num'.$key);
+                    // $Unrepair_equipmentdetail->name_technical = Auth::user()->name;
+                    // $Unrepair_equipmentdetail->name_technical_depart = Auth::user()->name;
+                    $v->save();
+    ///////////*************************************************************////////////
+                    $a = input::get('list_use_equipment'.$key);
+                    $equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
+                    $in = $equipment->number;
+
+                    $nb = input::get('num'.$key); 
+
+                    $sum = ($in-$nb);
+
+                    $equipment->number = $sum;
+                    $equipment->save();             
+                }
+           
+            } 
+       }
+       
+
+       return Redirect::to('showw');
+    }
+
+
+
+
+///***********************************//////***********************************///
+
+///***********************************//////***********************************///
     public function edit_fix($id)
     {    
        $Eq = Equipment::where('id_equipment',$id)->first();  
@@ -329,7 +757,7 @@ class HomeController extends Controller
         $equipment = Equipment::where('id_equipment',$id)->first();
         $Eqd = Equipmentdetail::where('id_equipment',$id)->get();   
         // echo $equipment;   
-        $equipment->id_user = Auth::user()->id;   
+        //$equipment->id_user = Auth::user()->id;   
         $equipment->phone_number = input::get('phone_number');  
         $equipment->num_room = input::get('num_room');
         // $date = date("Y-m-d"); 

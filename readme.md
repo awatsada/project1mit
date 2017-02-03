@@ -1,4 +1,4 @@
-## Laravel PHP Framework
+<!-- ## Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
 [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
@@ -25,3 +25,16 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ### License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+ -->
+
+
+## Dormitory Repairing System for PSU ( ระบบแจ้งซ่อมหอพักนักศึกษาในกำกับ มอ.ภูเก็ต )
+
+##ลักษณะของระบบ
+
+ระบบนี้เป็น web application ที่ถูกพัฒนาโดยใช้ PHP Laravel framework 5.2 
+
+##จุดประสงค์
+
+เพื่ออ านวยความสะดวกในการให้บริการแก่นักศึกษา และรวมไปถึงช่างผู้ซ่อมจะสามารถท างานได้
+เร็วขึ้น
