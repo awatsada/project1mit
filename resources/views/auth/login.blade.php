@@ -106,6 +106,7 @@
 
 
 <form class="w3-container" role="form" method="POST" action="{{ url('/login') }}">
+
 {!! csrf_field() !!}
 
 

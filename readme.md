@@ -28,7 +28,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
  -->
 
 
-## Dormitory Repairing System for PSU ( ระบบแจ้งซ่อมหอพักนักศึกษาในกำกับ มอ.ภูเก็ต )
+##Dormitory Repairing System for PSU (ระบบแจ้งซ่อมหอพักนักศึกษาในกำกับ มอ.ภูเก็ต)
 
 ###ลักษณะของระบบ
 

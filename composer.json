@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "barryvdh/laravel-dompdf": "^0.7.0",
-        "codedge/laravel-fpdf": "^1.0"
+        "codedge/laravel-fpdf": "^1.0",
+        "artisaninweb/laravel-soap": "0.3.*"       
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
