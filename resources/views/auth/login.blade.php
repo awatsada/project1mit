@@ -99,7 +99,7 @@
 <br>
 <br>
 
-<h1 class="w3-center">Login</h1>
+<h1 class="w3-center">เข้าสู่ระบบ</h1>
 
 <div class="w3-content" style="max-width:500px">
 
@@ -114,7 +114,7 @@
 <input class="w3-input w3-hover-theme" type="text"> -->
 
 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-<p>                            <label">Username</label>
+<p>                            <label">ชื่อผู้ใช้</label>
                                 <input type="name" class="w3-input w3-hover-sand" name="name" value="{{ old('name') }}">
 
                                 @if ($errors->has('name'))
@@ -132,7 +132,7 @@
 
 
 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label>Password</label>
+                            <label>รหัสผ่าน</label>
                                 <input type="password" class="w3-input w3-hover-sand" name="password">
 
                                 @if ($errors->has('password'))
@@ -150,9 +150,9 @@
 
 
 <div class="form-group">
- <p>
+<!--  <p>
 <input class="w3-check w3-hover-theme" type="checkbox" name="remember">
-<label class="w3-validate">Remember Me</label></p> 
+<label class="w3-validate">Remember Me</label></p>  -->
 </div>
 
 
@@ -169,11 +169,11 @@
 <div class="form-group">
   <p><center>                          
                                 <button type="submit" class="w3-btn w3-padding-12 w3-dark-grey" style="width:50%">
-                                    Login
+                                    เข้าสู่ระบบ
                                 </button></p>
 
-                               <p> <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-</p>
+<!--                                <p> <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+</p> -->
 
 </center>                           
                         </div>

@@ -91,7 +91,7 @@
             <tr>       
               <td>{{$key+1}}</td>
               <td>{{$v->name}}</td>
-              <td>{{$v->number}}</td>
+              <td>{{$v->number-$v->number_use}}</td>
               <td><a href="{{url('edit_stock')}}/{{$v->id}}">
 <i class="fa fa-refresh"></i></a></td>
               <td><a href="{{url('delete_stock')}}/{{$v->id}}">

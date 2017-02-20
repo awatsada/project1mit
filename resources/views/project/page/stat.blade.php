@@ -59,26 +59,27 @@
 
       <div class="w3-container w3-section w3-topbar w3-bottombar w3-border-green w3-pale-green">
         <center>
-          <h1>สถิติการซ่อม</h1>
+          <h1>สถิติการซ่อม ({{$month}})</h1>
         </center>
       </div>
       <br>
       
       <form class="w3-container" action="statt" enctype="multipart/form-data" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-        <p>
-
-          <input name="month" type="month" />
+        <p><input name="month" type="month" />
+    <input id="pdf" class="w3-check" type="checkbox"  name="pdf">
+    <label class="w3-validate">PDF</label>
+          
           <button class="w3-btn w3-blue w3-border" type="submit">แสดง</button></p>
         </form>
 
-<form class="w3-container" action="stat/pdf" enctype="multipart/form-data" method="post">
-            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+<!-- <form class="w3-container" action="stat/pdf" enctype="multipart/form-data" method="post">
+          
             <p>
               <input name="month" type="month" />
               <button class="w3-btn w3-green w3-border" type="submit">Export PDF</button></p>
             </form>
-
+ -->
         <br>
         <div id="chartContainer" style="height: 300px; width: 100%;"></div>
 

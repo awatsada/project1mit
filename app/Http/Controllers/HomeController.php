@@ -30,6 +30,8 @@ use App\Unrepair_equipmentdetail;
 use App\Name_equipment_stock;
 use App\Save_stock;
 
+use App\User;
+
 class HomeController extends Controller
 {
     /**
@@ -60,11 +62,28 @@ class HomeController extends Controller
 
        return view('project/index')->with('equipment',$equipment)
        ->with('unrepair_equipment',$unrepair_equipment) 
-       ->with('num_change_and_repair',$num_change_and_repair)
-       ;
+       ->with('num_change_and_repair',$num_change_and_repair);
+       
 
     }
 
+    public function getmember()
+    {
+       $user = User::where('level',0)->get();
+
+       return view('project/page/member')->with('user',$user);
+
+    }
+
+    public function postmember($id)
+    {
+       //dd($id);
+        $user = User::find($id);
+        $user->level = 2;
+        $user->save();
+        return Redirect::to('member');
+
+    }
 
 
 
@@ -102,9 +121,10 @@ class HomeController extends Controller
     {
        // dd(input::get('month'));
        $month = input::get('month');
+       $pdf = input::get('pdf');
+       $check_pdf = "on";
        
-
-
+if ($pdf == $check_pdf) {
         $count_change = DB::table('change_equipmentdetails')
         ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
         ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE',$month.'%')
@@ -125,7 +145,37 @@ class HomeController extends Controller
         ->groupBy('Unrepair_equipmentdetails.equiment')
         ->get();
 
-        return view('project/page/stat')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair);
+
+        // return view('project/page/statpdf')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair);
+
+        $pdf = PDF::loadView('project/page/statpdf',compact('count_change','count_repair','count_unrepair','month'));
+        return $pdf->stream('equipment.pdf');
+} else {
+        $count_change = DB::table('change_equipmentdetails')
+        ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
+        ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE',$month.'%')
+        ->groupBy('change_equipmentdetails.equiment')
+        ->get();
+        
+        // dd($count_change);
+       
+       $count_repair = DB::table('Repair_equipmentdetails')
+        ->leftJoin('name_equipments','Repair_equipmentdetails.id','=','name_equipments.id')
+        ->select('Repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))->where('Repair_equipmentdetails.created_at','LIKE',$month.'%')
+        ->groupBy('Repair_equipmentdetails.equiment')
+        ->get();
+
+       $count_unrepair = DB::table('Unrepair_equipmentdetails')
+        ->leftJoin('name_equipments','Unrepair_equipmentdetails.id','=','name_equipments.id')
+        ->select('Unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))->where('Unrepair_equipmentdetails.created_at','LIKE',$month.'%')
+        ->groupBy('Unrepair_equipmentdetails.equiment')
+        ->get();
+
+        return view('project/page/stat')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair)->with('month',$month);
+}
+
+
+
        
 
         
@@ -165,39 +215,39 @@ class HomeController extends Controller
 
 
 
-    public function statpdf()
-    {
-        $month = input::get('month');
+    // public function statpdf()
+    // {
+    //     $month = input::get('month');
        
 
 
-        $count_change = DB::table('change_equipmentdetails')
-        ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
-        ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE',$month.'%')
-        ->groupBy('change_equipmentdetails.equiment')
-        ->get();
+    //     $count_change = DB::table('change_equipmentdetails')
+    //     ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
+    //     ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE',$month.'%')
+    //     ->groupBy('change_equipmentdetails.equiment')
+    //     ->get();
         
-        // dd($count_change);
+    //     // dd($count_change);
        
-       $count_repair = DB::table('Repair_equipmentdetails')
-        ->leftJoin('name_equipments','Repair_equipmentdetails.id','=','name_equipments.id')
-        ->select('Repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))->where('Repair_equipmentdetails.created_at','LIKE',$month.'%')
-        ->groupBy('Repair_equipmentdetails.equiment')
-        ->get();
+    //    $count_repair = DB::table('Repair_equipmentdetails')
+    //     ->leftJoin('name_equipments','Repair_equipmentdetails.id','=','name_equipments.id')
+    //     ->select('Repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))->where('Repair_equipmentdetails.created_at','LIKE',$month.'%')
+    //     ->groupBy('Repair_equipmentdetails.equiment')
+    //     ->get();
 
-       $count_unrepair = DB::table('Unrepair_equipmentdetails')
-        ->leftJoin('name_equipments','Unrepair_equipmentdetails.id','=','name_equipments.id')
-        ->select('Unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))->where('Unrepair_equipmentdetails.created_at','LIKE',$month.'%')
-        ->groupBy('Unrepair_equipmentdetails.equiment')
-        ->get();
+    //    $count_unrepair = DB::table('Unrepair_equipmentdetails')
+    //     ->leftJoin('name_equipments','Unrepair_equipmentdetails.id','=','name_equipments.id')
+    //     ->select('Unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))->where('Unrepair_equipmentdetails.created_at','LIKE',$month.'%')
+    //     ->groupBy('Unrepair_equipmentdetails.equiment')
+    //     ->get();
 
 
-        // return view('project/page/statpdf')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair);
+    //     // return view('project/page/statpdf')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair);
 
-        $pdf = PDF::loadView('project/page/statpdf',compact('count_change','count_repair','count_unrepair'));
-        return $pdf->stream('equipment.pdf');
+    //     $pdf = PDF::loadView('project/page/statpdf',compact('count_change','count_repair','count_unrepair'));
+    //     return $pdf->stream('equipment.pdf');
     
-    }
+    // }
 
 
 
@@ -514,13 +564,13 @@ class HomeController extends Controller
     ///////////*************************************************************////////////
                     $a = input::get('list_use_equipment'.$key);
                     $equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
-                    $in = $equipment->number;
+                    $in = $equipment->number_use;
 
                     $nb = input::get('num'.$key); 
 
-                    $sum = ($in-$nb);
+                    $sum = ($in+$nb);
 
-                    $equipment->number = $sum;
+                    $equipment->number_use = $sum;
                     $equipment->save();
 
 
@@ -556,13 +606,13 @@ class HomeController extends Controller
     ///////////*************************************************************////////////
                     $a = input::get('list_use_equipment'.$key);
                     $equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
-                    $in = $equipment->number;
+                    $in = $equipment->number_use;
 
                     $nb = input::get('num'.$key); 
 
-                    $sum = ($in-$nb);
+                    $sum = ($in+$nb);
 
-                    $equipment->number = $sum;
+                    $equipment->number_use = $sum;
                     $equipment->save();
                 }        
 
@@ -595,13 +645,13 @@ class HomeController extends Controller
     ///////////*************************************************************////////////
                     $a = input::get('list_use_equipment'.$key);
                     $equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
-                    $in = $equipment->number;
+                    $in = $equipment->number_use;
 
                     $nb = input::get('num'.$key); 
 
-                    $sum = ($in-$nb);
+                    $sum = ($in+$nb);
 
-                    $equipment->number = $sum;
+                    $equipment->number_use = $sum;
                     $equipment->save();             
                 }
            
@@ -640,13 +690,13 @@ class HomeController extends Controller
     ///////////*************************************************************////////////
                     $a = input::get('list_use_equipment'.$key);
                     $equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
-                    $in = $equipment->number;
+                    $in = $equipment->number_use;
 
                     $nb = input::get('num'.$key); 
 
-                    $sum = ($in-$nb);
+                    $sum = ($in+$nb);
 
-                    $equipment->number = $sum;
+                    $equipment->number_use = $sum;
                     $equipment->save();
 
 
@@ -682,13 +732,13 @@ class HomeController extends Controller
     ///////////*************************************************************////////////
                     $a = input::get('list_use_equipment'.$key);
                     $equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
-                    $in = $equipment->number;
+                    $in = $equipment->number_use;
 
                     $nb = input::get('num'.$key); 
 
-                    $sum = ($in-$nb);
+                    $sum = ($in+$nb);
 
-                    $equipment->number = $sum;
+                    $equipment->number_use = $sum;
                     $equipment->save();
                 }        
 
@@ -721,13 +771,13 @@ class HomeController extends Controller
     ///////////*************************************************************////////////
                     $a = input::get('list_use_equipment'.$key);
                     $equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
-                    $in = $equipment->number;
+                    $in = $equipment->number_use;
 
                     $nb = input::get('num'.$key); 
 
-                    $sum = ($in-$nb);
+                    $sum = ($in+$nb);
 
-                    $equipment->number = $sum;
+                    $equipment->number_use = $sum;
                     $equipment->save();             
                 }
            

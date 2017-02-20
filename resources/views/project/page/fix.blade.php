@@ -68,7 +68,7 @@
 							<p><label>ชื่อ - นามสกุล : </label></p>
 						</div>
 						<div class="w3-col m10">
-							<input class="w3-input w3-animate-input" type="text" value="{{ Auth::user()->name }}" disabled="disabled" style="width:70%"></p>
+							<input class="w3-input w3-animate-input" type="text" value="{{ Auth::user()->name_student }}"  style="width:70%"></p>
 						</div>
 					</div>
 					<div class="w3-row">

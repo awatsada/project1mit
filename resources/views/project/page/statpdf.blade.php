@@ -62,7 +62,7 @@
 
   <center>
   
-  <p><font size="5">สรุปรายการซ่อมอุปกรณ์ภายในห้องพักหอพักนักศึกษาในกำกับฯ</font></p>
+  <p><font size="5">สรุปรายการซ่อม ภายในห้องพักหอพักนักศึกษาในกำกับฯ ({{$month}})</font></p>
  
   </center>
   <hr>
@@ -74,16 +74,16 @@
 
               <thead>
                 <tr >
-
+                  <!-- <th bgcolor="#E6E6FA">ลำดับ</th> -->
                   <th bgcolor="#E6E6FA">รายการซ่อมแซม</th>
                   <th bgcolor="#E6E6FA">จำนวนรายการ</th>
                   <th bgcolor="#E6E6FA">ผลารซ่อมแซม</th>
                   
                 </tr>
               </thead>
-              @foreach($count_change as $v)
+              @foreach($count_change as $key => $v)
               <tr>       
-                
+                <!-- <td align='center'>{{$key+1}}</td> -->
                 <td align='center'>{{$v->equiment}}</td>
                 <td align='center'>{{$v->count_c}}</td>
                 <td align='center'>เปลี่ยน</td> 
@@ -91,18 +91,18 @@
           
               @endforeach
 
-              @foreach($count_repair as $v)
+              @foreach($count_repair as $key => $v)
               <tr>       
-            
+                <!-- <td align='center'>{{$key+1}}</td> -->
                 <td align='center'>{{$v->equiment}}</td>
                 <td align='center'>{{$v->count_r}}</td>
                 <td align='center'>ซ่อม</td> 
               </tr>
               @endforeach
 
-              @foreach($count_unrepair as $v)
+              @foreach($count_unrepair as $key => $v)
               <tr>       
-                
+                <!-- <td align='center'>{{$key+1}}</td>    -->
                 <td align='center'>{{$v->equiment}}</td>
                 <td align='center'>{{$v->count_u}}</td>
                 <td align='center'>ซ่อมไม่ได้</td> 

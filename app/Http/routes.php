@@ -68,17 +68,22 @@
 |
 */
 
-
+    // Route::get('register', 'Auth\AuthController@showRegistrationForm');
+    // Route::post('register', 'Auth\AuthController@register');
 
 Route::group(['middleware' => 'web'], function () {
     
 
-    Route::auth();
+ Route::auth();
+
+// Route::get('/','HomeController@index');
 
     Route::get('home', 'HomeController@index');
     Route::get('fix', 'HomeController@fix');
     Route::post('savefix', 'HomeController@savefix');
 
+    Route::get('member', 'HomeController@getmember');
+    Route::post('member/{id}', 'HomeController@postmember');
 
     Route::get('fix/detail/{id}', 'HomeController@detailfix');
     Route::get('fix/detail/delete_fix/{id}', 'HomeController@delete_fix');

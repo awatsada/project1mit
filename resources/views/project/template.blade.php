@@ -67,7 +67,23 @@
     <!--   <a href="#" class="w3-light-grey w3-medium">Home</a> -->
     <a href="#">คู่มือการใช้งาน</a>
     <a href="#">ติดต่อสอบถาม</a>
+    <!-- normal user -->
+    @elseif(Auth::user()->level == 0)
+    <a href="{{url('/home')}}">หน้าหลัก</a>
+    <!-- student user -->
+    @elseif(Auth::user()->level == 3)
+    <a href="{{url('/home')}}">หน้าหลัก</a>
+    <a href="{{url('/fix')}}">ใบแจ้งซ่อม</a>
+    <!-- repairman user -->
+    @elseif(Auth::user()->level == 2)
+    <a href="{{url('/home')}}">หน้าหลัก</a>
+    <a href="{{url('/showw')}}">บันทึกการซ่อม</a>
+    <a href="{{url('/stat')}}">สถิติ</a>
+    <a href="{{url('/savestock')}}">เพิ่มอุปกรณ์สำรอง</a>
+    <a href="{{url('/showstock')}}">จำนวนอุปกรณ์สำรอง</a>
     @else
+    <a href="{{url('/home')}}">หน้าหลัก</a>
+    <a href="{{url('/member')}}">ยืนยันสมาชิก</a>
     <a href="{{url('/fix')}}">ใบแจ้งซ่อม</a>
     <a href="{{url('/showw')}}">บันทึกการซ่อม</a>
     <a href="{{url('/stat')}}">สถิติ</a>

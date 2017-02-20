@@ -119,15 +119,15 @@
     <br>
     
 
-    <h1 class="w3-center">Register</h1>
+    <h1 class="w3-center">สมัครสมาชิก</h1>
     <div class="w3-content" style="max-width:500px">
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
         {!! csrf_field() !!}
 
-
+ <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label>Name</label>
+                            <label>ชื่อ</label>
 
                             <div class="col-md-6">
                                 <input type="text" class="w3-input w3-hover-sand" name="name" value="{{ old('name') }}">
@@ -147,7 +147,7 @@
             </p> -->
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label>E-Mail Address</label>
+                            <label>อีเมล์</label>
 
                             <div class="col-md-6">
                                 <input type="email" class="w3-input w3-hover-sand" name="email" value="{{ old('email') }}">
@@ -166,7 +166,7 @@
             </p> -->
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label ">Password</label>
+                            <label ">รหัสผ่าน</label>
 
                             <div class="col-md-6">
                                 <input type="password" class="w3-input w3-hover-sand" name="password">
@@ -188,7 +188,7 @@
 
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label>Confirm Password</label>
+                            <label>รหัสผ่านยืนยัน</label>
 
                             <div class="col-md-6">
                                 <input type="password" class="w3-input w3-hover-sand" name="password_confirmation">
@@ -211,7 +211,7 @@
                   <center> 
                   <p>                         
                     <button type="submit" class="w3-btn w3-padding-12 w3-dark-grey" style="width:50%">
-                        Register
+                        สมัคร
                     </button>
                   </p>
                   </center>                           
