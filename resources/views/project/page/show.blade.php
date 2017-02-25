@@ -107,7 +107,7 @@
           <div id="London" class="w3-container city" style="display: block;">
             <div class="w3-row">
               <!-- <div class="w3-col m4"> -->
-                <h2>รายการแจ้งซ่อม</h2>
+                <h2>รายการรอซ่อม</h2>
 
 
              <!--  </div>
@@ -147,7 +147,9 @@
 
           <div id="Paris" class="w3-container city">
             <h2>รายการซ่อมเสร็จ</h2>
-            <table class="w3-table w3-striped w3-border">
+             <input type="searchh" name="search" class="w3-input w3-animate-input" data-table="order-table" placeholder="Search...">
+                <br>
+            <table class="w3-table w3-striped w3-border order-table table">
               <thead>
                 <tr class="w3-green">
                   <th>ลำดับ</th>
@@ -182,7 +184,9 @@
 
           <div id="Tokyo" class="w3-container city">
             <h2>รายการซ่อมไม่ได้</h2>
-            <table class="w3-table w3-striped w3-border">
+             <input type="searchh" name="search" class="w3-input w3-animate-input" data-table="order-table" placeholder="Search...">
+                <br>
+            <table class="w3-table w3-striped w3-border order-table table">
               <thead>
                 <tr class="w3-pink">
                   <th>ลำดับ</th>
@@ -211,7 +215,7 @@
             </table>
           </div>
           <br>
-          <div class="w3-row">
+     <!--      <div class="w3-row">
             <center>
               <ul class="w3-pagination w3-border w3-round">
                 <li><a href="#">&laquo;</a></li>
@@ -223,7 +227,7 @@
                 <li><a href="#">&raquo;</a></li>
               </ul>
             </center>
-          </div>
+          </div> -->
 
         </div>
       </div>
@@ -273,7 +277,7 @@
               }
               return {
                 init: function () {
-                  var inputs = document.getElementsByClassName('light-table-filter');
+                  var inputs = document.getElementsByClassName('w3-input w3-animate-input');
                   Arr.forEach.call(inputs, function (input) {
                     input.oninput = _onInputEvent;
                   });

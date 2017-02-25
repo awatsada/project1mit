@@ -73,157 +73,197 @@ class StockController extends Controller
     public function savestock()
     {
     	$savestock = new Save_stock;
+        $i=0;
 
-    	$k=input::get('name0');
+        while (input::get('name'.$i)) {
+            $input = input::get('name'.$i);
+            $same = Save_stock::where('name','LIKE','%'.$input.'%')->first();
 
-    	$equipment = Save_stock::all();
-    	// $in=$equipment->name;
+            if ($same) {
+                $old = $same->number;
+                $new = input::get('num'.$i); 
 
-    	$i = 0;
-    	foreach ($equipment as $value) 
-    	{
-    		// $equipment[$i];
+                $sum=($old+$new);
 
-  	    // same name 
-    		if ($k==$equipment[$i]->name)
-    		{
+                $same->number = $sum;
+                $same->save();
+            } else {
+                $savestock->id_user = Auth::user()->id;
+                $savestock->name = input::get('name'.$i); 
+                $savestock->number = input::get('num'.$i); 
+                $savestock->save();
+            }
 
-    			$a=input::get('name0');
-    			$equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
-    			$in=$equipment->number;
+            $i++;
+        }
 
-    			$nb = input::get('num0'); 
-
-    			$sum=($in+$nb);
-
-    			$equipment->number = $sum;
-    			$equipment->save();
-    			//echo "success1";
-    			 return Redirect::to('showstock');
-
-
-    		} 
-        // different name	
-    		else 
-    		{
-    			$k=input::get('num0'); 
-    			if($k!=null)
-    			{
-    				$savestock->id_user = Auth::user()->id;
-    				$savestock->name = input::get('name0'); 
-    				$savestock->number = input::get('num0'); 
-    				$savestock->save();
-    				//echo "success2";
-    				 return Redirect::to('showstock');
-    			}
-    		}
-    		$i++;
-
-    	}
+        return Redirect::to('showstock');
 
 
 
-    	//////name1
-    	    	$savestock = new Save_stock;
-
-    	$k=input::get('name1');
-
-    	$equipment = Save_stock::all();
-    	// $in=$equipment->name;
-
-    	$i = 0;
-    	foreach ($equipment as $value) 
-    	{
-    		// $equipment[$i];
-
-  	    // same name 
-    		if ($k==$equipment[$i]->name)
-    		{
-
-    			$a=input::get('name1');
-    			$equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
-    			$in=$equipment->number;
-
-    			$nb = input::get('num1'); 
-
-    			$sum=($in+$nb);
-
-    			$equipment->number = $sum;
-    			$equipment->save();
-    			// echo "success1";
-    			 return Redirect::to('showstock');
 
 
-    		} 
-        // different name	
-    		else 
-    		{
-    			$k=input::get('num1'); 
-    			if($k!=null)
-    			{
-    				$savestock->id_user = Auth::user()->id;
-    				$savestock->name = input::get('name1'); 
-    				$savestock->number = input::get('num1'); 
-    				$savestock->save();
-    				// echo "success2";
-    				 return Redirect::to('showstock');
-    			}
-    		}
-    		$i++;
-
-    	}
 
 
-    	//////name2
-    	    	$savestock = new Save_stock;
-
-    	$k=input::get('name2');
-
-    	$equipment = Save_stock::all();
-    	// $in=$equipment->name;
-
-    	$i = 0;
-    	foreach ($equipment as $value) 
-    	{
-    		// $equipment[$i];
-
-  	    // same name 
-    		if ($k==$equipment[$i]->name)
-    		{
-
-    			$a=input::get('name2');
-    			$equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
-    			$in=$equipment->number;
-
-    			$nb = input::get('num2'); 
-
-    			$sum=($in+$nb);
-
-    			$equipment->number = $sum;
-    			$equipment->save();
-    			// echo "success1";
-    			 return Redirect::to('showstock');
 
 
-    		} 
-        // different name	
-    		else 
-    		{
-    			$k=input::get('num2'); 
-    			if($k!=null)
-    			{
-    				$savestock->id_user = Auth::user()->id;
-    				$savestock->name = input::get('name2'); 
-    				$savestock->number = input::get('num2'); 
-    				$savestock->save();
-    				// echo "success2";
-    				 return Redirect::to('showstock');
-    			}
-    		}
-    		$i++;
 
-    	}
+
+
+
+    	// $i = 0;
+    	// foreach ($equipment as $value) 
+    	// {
+    	// 	// $equipment[$i];
+
+  	  //   // same name 
+    	// 	if ($k==$equipment[$i]->name)
+    	// 	{
+
+    	// 		$a=input::get('name0');
+    	// 		$equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
+    	// 		$in=$equipment->number;
+
+    	// 		$nb = input::get('num0'); 
+
+    	// 		$sum=($in+$nb);
+
+    	// 		$equipment->number = $sum;
+    	// 		$equipment->save();
+    	// 		//echo "success1";
+    	// 		 return Redirect::to('showstock');
+
+
+    	// 	} 
+     //    // different name	
+    	// 	else 
+    	// 	{
+    	// 		$k=input::get('num0'); 
+    	// 		if($k!=null)
+    	// 		{
+    	// 			$savestock->id_user = Auth::user()->id;
+    	// 			$savestock->name = input::get('name0'); 
+    	// 			$savestock->number = input::get('num0'); 
+    	// 			$savestock->save();
+    	// 			//echo "success2";
+    	// 			 return Redirect::to('showstock');
+    	// 		}
+    	// 	}
+    	// 	$i++;
+
+    	// }
+
+
+
+    	// //////name1
+    	// $savestock = new Save_stock;
+
+    	// $k=input::get('name1');
+
+    	// $equipment = Save_stock::all();
+    	// // $in=$equipment->name;
+
+    	// $i = 0;
+    	// foreach ($equipment as $value) 
+    	// {
+    	// 	// $equipment[$i];
+
+  	  //   // same name 
+    	// 	if ($k==$equipment[$i]->name)
+    	// 	{
+
+    	// 		$a=input::get('name1');
+    	// 		$equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
+    	// 		$in=$equipment->number;
+
+    	// 		$nb = input::get('num1'); 
+
+    	// 		$sum=($in+$nb);
+
+    	// 		$equipment->number = $sum;
+    	// 		$equipment->save();
+    	// 		// echo "success1";
+    	// 		 return Redirect::to('showstock');
+
+
+    	// 	} 
+     //    // different name	
+    	// 	else 
+    	// 	{
+    	// 		$k=input::get('num1'); 
+    	// 		if($k!=null)
+    	// 		{
+    	// 			$savestock->id_user = Auth::user()->id;
+    	// 			$savestock->name = input::get('name1'); 
+    	// 			$savestock->number = input::get('num1'); 
+    	// 			$savestock->save();
+    	// 			// echo "success2";
+    	// 			 return Redirect::to('showstock');
+    	// 		}
+    	// 	}
+    	// 	$i++;
+
+    	// }
+
+
+    	// //////name2
+    	//     	$savestock = new Save_stock;
+
+    	// $k=input::get('name2');
+
+    	// $equipment = Save_stock::all();
+    	// // $in=$equipment->name;
+
+    	// $i = 0;
+    	// foreach ($equipment as $value) 
+    	// {
+    	// 	// $equipment[$i];
+
+  	  //   // same name 
+    	// 	if ($k==$equipment[$i]->name)
+    	// 	{
+
+    	// 		$a=input::get('name2');
+    	// 		$equipment = Save_stock::where('name','LIKE','%'.$a.'%')->first();
+    	// 		$in=$equipment->number;
+
+    	// 		$nb = input::get('num2'); 
+
+    	// 		$sum=($in+$nb);
+
+    	// 		$equipment->number = $sum;
+    	// 		$equipment->save();
+    	// 		// echo "success1";
+    	// 		 return Redirect::to('showstock');
+
+
+    	// 	} 
+     //    // different name	
+    	// 	else 
+    	// 	{
+    	// 		$k=input::get('num2'); 
+    	// 		if($k!=null)
+    	// 		{
+    	// 			$savestock->id_user = Auth::user()->id;
+    	// 			$savestock->name = input::get('name2'); 
+    	// 			$savestock->number = input::get('num2'); 
+    	// 			$savestock->save();
+    	// 			// echo "success2";
+    	// 			 return Redirect::to('showstock');
+    	// 		}
+    	// 	}
+    	// 	$i++;
+
+    	// }
 
         
     }
+
+
+
+
+
+
+
+
 }

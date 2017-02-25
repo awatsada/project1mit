@@ -72,7 +72,8 @@
           <input type="searchh" name="search" placeholder="Search...">
         </form>  -->
 
-        <input type="searchh" name="search" class="w3-input w3-animate-input" data-table="order-table" placeholder="Search...">
+        <!-- <input type="search" class="w3-input w3-animate-input" data-table="order-table" placeholder="Search..."> -->
+          <input type="search" class="w3-input w3-animate-input" data-table="order-table" placeholder="Search...">
         <br>
         
         <table class="order-table table">
@@ -105,7 +106,7 @@
 
             <br>
 
-            <div class="w3-row">
+<!--             <div class="w3-row">
               <center>
                 <ul class="w3-pagination w3-border w3-round">
                   <li><a href="#">&laquo;</a></li>
@@ -117,7 +118,7 @@
                   <li><a href="#">&raquo;</a></li>
                 </ul>
               </center>
-            </div>
+            </div> -->
 
           </div>
         </div>
@@ -143,7 +144,7 @@
     }
     return {
       init: function () {
-        var inputs = document.getElementsByClassName('light-table-filter');
+        var inputs = document.getElementsByClassName('w3-input w3-animate-input');
         Arr.forEach.call(inputs, function (input) {
           input.oninput = _onInputEvent;
         });

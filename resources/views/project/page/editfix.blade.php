@@ -30,14 +30,29 @@
 					<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 					<h3 class="w3-text-blue">รายละเอียดผู้แจ้ง</h3>
 					<br>
+					
+					@if ($level == 3)
 					<div class="w3-row">
 						<div class="w3-col m2">
 							<p><label>ชื่อ - นามสกุล : </label></p>
 						</div>
+						
 						<div class="w3-col m10">
-							<input class="w3-input w3-animate-input" type="text" value="{{ Auth::user()->name }}" disabled="disabled" style="width:70%"></p>
+							<input class="w3-input w3-animate-input" type="text" value="น.ส.{{ Auth::user()->name_student }}"  style="width:70%" disabled="disabled" required/></p>
 						</div>
 					</div>
+					@else
+					<div class="w3-row">
+						<div class="w3-col m2">
+							<p><label>ชื่อ - นามสกุล : </label></p>
+						</div>
+						
+						<div class="w3-col m10">
+							<input class="w3-input w3-animate-input" type="text" value="{{ Auth::user()->name }}"  style="width:70%" required/></p>
+						</div>
+						
+					</div>
+					@endif
 					<div class="w3-row">
 						<div class="w3-col m2">
 							<p><label>เบอร์โทรศัพท์ : </label></p>

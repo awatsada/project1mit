@@ -110,21 +110,30 @@ class HomeController extends Controller
         ->select('Unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))->where('Unrepair_equipmentdetails.created_at','LIKE',$ym.'%')
         ->groupBy('Unrepair_equipmentdetails.equiment')
         ->get();
+$month = date("Y-m");
 
-        return view('project/page/stat')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair);
+if ($count_change) {
+
+
+
+        return view('project/page/stat')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair)->with('month',$month);
        
-
+}
+else
+{
+    return view('project/page/not_stat')->with('month',$month);
+}
         
     }
 
     public function statt()
     {
        // dd(input::get('month'));
-       $month = input::get('month');
-       $pdf = input::get('pdf');
-       $check_pdf = "on";
-       
-if ($pdf == $check_pdf) {
+     $month = input::get('month');
+     $pdf = input::get('pdf');
+     $check_pdf = "on";
+
+     if ($pdf == $check_pdf) {
         $count_change = DB::table('change_equipmentdetails')
         ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
         ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE',$month.'%')
@@ -132,14 +141,14 @@ if ($pdf == $check_pdf) {
         ->get();
         
         // dd($count_change);
-       
-       $count_repair = DB::table('Repair_equipmentdetails')
+
+        $count_repair = DB::table('Repair_equipmentdetails')
         ->leftJoin('name_equipments','Repair_equipmentdetails.id','=','name_equipments.id')
         ->select('Repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))->where('Repair_equipmentdetails.created_at','LIKE',$month.'%')
         ->groupBy('Repair_equipmentdetails.equiment')
         ->get();
 
-       $count_unrepair = DB::table('Unrepair_equipmentdetails')
+        $count_unrepair = DB::table('Unrepair_equipmentdetails')
         ->leftJoin('name_equipments','Unrepair_equipmentdetails.id','=','name_equipments.id')
         ->select('Unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))->where('Unrepair_equipmentdetails.created_at','LIKE',$month.'%')
         ->groupBy('Unrepair_equipmentdetails.equiment')
@@ -147,31 +156,44 @@ if ($pdf == $check_pdf) {
 
 
         // return view('project/page/statpdf')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair);
+        if ($count_change) {
+            $pdf = PDF::loadView('project/page/statpdf',compact('count_change','count_repair','count_unrepair','month'));
+            return $pdf->stream('equipment.pdf');
+        }
+        else
+        {
+           return view('project/page/not_stat')->with('month',$month);
+       }
 
-        $pdf = PDF::loadView('project/page/statpdf',compact('count_change','count_repair','count_unrepair','month'));
-        return $pdf->stream('equipment.pdf');
-} else {
-        $count_change = DB::table('change_equipmentdetails')
-        ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
-        ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE',$month.'%')
-        ->groupBy('change_equipmentdetails.equiment')
-        ->get();
-        
+   } else {
+    $count_change = DB::table('change_equipmentdetails')
+    ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
+    ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE',$month.'%')
+    ->groupBy('change_equipmentdetails.equiment')
+    ->get();
+
         // dd($count_change);
-       
-       $count_repair = DB::table('Repair_equipmentdetails')
-        ->leftJoin('name_equipments','Repair_equipmentdetails.id','=','name_equipments.id')
-        ->select('Repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))->where('Repair_equipmentdetails.created_at','LIKE',$month.'%')
-        ->groupBy('Repair_equipmentdetails.equiment')
-        ->get();
 
-       $count_unrepair = DB::table('Unrepair_equipmentdetails')
-        ->leftJoin('name_equipments','Unrepair_equipmentdetails.id','=','name_equipments.id')
-        ->select('Unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))->where('Unrepair_equipmentdetails.created_at','LIKE',$month.'%')
-        ->groupBy('Unrepair_equipmentdetails.equiment')
-        ->get();
+    $count_repair = DB::table('Repair_equipmentdetails')
+    ->leftJoin('name_equipments','Repair_equipmentdetails.id','=','name_equipments.id')
+    ->select('Repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))->where('Repair_equipmentdetails.created_at','LIKE',$month.'%')
+    ->groupBy('Repair_equipmentdetails.equiment')
+    ->get();
+
+    $count_unrepair = DB::table('Unrepair_equipmentdetails')
+    ->leftJoin('name_equipments','Unrepair_equipmentdetails.id','=','name_equipments.id')
+    ->select('Unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))->where('Unrepair_equipmentdetails.created_at','LIKE',$month.'%')
+    ->groupBy('Unrepair_equipmentdetails.equiment')
+    ->get();
+
+    if ($count_change) {
 
         return view('project/page/stat')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair)->with('month',$month);
+    }
+    else
+    {
+       return view('project/page/not_stat')->with('month',$month);
+   }
 }
 
 
@@ -208,8 +230,13 @@ if ($pdf == $check_pdf) {
         ->groupBy('Unrepair_equipmentdetails.equiment')
         ->get();
 
-       
+       if ($count_change) {
         return view('project/page/statprint')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair);
+       }
+        else
+        {
+         return view('project/page/not_stat')->with('month',$month);
+        }
     
     }
 
@@ -333,9 +360,10 @@ if ($pdf == $check_pdf) {
 
         $id_user = Auth::user()->id;
         $list_fix = Equipment::where('id_user',$id_user)->get();
+        $level = Auth::user()->level;
         
 
-        return view('project/page/fix')->with('name_equipment',$name_equipment)->with('list_fix',$list_fix);
+        return view('project/page/fix')->with('name_equipment',$name_equipment)->with('list_fix',$list_fix)->with('level',$level);
     }
 
     public function detailfix($id)
@@ -798,8 +826,10 @@ if ($pdf == $check_pdf) {
     {    
        $Eq = Equipment::where('id_equipment',$id)->first();  
        $Eqd = Equipmentdetail::where('id_equipment',$id)->get();
+       $level = Auth::user()->level;
+
        // $count = Equipmentdetail::where('id_equipment',$id)->count();
-       return view('project/page/editfix')->with('Eq',$Eq)->with('Eqd',$Eqd);
+       return view('project/page/editfix')->with('Eq',$Eq)->with('Eqd',$Eqd)->with('level',$level);
     }
     public function update_fix(Request $data, $id)
     {   
@@ -820,39 +850,44 @@ if ($pdf == $check_pdf) {
 
         foreach ($Eqd as $key => $v) 
         {
-            $k=$data->Input('eq'.$key);
-                if($k!=null)
+            // $k=$data->Input('eq'.$key);
+                if($data->Input('eq'.$key))
                 {
                     $logo = $data->file('eqpho'.$key);
-                    $upload = 'upload/repair';
-                    $filename = $logo->getClientOriginalName();
-                    $success = $logo->move($upload, $filename);
+                  
 
-                    $ep = $data->Input('eq'.$key);
-                    $epdetail = $data->Input('eqdetail'.$key);
+                    if($logo)
+                    {
+                        $upload = 'upload/repair';
+                        $filename = $logo->getClientOriginalName();
+                        $success = $logo->move($upload, $filename);
 
-                if($success)
-                {
-                    
-                    $v->photo_repair = $filename;
-                    // $v->id_equipment = $equipment->id;
-                    $v->equipment = $ep;
-                    $v->detail_equipment = $epdetail;
+                        $ep = $data->Input('eq'.$key);
+                        $epdetail = $data->Input('eqdetail'.$key);
+                        $v->photo_repair = $filename;
+                        // $v->id_equipment = $equipment->id;
+                        $v->equipment = $ep;
+                        $v->detail_equipment = $epdetail;
 
+                        
+                    }
+                    else
+                    {
+                        $ep = $data->Input('eq'.$key);
+                        $epdetail = $data->Input('eqdetail'.$key);
+                        // $v->photo_repair = $filename;
+                        // $v->id_equipment = $equipment->id;
+                        $v->equipment = $ep;
+                        $v->detail_equipment = $epdetail;
+                    }
                     $v->save();
                 }
-        }
 
             
         }
 
 
-
-
-
-
-        return Redirect::to('fix'); 
-        //echo "string";
+        return Redirect::to('fix');   
     }
 
 
@@ -909,262 +944,44 @@ if ($pdf == $check_pdf) {
         $equipment->note = input::get('note');
         $equipment->save();
 
-
-        $k=$data->Input('eq0');
-        if($k!=null)
+        $i = 0;
+        while ($data->Input('eq'.$i)) 
         {
-            $logo = $data->file('eqpho0');
-            $upload = 'upload/repair';
-            $filename = $logo->getClientOriginalName();
-            $success = $logo->move($upload, $filename);
+            $logo = $data->file('eqpho'.$i);
 
-            $ep = $data->Input('eq0');
-            $epdetail = $data->Input('eqdetail0');
-
-            if($success)
+            if($logo)
             {
+                $upload = 'upload/repair';
+                $filename = $logo->getClientOriginalName();
+                $success = $logo->move($upload, $filename);
+
+                $ep = $data->Input('eq'.$i);
+                $epdetail = $data->Input('eqdetail'.$i);
+
+            
                 $equipmentdetail = new Equipmentdetail;
                 $equipmentdetail->photo_repair = $filename;
-                $equipmentdetail->id_equipment = $equipment->id;
+                $equipmentdetail->id_equipment = $equipment->id_equipment;
                 $equipmentdetail->equipment = $ep;
                 $equipmentdetail->detail_equipment = $epdetail;
 
-                $equipmentdetail->save();
             }
+            else
+            {
+                $ep = $data->Input('eq'.$i);
+                $epdetail = $data->Input('eqdetail'.$i);
+
+                $equipmentdetail = new Equipmentdetail;
+                $equipmentdetail->id_equipment = $equipment->id_equipment;
+                $equipmentdetail->equipment = $ep;
+                $equipmentdetail->detail_equipment = $epdetail;
+
+            }    
+            $equipmentdetail->save();
+     
+            $i++;
         }
-
-
-        $a=$data->Input('eq1');
-        if($a!=null)
-        {
-            $logo = $data->file('eqpho1');
-            $upload = 'upload/repair';
-            $filename = $logo->getClientOriginalName();
-            $success = $logo->move($upload, $filename);
-
-            $ep = $data->Input('eq1');
-            $epdetail = $data->Input('eqdetail1');
-
-            if($success)
-            {
-                $equipmentdetail = new Equipmentdetail;
-                $equipmentdetail->photo_repair = $filename;
-                $equipmentdetail->id_equipment = $equipment->id;
-                $equipmentdetail->equipment = $ep;
-                $equipmentdetail->detail_equipment = $epdetail;
-
-                $equipmentdetail->save();
-            }
-        }
-
-
-        $b=$data->Input('eq2');
-        if($b!=null)
-        {
-            $logo = $data->file('eqpho2');
-            $upload = 'upload/repair';
-            $filename = $logo->getClientOriginalName();
-            $success = $logo->move($upload, $filename);
-
-            $ep = $data->Input('eq2');
-            $epdetail = $data->Input('eqdetail2');
-
-            if($success)
-            {
-                $equipmentdetail = new Equipmentdetail;
-                $equipmentdetail->photo_repair = $filename;
-                $equipmentdetail->id_equipment = $equipment->id;
-                $equipmentdetail->equipment = $ep;
-                $equipmentdetail->detail_equipment = $epdetail;
-
-                $equipmentdetail->save();
-            }
-        }
-
-        $c=$data->Input('eq3');
-        if($c!=null)
-        {
-            $logo = $data->file('eqpho3');
-            $upload = 'upload/repair';
-            $filename = $logo->getClientOriginalName();
-            $success = $logo->move($upload, $filename);
-
-            $ep = $data->Input('eq3');
-            $epdetail = $data->Input('eqdetail3');
-
-            if($success)
-            {
-                $equipmentdetail = new Equipmentdetail;
-                $equipmentdetail->photo_repair = $filename;
-                $equipmentdetail->id_equipment = $equipment->id;
-                $equipmentdetail->equipment = $ep;
-                $equipmentdetail->detail_equipment = $epdetail;
-
-                $equipmentdetail->save();
-            }
-        }        
-
-        $d=$data->Input('eq4');
-        if($d!=null)
-        {
-            $logo = $data->file('eqpho4');
-            $upload = 'upload/repair';
-            $filename = $logo->getClientOriginalName();
-            $success = $logo->move($upload, $filename);
-
-            $ep = $data->Input('eq4');
-            $epdetail = $data->Input('eqdetail4');
-
-            if($success)
-            {
-                $equipmentdetail = new Equipmentdetail;
-                $equipmentdetail->photo_repair = $filename;
-                $equipmentdetail->id_equipment = $equipment->id;
-                $equipmentdetail->equipment = $ep;
-                $equipmentdetail->detail_equipment = $epdetail;
-
-                $equipmentdetail->save();
-            }
-        }
-
-        $e=$data->Input('eq5');
-        if($e!=null)
-        {
-            $logo = $data->file('eqpho5');
-            $upload = 'upload/repair';
-            $filename = $logo->getClientOriginalName();
-            $success = $logo->move($upload, $filename);
-
-            $ep = $data->Input('eq5');
-            $epdetail = $data->Input('eqdetail5');
-
-            if($success)
-            {
-                $equipmentdetail = new Equipmentdetail;
-                $equipmentdetail->photo_repair = $filename;
-                $equipmentdetail->id_equipment = $equipment->id;
-                $equipmentdetail->equipment = $ep;
-                $equipmentdetail->detail_equipment = $epdetail;
-
-                $equipmentdetail->save();
-            }
-        }
-
-        $f=$data->Input('eq6');
-        if($f!=null)
-        {
-            $logo = $data->file('eqpho6');
-            $upload = 'upload/repair';
-            $filename = $logo->getClientOriginalName();
-            $success = $logo->move($upload, $filename);
-
-            $ep = $data->Input('eq6');
-            $epdetail = $data->Input('eqdetail6');
-
-            if($success)
-            {
-                $equipmentdetail = new Equipmentdetail;
-                $equipmentdetail->photo_repair = $filename;
-                $equipmentdetail->id_equipment = $equipment->id;
-                $equipmentdetail->equipment = $ep;
-                $equipmentdetail->detail_equipment = $epdetail;
-
-                $equipmentdetail->save();
-            }
-        }
-
-
-        $g=$data->Input('eq7');
-        if($g!=null)
-        {
-            $logo = $data->file('eqpho7');
-            $upload = 'upload/repair';
-            $filename = $logo->getClientOriginalName();
-            $success = $logo->move($upload, $filename);
-
-            $ep = $data->Input('eq7');
-            $epdetail = $data->Input('eqdetail7');
-
-            if($success)
-            {
-                $equipmentdetail = new Equipmentdetail;
-                $equipmentdetail->photo_repair = $filename;
-                $equipmentdetail->id_equipment = $equipment->id;
-                $equipmentdetail->equipment = $ep;
-                $equipmentdetail->detail_equipment = $epdetail;
-
-                $equipmentdetail->save();
-            }
-        }
-
-        $h=$data->Input('eq8');
-        if($h!=null)
-        {
-            $logo = $data->file('eqpho8');
-            $upload = 'upload/repair';
-            $filename = $logo->getClientOriginalName();
-            $success = $logo->move($upload, $filename);
-
-            $ep = $data->Input('eq8');
-            $epdetail = $data->Input('eqdetail8');
-
-            if($success)
-            {
-                $equipmentdetail = new Equipmentdetail;
-                $equipmentdetail->photo_repair = $filename;
-                $equipmentdetail->id_equipment = $equipment->id;
-                $equipmentdetail->equipment = $ep;
-                $equipmentdetail->detail_equipment = $epdetail;
-
-                $equipmentdetail->save();
-            }
-        }
-
-        $i=$data->Input('eq9');
-        if($i!=null)
-        {
-            $logo = $data->file('eqpho9');
-            $upload = 'upload/repair';
-            $filename = $logo->getClientOriginalName();
-            $success = $logo->move($upload, $filename);
-
-            $ep = $data->Input('eq9');
-            $epdetail = $data->Input('eqdetail9');
-
-            if($success)
-            {
-                $equipmentdetail = new Equipmentdetail;
-                $equipmentdetail->photo_repair = $filename;
-                $equipmentdetail->id_equipment = $equipment->id;
-                $equipmentdetail->equipment = $ep;
-                $equipmentdetail->detail_equipment = $epdetail;
-
-                $equipmentdetail->save();
-            }
-        }
-
-        $j=$data->Input('eq10');
-        if($j!=null)
-        {
-            $logo = $data->file('eqpho10');
-            $upload = 'upload/repair';
-            $filename = $logo->getClientOriginalName();
-            $success = $logo->move($upload, $filename);
-
-            $ep = $data->Input('eq10');
-            $epdetail = $data->Input('eqdetail10');
-
-            if($success)
-            {
-                $equipmentdetail = new Equipmentdetail;
-                $equipmentdetail->photo_repair = $filename;
-                $equipmentdetail->id_equipment = $equipment->id;
-                $equipmentdetail->equipment = $ep;
-                $equipmentdetail->detail_equipment = $epdetail;
-
-                $equipmentdetail->save();
-            }
-        }                        
+               
         return Redirect::to('home');
     }
 

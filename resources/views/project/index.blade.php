@@ -12,9 +12,14 @@
     <h3 class="w3-xxxlarge w3-padding-5">Dormitory Repairing System for PSU</h3>
   </header>
 <!-- tab -->
-  <style>
+<style>
     .city {display:none;}
-  </style>
+
+</style>
+  
+
+
+
 
   <div class="w3-container w3-padding-32" style="padding-left:32px">
 
@@ -53,55 +58,6 @@
         <!-- <h3 class="w3-center">Blog Template</h3> -->
         <div class="w3-content" style="max-width:800px">
 
-<!-- 
-          <table class="w3-table w3-striped w3-border">
-            <thead>
-              <tr class="w3-red">
-                <th>ลำดับ</th>
-                <th>ห้อง</th>
-                <th>วันที่เจ้งซ่อม</th>
-                <th>วันที่ซ่อมได้</th>
-                <th>เวลาที่ซ่อมได้</th>
-                <th>สถานะ</th>
-              </tr>
-            </thead>
-            @foreach($equipment as $v) 
-
-            <tr>       
-              <td>{{$v->id_equipment}}</td>
-              <td>{{$v->num_room}}</td>
-              <td>{{$v->date_in}}</td>
-              <td>{{$v->date_repair}}</td>
-              <td>{{$v->time_repair}}</td>
-              <td>รอการซ่อม</td>
-            </tr>
-
-
-            @endforeach
-          </table> -->
-
-
-          <!-- css textbox search -->
-      <!--     <style>
-            input[type=searchh] {
-              width: 80%
-              box-sizing: border-box;
-              border: 2px solid #ccc;
-              border-radius: 10px;
-              font-size: 16px;
-              background-color: white;
-              background-size:30px 25px;
-              background-position: 5px 10px;
-              background-repeat: no-repeat;
-              padding: 12px 20px 12px 40px;
-              -webkit-transition: width 0.4s ease-in-out;
-              transition: width 0.4s ease-in-out;
-            }
-
-            input[type=searchh]:focus {
-              width: 100%;
-            }
-          </style> -->
 
 
           <div id="London" class="w3-container city" style="display: block;">
@@ -114,10 +70,11 @@
 
               <div class="w3-col m8"> -->
                 <input type="searchh" name="search" class="w3-input w3-animate-input" data-table="order-table" placeholder="Search...">
+                <br>
                 <!-- <input class="w3-input w3-animate-input" type="search" name="search" class="light-table-filter" data-table="order-table" style="width:70%" placeholder="Search..."> -->
               <!-- </div> -->
             </div>
-<br>
+
             <table class="w3-table w3-striped w3-border order-table table">
               <thead>
                 <tr class="w3-pale-yellow">
@@ -130,9 +87,9 @@
                   
                 </tr>
               </thead>
-              @foreach($equipment as $v) 
+              @foreach($equipment as $key=>$v) 
               <tr>       
-                <td>{{$v->id_equipment}}</td>
+                <td>{{$key+1}}</td>
                 <td>{{$v->num_room}}</td>
                 <td>{{$v->date_in}}</td>
                 <td>{{$v->date_repair}}</td>
@@ -142,12 +99,14 @@
               </tr>
               @endforeach
             </table>
+</div>
 
-          </div>
 
           <div id="Paris" class="w3-container city">
             <h2>รายการซ่อมเสร็จ</h2>
-            <table class="w3-table w3-striped w3-border">
+             <input type="searchh" name="search" class="w3-input w3-animate-input" data-table="order-table" placeholder="Search...">
+             <br>
+            <table class="w3-table w3-striped w3-border order-table table">
               <thead>
                 <tr class="w3-green">
                   <th>ลำดับ</th>
@@ -178,7 +137,9 @@
 
           <div id="Tokyo" class="w3-container city">
             <h2>รายการซ่อมไม่ได้</h2>
-            <table class="w3-table w3-striped w3-border">
+             <input type="searchh" name="search" class="w3-input w3-animate-input" data-table="order-table" placeholder="Search...">
+             <br>
+            <table class="w3-table w3-striped w3-border order-table table">
               <thead>
                 <tr class="w3-pink">
                   <th>ลำดับ</th>
@@ -190,7 +151,7 @@
                 </tr>
               </thead> 
 
-              @foreach($unrepair_equipment as $v)
+              @foreach($unrepair_equipment as $key=>$v)
               <tr>       
                 <td>{{$v->id}}</td>
                 <td>{{$v->num_room}}</td>
@@ -203,19 +164,7 @@
             </table>
           </div>
           <br>
-          <div class="w3-row">
-            <center>
-              <ul class="w3-pagination w3-border w3-round">
-                <li><a href="#">&laquo;</a></li>
-                <li><a class="w3-red" href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&raquo;</a></li>
-              </ul>
-            </center>
-          </div>
+  
 
         </div>
       </div>
@@ -265,7 +214,7 @@
               }
               return {
                 init: function () {
-                  var inputs = document.getElementsByClassName('light-table-filter');
+                  var inputs = document.getElementsByClassName('w3-input w3-animate-input');
                   Arr.forEach.call(inputs, function (input) {
                     input.oninput = _onInputEvent;
                   });

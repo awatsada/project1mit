@@ -21,16 +21,6 @@
       <br>
     </div>
 
-<!--     {{$Eq}}
-    {{$Eqd}}
-    {{$count}}
-
-    
-
-    @for ($i = 0; $i < $count; $i++)
-    Theeeeeeeeeeeeeeeee current value is {{ $i }}
-    {{$Eqd[$i]}}
-    @endfor -->
 
 @for ($i = 0; $i < $count; $i++) 
 
@@ -50,7 +40,7 @@
 
       <form action="{{url('record/')}}/{{$Eq->id_equipment}}" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">  
-        <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายละเอียดการซ่อม" name="list_detail_repair{{$i}}"></textarea>
+        <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายละเอียดการซ่อม" name="list_detail_repair{{$i}}" required></textarea>
         <br>
 
         <div class="w3-row">
@@ -59,7 +49,7 @@
           </div>
 
           <div class="w3-col m10">
-            <input class="w3-input w3-animate-input" value="{{ Auth::user()->name }}" type="text" style="width:70%"></p>
+            <input class="w3-input w3-animate-input" value="{{ Auth::user()->name }}" type="text" style="width:70%" required></p>
           </div>
         </div>
 
@@ -70,7 +60,7 @@
             <p>วันที่ซ่อมเสร็จ :</p>
           </div>
           <div class="w3-col m10">
-            <input class="w3-input" type="date" value="{{$date = date("Y-m-d")}}" disabled="disabled" style="width:70%">
+            <input class="w3-input" type="date" value="{{$date = date("Y-m-d")}}" disabled="disabled" style="width:70%" required>
           </div>
         </div>
 
@@ -78,10 +68,10 @@
 
         <h3 class="w3-text-blue">รายการเบิกอุปกรณ์</h3>     
         <!-- <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายการเบิกอุปกรณ์" name="list_use_equipment{{$i}}" ></textarea> -->
-                  <p>ชื่ออุปกรณ์</p> <input class="w3-input w3-animate-input" id="tags" name="list_use_equipment{{$i}}"  type="text"  style="width:70%" />
+                  <p>ชื่ออุปกรณ์</p> <input class="w3-input w3-animate-input" id="tags" name="list_use_equipment{{$i}}"  type="text"  style="width:70%" required/>
                   <br>
                   <i> จำนวนอุปกรณ์</i>  
-                  <input class="w3-input w3-animate-input" name="num{{$i}}" type="text"  style="width:70%" />
+                  <input class="w3-input w3-animate-input" name="num{{$i}}" type="text"  style="width:70%" required/>
                   <br>
 
      
@@ -91,7 +81,7 @@
             <p>ลงชื่อผู้เบิกของ :</p>
           </div>
           <div class="w3-col m10">
-            <input class="w3-input w3-animate-input" value="{{ Auth::user()->name }}" type="text" style="width:70%"></p>
+            <input class="w3-input w3-animate-input" value="{{ Auth::user()->name }}" type="text" style="width:70%" required></p>
           </div>
         </div>
 
@@ -102,7 +92,7 @@
             <p>วันที่เบิก :</p>
           </div>
           <div class="w3-col m10">
-           <input class="w3-input" type="date" value="{{$date = date("Y-m-d")}}" disabled="disabled" style="width:70%">
+           <input class="w3-input" type="date" value="{{$date = date("Y-m-d")}}" disabled="disabled" style="width:70%" required/>
          </div>
        </div>
 
@@ -113,26 +103,28 @@
         <p>
           <input class="w3-radio" type="radio" name="status{{$i}}" value="repair" checked><label class="w3-validate">ซ่อม</label>
         </p>
-
-        <p>
-          <input class="w3-radio" type="radio" name="status{{$i}}" value="unrepair" checked>
-          <label class="w3-validate">ซ่อมไม่ได้</label>
-        </p>
-
         <p>
           <input class="w3-radio" type="radio" name="status{{$i}}" value="change" checked>
           <label class="w3-validate">เปลี่ยน</label>
         </p>
-      </div>
+        <p>
+          <input class="w3-radio" type="radio" name="status{{$i}}" value="unrepair" checked>
+          <label class="w3-validate">ซ่อมไม่ได้</label>
+        </p>
+      </div> @endfor
  </div> 
        
             
 
-      @endfor
+     
 
       <br>
-      <br>
 
+
+                <p>หมายเหตุ</p>
+                <textarea class="w3-input w3-animate-input" name="note" style="width:70%;" rows="4" cols="50" placeholder="กรณีที่ซ่อมไม่ได้"></textarea>
+                <br>
+                <br>
 
             <!-- <div class="w3-row">
               <div class="w3-col m6">

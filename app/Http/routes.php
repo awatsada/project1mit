@@ -35,9 +35,9 @@
 //     return view('project/page/showequipment');
 // });
 
-// Route::get('st', function(){
-//     return view('project/page/statpdf');
-// });
+Route::get('st', function(){
+    return view('project/page/not_stat');
+});
 
 // Route::get('pdf', function () {
 //     $pdf = PDF::loadView('pdf');

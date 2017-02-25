@@ -20,7 +20,7 @@
   <h2>รายละเอียดการแจ้งซ่อมทั่วไป</h2>
   <hr>
   <div class="w3-container w3-sand w3-leftbar">
-    <p><strong>ลำดับ : </strong><i>{{$Eq->id_equipment}}</i></p>
+    <!-- <p><strong>ลำดับ : </strong><i>{{$Eq->id_equipment}}</i></p> -->
     <p><strong>ห้อง : </strong><i>{{$Eq->num_room}}</i></p>
     <p><strong>เบอร์โทรศัพท์ : </strong><i>{{$Eq->phone_number}}</i></p>
     <p><strong>วันที่แจ้งซ่อม : </strong><i>{{$Eq->date_in}}</i></p> 
@@ -40,18 +40,25 @@
     <hr>
     <br>
 
-    @foreach($Eqd as $v)
+    @foreach($Eqd as $key=>$v)
     
-      <p>ลำดับ {{$v->id}}</p>
+      <p>ลำดับ {{$key+1}}</p>
     
 
-    <p><strong>ลำดับอุปกรณ์ : </strong><i>{{$v->id_equipment}}</i></p> 
+    <!-- <p><strong>ลำดับอุปกรณ์ : </strong><i>{{$v->id_equipment}}</i></p>  -->
     <p><strong>อุปกรณ์ : </strong><i>{{ $v->equipment}}</i></p> 
     <p><strong>รายละเอียดอุปกรณ์ : </strong><i>{{$v->detail_equipment}}</i></p> 
-    <p>  
+   <!--  <p>  
       <strong>ภาพอุปกรณ์  </strong>
       <h1><img src="{{asset('upload/repair/')}}/{{$v->photo_repair}}" class="w3-border w3-padding-4 w3-padding-tiny" alt="Norway" style="width:30%"></h1>
+    </p> -->
+    @if($v->photo_repair)
+    <p>
+            <strong>ภาพอุปกรณ์  </strong>
+            <h1><img src="{{asset('upload/repair/')}}/{{$v->photo_repair}}" class="w3-border w3-padding-4 w3-padding-tiny" alt="Norway" style="width:30%"></h1>
+            @endif
     </p>
+    <hr>
     @endforeach
   </div>
 

@@ -38,10 +38,11 @@
   </style> -->
 
   <div class="w3-container w3-padding-32" style="padding-left:32px">
-    <h2>รายละเอียดการแจ้งซ่อมทั่วไป</h2> 
+    <h2>รายละเอียดการแจ้งซ่อมทั่วไป</h2>
+    <p align = "right">
     <a class="w3-btn w3-teal" href="{{url('getpdf')}}/{{$Eq->id_equipment}}">Export PDF <i class="fa fa-file"></i></a>
-    <a class="w3-btn w3-blue" href="{{url('fix/detail/edit_fix')}}/{{$Eq->id_equipment}}">ลำดับ : {{$Eq->id_equipment}} <i class="fa fa-refresh"></i></a>
-    <a class="w3-btn w3-red" href="{{url('fix/detail/delete_fix')}}/{{$Eq->id_equipment}}">ลำดับ : {{$Eq->id_equipment}} <i class="fa fa-trash"></i></a>
+    <a class="w3-btn w3-blue" href="{{url('fix/detail/edit_fix')}}/{{$Eq->id_equipment}}">แก้ไข <i class="fa fa-refresh"></i></a>
+    <a class="w3-btn w3-red" href="{{url('fix/detail/delete_fix')}}/{{$Eq->id_equipment}}">ลบ <i class="fa fa-trash"></i></a></p> 
    <!--  <form class="w3-container" action="re/report" enctype="multipart/form-data" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <p>
@@ -51,8 +52,8 @@
     <hr>
 
     <div class="w3-container w3-sand w3-leftbar">
-      <h1><strong>ลำดับ : </strong><i>{{$Eq->id_equipment}}</i></h1>
-      <p><strong>ห้อง : </strong><i>{{$Eq->num_room}}</i></p>
+      <!-- <h1><strong>ลำดับ : </strong><i>{{$Eq->id_equipment}}</i></h1> -->
+      <h1><strong>ห้อง : </strong><i>{{$Eq->num_room}}</i></h1>
       <p><strong>เบอร์โทรศัพท์ : </strong><i>{{$Eq->phone_number}}</i></p>
       <p><strong>วันที่แจ้งซ่อม : </strong><i>{{$Eq->date_in}}</i></p> 
       <p><strong>วันที่ซ่อมได้ : </strong><i>{{$Eq->date_repair}}</i></p> 
@@ -88,8 +89,10 @@
               <p><strong>รายละเอียดอุปกรณ์ : </strong><i>{{$v->detail_equipment}}</i></p> 
 
             </div>
+            @if($v->photo_repair)
             <strong>ภาพอุปกรณ์  </strong>
             <h1><img src="{{asset('upload/repair/')}}/{{$v->photo_repair}}" class="w3-border w3-padding-4 w3-padding-tiny" alt="Norway" style="width:30%"></h1>
+            @endif
          </div>
         <footer class="w3-container w3-blue"></footer>
         </div>

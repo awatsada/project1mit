@@ -39,9 +39,9 @@
       <th>เวลาที่ซ่อมได้</th>
       <th>รายละเอียด</th>
     </tr>
-    @foreach($list_fix as $v) 
+    @foreach($list_fix as $key=>$v) 
     <tr>
-      <td>{{$v->id_equipment}}</td>
+      <td>{{$key+1}}</td>
       <td>{{$v->num_room}}</td>
       <td>{{$v->date_in}}</td>
       <td>{{$v->date_repair}}</td>
@@ -63,20 +63,34 @@
 					<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 					<h3 class="w3-text-blue">รายละเอียดผู้แจ้ง</h3>
 					<br>
+					@if ($level == 3)
 					<div class="w3-row">
 						<div class="w3-col m2">
 							<p><label>ชื่อ - นามสกุล : </label></p>
 						</div>
+						
 						<div class="w3-col m10">
-							<input class="w3-input w3-animate-input" type="text" value="{{ Auth::user()->name_student }}"  style="width:70%"></p>
+							<input class="w3-input w3-animate-input" type="text" value="น.ส.{{ Auth::user()->name_student }}"  style="width:70%" disabled="disabled" required/></p>
 						</div>
 					</div>
+					@else
+					<div class="w3-row">
+						<div class="w3-col m2">
+							<p><label>ชื่อ - นามสกุล : </label></p>
+						</div>
+						
+						<div class="w3-col m10">
+							<input class="w3-input w3-animate-input" type="text" value="{{ Auth::user()->name }}"  style="width:70%" required/></p>
+						</div>
+						
+					</div>
+					@endif
 					<div class="w3-row">
 						<div class="w3-col m2">
 							<p><label>เบอร์โทรศัพท์ : </label></p>
 						</div>
 						<div class="w3-col m10">
-							<input class="w3-input w3-animate-input" name="phone_number" type="text" style="width:70%" value="0883845297">
+							<input class="w3-input w3-animate-input" name="phone_number" type="text" style="width:70%" required>
 						</div>
 					</div>
 					<div class="w3-row">
@@ -84,7 +98,7 @@
 							<p><label>ห้อง </label></p>
 						</div>
 						<div class="w3-col m11">
-							<input class="w3-input w3-animate-input" name="num_room" type="text" style="width:70%" value="2325">
+							<input class="w3-input w3-animate-input" name="num_room" type="text" style="width:70%" required>
 						</div>
 					</div>
 					<div class="w3-row">
@@ -100,7 +114,7 @@
 							<p><lavel>วันที่ให้เข้าซ่อมได้ : </lavel></p>
 						</div>
 						<div class="w3-col m10">
-							<input class="w3-input datepicker" name="date_repair"  type="date" style="width:70%">
+							<input class="w3-input datepicker" name="date_repair"  type="date" style="width:70%" required>
 						</div>
 					</div>
 					<div class="w3-row">
@@ -108,7 +122,7 @@
 							<p><label>เวลา : </label></p>
 						</div>
 						<div class="w3-col m11">
-							<input class="w3-input w3-animate-input" name="time_repair" type="time" style="width:70%" value="12:10">
+							<input class="w3-input w3-animate-input" name="time_repair" type="time" style="width:70%" required>
 						</div>
 					</div>
 					<div class="w3-row">
@@ -131,13 +145,13 @@
 							<div id="itemRows">
 								<div class="ui-widget">
 									<br>
-									อุปกรณ์ <input class="w3-input w3-animate-input" id="tags" name="eq0"  type="text"  style="width:70%" /></div>
+									อุปกรณ์ <input class="w3-input w3-animate-input" id="tags" name="eq0"  type="text"  style="width:70%" required/></div>
 									<br>
 									<i> รายละเอียดและปัญหา</i>  
-									<input class="w3-input w3-animate-input" name="eqdetail0" type="text"  style="width:70%" />
+									<input class="w3-input w3-animate-input" name="eqdetail0" type="text"  style="width:70%" required/>
 									<br>
 									<input type="file" multiple="" name="eqpho0"><br><br> 
-									<input onclick="addRow(this.form);" class="w3-btn w3-teal"  type="button" value="เพิ่มอุปกรณ์" />
+									<input onclick="addRow(this.form);" class="w3-btn w3-teal"  type="button" value="เพิ่มรายการ" />
 								</div>
 								<br>
 								<p>อื่น ๆ</p>
@@ -178,7 +192,7 @@ source: availableTags
 var rowNum = 0;
 function addRow(frm) {
 	rowNum ++;
-	var row = '<p  id="rowNum'+rowNum+'">อุปกรณ์ <input class="w3-input w3-animate-input ui-autocomplete-input"  type="text" name="eq'+rowNum+'" style="width:400px" autocomplete="off" > <br> <i>รายละเอียดและปัญหา</i> <input class="w3-input w3-animate-input" type="text" name="eqdetail'+rowNum+'" style="width:400px"><br> <input type="file" multiple="" name="eqpho'+rowNum+'"> <br> <br>  <input class="w3-btn w3-red" type="button"  value="ลบอุปกรณ์" onclick="removeRow('+rowNum+');"></p>';
+	var row = '<p  id="rowNum'+rowNum+'">อุปกรณ์ <input class="w3-input w3-animate-input ui-autocomplete-input"  type="text" name="eq'+rowNum+'" style="width:70%" autocomplete="off" required> <br> <i>รายละเอียดและปัญหา</i> <input class="w3-input w3-animate-input" type="text" name="eqdetail'+rowNum+'" style="width:70%" required><br> <input type="file" multiple="" name="eqpho'+rowNum+'"> <br> <br>  <input class="w3-btn w3-red" type="button"  value="ลบรายการ" onclick="removeRow('+rowNum+');"></p>';
 	jQuery('#itemRows').append(row);
 //	frm.add_qty.value = '';
 //	frm.add_name.value = '';
