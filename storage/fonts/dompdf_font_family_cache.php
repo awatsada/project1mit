@@ -78,9 +78,9 @@
     'normal' => $rootDir . '\lib\fonts\DejaVuSerif',
   ),
   'kanit' => array(
-    'normal' => $fontDir . '\7677589f318b5e1a8fa90f92bdf5a518',
-    'bold' => $fontDir . '\7677589f318b5e1a8fa90f92bdf5a518',
-    'italic' => $fontDir . '\7677589f318b5e1a8fa90f92bdf5a518',
-    'bold_italic' => $fontDir . '\7677589f318b5e1a8fa90f92bdf5a518',
+    'normal' => $fontDir . '7677589f318b5e1a8fa90f92bdf5a518',
+    'bold' => $fontDir . '7677589f318b5e1a8fa90f92bdf5a518',
+    'italic' => $fontDir . '7677589f318b5e1a8fa90f92bdf5a518',
+    'bold_italic' => $fontDir . '7677589f318b5e1a8fa90f92bdf5a518',
   ),
 ) ?>

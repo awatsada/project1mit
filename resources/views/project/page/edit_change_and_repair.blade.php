@@ -38,7 +38,7 @@
       <h3 class="w3-text-blue">รายละเอียดการซ่อม</h3>     
 
 
-      <form action="{{url('update_record_complete/')}}/{{$v->id_changeequipment}}" method="post">
+      <form action="{{url('update/record/complete')}}/{{$v->id_changeequipment}}" enctype="multipart/form-data" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">  
         <textarea class="w3-input w3-animate-input" style="width:70%;"  rows="4"  cols="50"  name="list_detail_repair{{$key}}">{{$v->detail_repair}}</textarea>
         <br>
@@ -68,7 +68,7 @@
 
         <h3 class="w3-text-blue">รายการเบิกอุปกรณ์</h3>     
         <!-- <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายการเบิกอุปกรณ์" name="list_use_equipment{{$key}}" ></textarea> -->
-                  <p>ชื่ออุปกรณ์</p> <input class="w3-input w3-animate-input" id="tags" value="{{$v->detail_use_equipment}}" name="list_use_equipment{{$key}}"  type="text"  style="width:70%" />
+                  <p>ชื่ออุปกรณ์</p> <input class="input.ui-autocomplete-input" id="tags" value="{{$v->detail_use_equipment}}" name="list_use_equipment{{$key}}"  type="text"  style="width:70%" />
                   <br>
                   <i> จำนวนอุปกรณ์</i>  
                   <input class="w3-input w3-animate-input" value="{{$v->number}}" name="num{{$key}}" type="text"  style="width:70%" />
@@ -104,7 +104,7 @@
           <input class="w3-radio" type="radio" name="status{{$key}}" value="repair" checked><label class="w3-validate">ซ่อม</label>
         </p>
 
-        <p>
+       <!--  <p>
           <input class="w3-radio" type="radio" name="status{{$key}}" value="unrepair" checked>
           <label class="w3-validate">ซ่อมไม่ได้</label>
         </p>
@@ -112,7 +112,7 @@
         <p>
           <input class="w3-radio" type="radio" name="status{{$key}}" value="change" checked>
           <label class="w3-validate">เปลี่ยน</label>
-        </p>
+        </p> -->
       </div>
       </div>
           
@@ -136,7 +136,7 @@
       <h3 class="w3-text-blue">รายละเอียดการซ่อม</h3>     
 
 
-      <form action="{{url('update_record_complete/')}}/{{$v->id_changeequipment}}" method="post">
+      <form action="{{url('update/record/complete')}}/{{$v->id_changeequipment}}" enctype="multipart/form-data" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">  
         <textarea class="w3-input w3-animate-input" style="width:70%;"  rows="4"  cols="50"  name="list_detail_repair{{$key}}">{{$v->detail_repair}}</textarea>
         <br>
@@ -166,7 +166,7 @@
 
         <h3 class="w3-text-blue">รายการเบิกอุปกรณ์</h3>     
         <!-- <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายการเบิกอุปกรณ์" name="list_use_equipment{{$key}}" ></textarea> -->
-                  <p>ชื่ออุปกรณ์</p> <input class="w3-input w3-animate-input" id="tags" value="{{$v->detail_use_equipment}}" name="list_use_equipment{{$key}}"  type="text"  style="width:70%" />
+                  <p>ชื่ออุปกรณ์</p> <input class="input.ui-autocomplete-input" id="tags" value="{{$v->detail_use_equipment}}" name="list_use_equipment{{$key}}"  type="text"  style="width:70%" />
                   <br>
                   <i> จำนวนอุปกรณ์</i>  
                   <input class="w3-input w3-animate-input" value="{{$v->number}}" name="num{{$key}}" type="text"  style="width:70%" />
@@ -198,14 +198,14 @@
 
        <div class="w3-row">
         <h3 class="w3-text-blue">สถานะการซ่อม</h3>
-        <p>
+       <!--  <p>
           <input class="w3-radio" type="radio" name="status{{$key}}" value="repair" checked><label class="w3-validate">ซ่อม</label>
         </p>
 
         <p>
           <input class="w3-radio" type="radio" name="status{{$key}}" value="unrepair" checked>
           <label class="w3-validate">ซ่อมไม่ได้</label>
-        </p>
+        </p> -->
 
         <p>
           <input class="w3-radio" type="radio" name="status{{$key}}" value="change" checked>
@@ -240,4 +240,19 @@
         </div>
       </div>
 
+
+<!-- ค้นหาอุปกรณ์  -->      
+<script>
+
+$( function() {
+  var availableTags = [
+  @foreach($name_equipment as $a) 
+  "{{$a->name}}",
+  @endforeach
+  ];
+  $( "input.ui-autocomplete-input" ).autocomplete({
+    source: availableTags
+  });
+} );
+</script>
 @endsection

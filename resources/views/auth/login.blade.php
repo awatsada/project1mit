@@ -172,8 +172,8 @@
                                     เข้าสู่ระบบ
                                 </button></p>
 
-<!--                                <p> <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-</p> -->
+                               <p> <a class="btn btn-link" href="{{ url('/password/reset') }}">ลืมรหัสผ่าน</a>
+</p>
 
 </center>                           
                         </div>

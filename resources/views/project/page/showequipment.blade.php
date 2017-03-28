@@ -44,7 +44,7 @@
     <hr>
 
     <div class="w3-container w3-sand w3-leftbar">
-      <p><strong>ลำดับ : </strong><i>{{$Eq->id_equipment}}</i></p>
+      <!-- <p><strong>ลำดับ : </strong><i>{{$Eq->id_equipment}}</i></p> -->
       <p><strong>ห้อง : </strong><i>{{$Eq->num_room}}</i></p>
       <p><strong>เบอร์โทรศัพท์ : </strong><i>{{$Eq->phone_number}}</i></p>
       <p><strong>วันที่แจ้งซ่อม : </strong><i>{{$Eq->date_in}}</i></p> 
@@ -69,19 +69,23 @@
         <div class="w3-card-4 test" style="width:100%"> 
 
           <header class="w3-container w3-blue">
-            <h2>ลำดับ {{$v->id}}</h2>
+            <!-- <h2>ลำดับ {{$v->id}}</h2> -->
+            <h2>อุปกรณ์ : <i>{{$v->equipment}}</i></h2>
           </header>
 
           <div class="w3-container">
             <div class="w3-panel w3-padding-4 w3-sand">
-              <p><strong>ลำดับอุปกรณ์ : </strong><i>{{$v->id_equipment}}</i></p> 
-              <p><strong>อุปกรณ์ : </strong><i>{{$v->equipment}}</i></p> 
+              <!-- <p><strong>ลำดับอุปกรณ์ : </strong><i>{{$v->id_equipment}}</i></p>  -->
+              <!-- <p><strong>อุปกรณ์ : </strong><i>{{$v->equipment}}</i></p>  -->
               <p><strong>รายละเอียดอุปกรณ์ : </strong><i>{{$v->detail_equipment}}</i></p> 
-
+              
             </div>
+            @if ($v->photo_repair)
             <strong>ภาพอุปกรณ์  </strong>
-            <h1><img src="{{asset('upload/repair/')}}/{{$v->photo_repair}}" class="w3-border w3-padding-4 w3-padding-tiny" alt="Norway" style="width:30%"></h1>
+            <h1><img src="{{asset('upload/repair/')}}/{{$v->photo_repair}}" class="w3-border w3-padding-4 w3-padding-tiny" alt="Norway" style="width:30%"></h1>  
+            @endif
          </div>
+
         <footer class="w3-container w3-blue"></footer>
         </div>
 

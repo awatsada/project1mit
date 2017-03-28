@@ -35,6 +35,11 @@ class StockController extends Controller
 	public function showstock()
     {
         $equipment = Save_stock::all();
+        foreach ($equipment as $key => $value) {
+            // $a = sum('detail_use_equipment') AS nummer_use FROM OrderDetails;
+            // dd($a) ;
+        }
+
         return view('project/page/show_stock')->with('equipment',$equipment);
     }
 

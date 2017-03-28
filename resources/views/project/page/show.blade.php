@@ -130,9 +130,9 @@
                   
                 </tr>
               </thead>
-              @foreach($equipment as $v) 
+              @foreach($equipment as $key => $v) 
               <tr>       
-                <td>{{$v->id_equipment}}</td>
+                <td>{{$key+1}}</td>
                 <td>{{$v->num_room}}</td>
                 <td>{{$v->date_in}}</td>
                 <td>{{$v->date_repair}}</td>
@@ -199,9 +199,9 @@
                 </tr>
               </thead> 
 
-              @foreach($unrepair_equipment as $v)
+              @foreach($unrepair_equipment as $key => $v)
               <tr>       
-                <td>{{$v->id}}</td>
+                <td>{{$key+1}}</td>
                 <td>{{$v->num_room}}</td>
                 <td>{{$v->date_in}}</td>
                 <td>{{$v->date_repair}}</td>

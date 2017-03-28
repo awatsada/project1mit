@@ -40,7 +40,7 @@
 
       <form action="{{url('record/')}}/{{$Eq->id_equipment}}" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">  
-        <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายละเอียดการซ่อม" name="list_detail_repair{{$i}}" required></textarea>
+        <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายละเอียดการซ่อม ***หากซ่อมไม่ได้ระบุหมายเหตุที่นี่***" name="list_detail_repair{{$i}}" required></textarea>
         <br>
 
         <div class="w3-row">
@@ -68,10 +68,10 @@
 
         <h3 class="w3-text-blue">รายการเบิกอุปกรณ์</h3>     
         <!-- <textarea class="w3-input w3-animate-input" style="width:70%;" rows="4" cols="50" placeholder="ระบุรายการเบิกอุปกรณ์" name="list_use_equipment{{$i}}" ></textarea> -->
-                  <p>ชื่ออุปกรณ์</p> <input class="w3-input w3-animate-input" id="tags" name="list_use_equipment{{$i}}"  type="text"  style="width:70%" required/>
+                  <i>ชื่ออุปกรณ์</i> <input class="w3-input w3-animate-input ui-autocomplete-input" id="tags" name="list_use_equipment{{$i}}"  type="text"  style="width:70%"/>
                   <br>
                   <i> จำนวนอุปกรณ์</i>  
-                  <input class="w3-input w3-animate-input" name="num{{$i}}" type="text"  style="width:70%" required/>
+                  <input class="w3-input w3-animate-input" name="num{{$i}}" type="text"  style="width:70%"/>
                   <br>
 
      
@@ -121,10 +121,10 @@
       <br>
 
 
-                <p>หมายเหตุ</p>
-                <textarea class="w3-input w3-animate-input" name="note" style="width:70%;" rows="4" cols="50" placeholder="กรณีที่ซ่อมไม่ได้"></textarea>
+              <!--   <p>หมายเหตุ</p>
+                <textarea class="w3-input w3-animate-input" name="note" style="width:70%;" rows="4" cols="50" placeholder="ระบุในกรณีที่ซ่อมไม่ได้"></textarea>
                 <br>
-                <br>
+                <br> -->
 
             <!-- <div class="w3-row">
               <div class="w3-col m6">
@@ -152,19 +152,20 @@
           <br>
         </div>
       </div>
+      </div>
 
 <!-- ค้นหาอุปกรณ์  -->      
 <script>
-$( function() {
-var availableTags = [
-@foreach($name_equipment as $a) 
-"{{$a->name}}",
-@endforeach
-];
-$("#tags" ).autocomplete({
-source: availableTags
-});
-} );
 
+$( function() {
+  var availableTags = [
+  @foreach($name_equipment as $a) 
+  "{{$a->name}}",
+  @endforeach
+  ];
+  $( "input.ui-autocomplete-input" ).autocomplete({
+    source: availableTags
+  });
+} );
 </script>
 @endsection

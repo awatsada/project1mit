@@ -106,7 +106,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('record/{id}', 'SaverepairController@saverecord');
 
     Route::get('edit_record_complete/{id}', 'HomeController@edit_record_complete');
-    Route::post('update_record_complete/{id}', 'HomeController@update_record_complete');
+    Route::post('update/record/complete/{id}', 'HomeController@update_record_complete');
+    Route::get('delete_record_complete/{id}', 'HomeController@delete_record_complete');
 
     Route::get('edit_record_uncomplete/{id}', 'HomeController@edit_record_uncomplete');
     Route::post('update_record_uncomplete/{id}', 'HomeController@update_record_uncomplete');
