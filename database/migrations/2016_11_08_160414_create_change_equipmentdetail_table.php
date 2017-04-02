@@ -17,7 +17,7 @@ class CreateChangeEquipmentdetailTable extends Migration
 
             $table->integer('id_changeequipment')->unsigned();
             $table->foreign('id_changeequipment')->references('id')->on('change_equipments')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('photo_repair',20);
+            $table->string('photo_repair',20)->nullable();
             $table->string('equiment',100);
             $table->string('detail_equiment',300);
 
@@ -27,6 +27,7 @@ class CreateChangeEquipmentdetailTable extends Migration
             $table->date('date_depart_equipment');
             $table->string('detail_repair',500);
             $table->string('detail_use_equipment',500);
+            $table->integer('number')->default(0);
             $table->string('name_technical',500);
             $table->string('name_technical_depart',500);
 

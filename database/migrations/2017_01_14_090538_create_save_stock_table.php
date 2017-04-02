@@ -19,7 +19,7 @@ class CreateSaveStockTable extends Migration
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name',100);
             $table->integer('number');
-
+            $table->integer('number_use');
             $table->timestamps();
         });
     }
