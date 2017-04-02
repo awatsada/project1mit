@@ -89,27 +89,28 @@ class HomeController extends Controller
 
     public function stat()
     {
-        $ym = date("Y-m-");
+        $ym = date("Y-m");
         if (Change_equipment::all()) {
             # code...
 
         // dd($ym);
             $count_change = DB::table('change_equipmentdetails')
-            ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
-            ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE','%'.$ym.'%')
+            ->leftJoin('name_equipments','change_equipmentdetails.equiment','=','name_equipments.name')
+            ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))
+            ->where('change_equipmentdetails.created_at','LIKE',$ym.'%')
             ->groupBy('change_equipmentdetails.equiment')
             ->get();
 
-        // dd($count_change);
+         
 
             $count_repair = DB::table('repair_equipmentdetails')
-            ->leftJoin('name_equipments','repair_equipmentdetails.id','=','name_equipments.id')
+            ->leftJoin('name_equipments','repair_equipmentdetails.equiment','=','name_equipments.name')
             ->select('repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))->where('repair_equipmentdetails.created_at','LIKE',$ym.'%')
             ->groupBy('repair_equipmentdetails.equiment')
             ->get();
-
+// dd($count_repair);
             $count_unrepair = DB::table('unrepair_equipmentdetails')
-            ->leftJoin('name_equipments','unrepair_equipmentdetails.id','=','name_equipments.id')
+            ->leftJoin('name_equipments','unrepair_equipmentdetails.equiment','=','name_equipments.name')
             ->select('unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))->where('unrepair_equipmentdetails.created_at','LIKE',$ym.'%')
             ->groupBy('unrepair_equipmentdetails.equiment')
             ->get();
@@ -126,11 +127,13 @@ class HomeController extends Controller
             {
                 return view('project/page/not_stat')->with('month',$month);
             }
+
+
         }
         else{
-             return view('project/page/not_stat')->with('month',$month);
-        }       
-    }
+           return view('project/page/not_stat')->with('month',$month);
+       }       
+   }
 
     public function statt()
     {
@@ -141,7 +144,7 @@ class HomeController extends Controller
 
      if ($pdf == $check_pdf) {
         $count_change = DB::table('change_equipmentdetails')
-        ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
+        ->leftJoin('name_equipments','change_equipmentdetails.equiment','=','name_equipments.name')
         ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE',$month.'%')
         ->groupBy('change_equipmentdetails.equiment')
         ->get();
@@ -149,20 +152,20 @@ class HomeController extends Controller
         // dd($count_change);
 
         $count_repair = DB::table('repair_equipmentdetails')
-        ->leftJoin('name_equipments','repair_equipmentdetails.id','=','name_equipments.id')
+        ->leftJoin('name_equipments','repair_equipmentdetails.equiment','=','name_equipments.name')
         ->select('repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))->where('repair_equipmentdetails.created_at','LIKE',$month.'%')
         ->groupBy('repair_equipmentdetails.equiment')
         ->get();
 
         $count_unrepair = DB::table('unrepair_equipmentdetails')
-        ->leftJoin('name_equipments','unrepair_equipmentdetails.id','=','name_equipments.id')
+        ->leftJoin('name_equipments','unrepair_equipmentdetails.equiment','=','name_equipments.name')
         ->select('unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))->where('unrepair_equipmentdetails.created_at','LIKE',$month.'%')
         ->groupBy('unrepair_equipmentdetails.equiment')
         ->get();
 
 
         // return view('project/page/statpdf')->with('count_change',$count_change)->with('count_repair',$count_repair)->with('count_unrepair',$count_unrepair);
-        if ($count_change) {
+        if ($count_change||$count_unrepair||$count_unrepair) {
             $pdf = PDF::loadView('project/page/statpdf',compact('count_change','count_repair','count_unrepair','month'));
             return $pdf->stream('equipment.pdf');
         }
@@ -173,21 +176,21 @@ class HomeController extends Controller
 
    } else {
     $count_change = DB::table('change_equipmentdetails')
-    ->leftJoin('name_equipments','change_equipmentdetails.id','=','name_equipments.id')
+    ->leftJoin('name_equipments','change_equipmentdetails.equiment','=','name_equipments.name')
     ->select('change_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_c'))->where('change_equipmentdetails.created_at','LIKE',$month.'%')
     ->groupBy('change_equipmentdetails.equiment')
     ->get();
 
-        // dd($count_change);
+        dd($count_change);
 
     $count_repair = DB::table('repair_equipmentdetails')
-    ->leftJoin('name_equipments','repair_equipmentdetails.id','=','name_equipments.id')
+    ->leftJoin('name_equipments','repair_equipmentdetails.equiment','=','name_equipments.name')
     ->select('repair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_r'))->where('repair_equipmentdetails.created_at','LIKE',$month.'%')
     ->groupBy('repair_equipmentdetails.equiment')
     ->get();
 
     $count_unrepair = DB::table('unrepair_equipmentdetails')
-    ->leftJoin('name_equipments','unrepair_equipmentdetails.id','=','name_equipments.id')
+    ->leftJoin('name_equipments','unrepair_equipmentdetails.equiment','=','name_equipments.name')
     ->select('unrepair_equipmentdetails.equiment',DB::raw('count(name_equipments.name) AS count_u'))->where('unrepair_equipmentdetails.created_at','LIKE',$month.'%')
     ->groupBy('unrepair_equipmentdetails.equiment')
     ->get();

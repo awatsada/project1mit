@@ -65,8 +65,8 @@
 
     @if (Auth::guest())
     <!--   <a href="#" class="w3-light-grey w3-medium">Home</a> -->
-    <a href="#">คู่มือการใช้งาน</a>
-    <a href="#">ติดต่อสอบถาม</a>
+    <a href="https://drive.google.com/file/d/0B_zH0xEcQXTSQmlBd0xDcVRseXM/view">คู่มือการใช้งาน</a>
+    <a href="https://www.facebook.com/hktdorm">ติดต่อสอบถาม</a>
     <!-- normal user -->
     @elseif(Auth::user()->level == 0)
     <a href="{{url('/home')}}">หน้าหลัก</a>
