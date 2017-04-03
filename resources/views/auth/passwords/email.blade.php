@@ -165,6 +165,10 @@
 <br>
 <div class="w3-content" style="max-width:500px">
 
+
+
+                    
+
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
                         {!! csrf_field() !!}
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -192,7 +196,19 @@
                       
                     </form>
 
+<div class="w3-container">
+  
 
+<div class="w3-panel w3-pale-yellow w3-display-container">
+    @if (session('status'))
+                        <div class="alert alert-success">
+                           <h5>ลิงค์เปลี่ยนรหัสผ่านถูกส่งไปยังอีเมล์ของคุณเรียบร้อยแล้ว</h5> 
+                        </div>
+                    @endif
+  </div>
+
+
+</div>
 
                     <br>
 </form>

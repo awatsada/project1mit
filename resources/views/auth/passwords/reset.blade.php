@@ -196,7 +196,7 @@
 
 {!! csrf_field() !!}
 
-
+         <input type="hidden" name="token" value="{{ $token }}">
 <!-- <label>Username</label>
 <input class="w3-input w3-hover-theme" type="text"> -->
 

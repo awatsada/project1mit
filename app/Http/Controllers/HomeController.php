@@ -181,7 +181,7 @@ class HomeController extends Controller
     ->groupBy('change_equipmentdetails.equiment')
     ->get();
 
-        dd($count_change);
+        // dd($count_change);
 
     $count_repair = DB::table('repair_equipmentdetails')
     ->leftJoin('name_equipments','repair_equipmentdetails.equiment','=','name_equipments.name')
