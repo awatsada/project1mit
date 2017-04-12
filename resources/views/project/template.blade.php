@@ -65,7 +65,7 @@
 
     @if (Auth::guest())
     <!--   <a href="#" class="w3-light-grey w3-medium">Home</a> -->
-    <a href="https://drive.google.com/file/d/0B_zH0xEcQXTSQmlBd0xDcVRseXM/view">คู่มือการใช้งาน</a>
+    <a href="https://drive.google.com/file/d/0B_zH0xEcQXTSN3ZqY04yVk1uQ2M/view?usp=sharing">คู่มือการใช้งาน</a>
     <a href="https://www.facebook.com/hktdorm">ติดต่อสอบถาม</a>
     <!-- normal user -->
     @elseif(Auth::user()->level == 0)

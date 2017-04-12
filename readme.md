@@ -38,3 +38,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 เพื่ออำนวยความสะดวกในการให้บริการแก่นักศึกษา และรวมไปถึงช่างผู้ซ่อมจะสามารถทำงานได้
 เร็วขึ้น
+
+###สามารถดูตู่มือการติดตั้งและคู่มือการใช้งานได้ที่ ไฟล์ manual
