@@ -9,7 +9,7 @@
   </div>
 
   <header class="w3-container w3-theme w3-padding-24" style="padding-left:24px" >
-    <h3 class="w3-xxxlarge w3-padding-5">Dormitory Repairing System for PSU</h3>
+    <h3 class="w3-xxxlarge w3-padding-16">Dormitory Repairing System for PSU</h3>
   </header>
 <!-- tab -->
 <style>
@@ -170,6 +170,7 @@
       </div>
     </div>
     
+    <br>
     <br>
 
 

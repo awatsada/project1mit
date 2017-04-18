@@ -10,7 +10,7 @@
     </div>
 
     <header class="w3-container w3-theme w3-padding-24" style="padding-left:24px" >
-      <h1 class="w3-xxxlarge w3-padding-5">Dormitory Repairing System for PSU</h1>
+      <h1 class="w3-xxxlarge w3-padding-16">Dormitory Repairing System for PSU</h1>
     </header>
 
 
@@ -94,7 +94,7 @@
 
 
 
-<div class="w3-container w3-padding-16 w3-card-2" style="background-color:#eee">
+<div class="w3-container w3-padding-32" style="padding-left:32px">
 <br>
 <br>
 <br>
@@ -183,10 +183,7 @@
 
 <br>
 </form>
-<br>
-<br>
-<br>
-<br>
+
 </div>
 
 <h1 style="background-color:#FFFFCC" class="w3-center">  </h1>

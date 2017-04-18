@@ -9,7 +9,7 @@
   </div>
 
   <header class="w3-container w3-theme w3-padding-24" style="padding-left:24px" >
-    <h1 class="w3-xxxlarge w3-padding-5">Dormitory Repairing System for PSU</h1>
+    <h1 class="w3-xxxlarge w3-padding-16">Dormitory Repairing System for PSU</h1>
   </header>
 
 
@@ -55,6 +55,12 @@
       @else
       <p><strong>ต้องการให้ช่างซ่อมบำรุงเข้าซ่อมในช่วงเจ้าของห้องพัก : </strong><i>ไม่อยู่</i></p> 
       @endif
+
+       @if ($Eq->note)
+            
+                          <p><strong>อื่นๆ : </strong><i>{{$Eq->note}}</i></p> 
+  
+            @endif
     </div>
 
     <br>
@@ -78,8 +84,8 @@
               <!-- <p><strong>ลำดับอุปกรณ์ : </strong><i>{{$v->id_equipment}}</i></p>  -->
               <!-- <p><strong>อุปกรณ์ : </strong><i>{{$v->equipment}}</i></p>  -->
               <p><strong>รายละเอียดอุปกรณ์ : </strong><i>{{$v->detail_equipment}}</i></p> 
-              
-            </div>
+             
+            </div>detail_equipment
             @if ($v->photo_repair)
             <strong>ภาพอุปกรณ์  </strong>
             <h1><img src="{{asset('upload/repair/')}}/{{$v->photo_repair}}" class="w3-border w3-padding-4 w3-padding-tiny" alt="Norway" style="width:30%"></h1>  

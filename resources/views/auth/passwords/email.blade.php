@@ -94,7 +94,7 @@
 <body>
 
   <nav class="w3-sidenav w3-collapse w3-white w3-animate-left w3-card-2 w3-padding-4" style="z-index:3;width:250px;" id="mySidenav">
-    <a href="{{url('/home')}}" class="w3-border-bottom w3-large"><img src="https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/14053948_907940599310962_5923993153439261598_n.jpg?oh=104c4d504e8e005296b41f551f4ab003&oe=5921CCCD" style="width:100%;"></a>
+    <a href="{{url('/home')}}" class="w3-border-bottom w3-large w3-padding-32"><img src="https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.0-9/14053948_907940599310962_5923993153439261598_n.jpg?oh=104c4d504e8e005296b41f551f4ab003&oe=5921CCCD" style="width:100%;"></a>
     <a href="javascript:void(0)" onclick="w3_close()" 
     class="w3-text-deep-purple w3-hide-large w3-closenav w3-large">Close <i class="fa fa-remove"></i></a>
 
@@ -153,13 +153,15 @@
     </div>
 
     <header class="w3-container w3-theme w3-padding-24" style="padding-left:24px" >
-      <h1 class="w3-xxxlarge w3-padding-5">Dormitory Repairing System for PSU</h1>
+      <h1 class="w3-xxxlarge w3-padding-16">Dormitory Repairing System for PSU</h1>
     </header>
 
-    <div class="w3-container w3-padding-16 w3-card-2" style="background-color:#eee">
+    <!-- <div class="w3-container w3-padding-16 w3-card-2" style="background-color:#eee"> -->
 <br>
 <br>
 <br>
+<!-- <div class="w3-container w3-padding-16 w3-card-2" style="background-color:#FFFFFF"> -->
+<div class="w3-container w3-padding-32" style="padding-left:32px">
 
 <h1 class="w3-center">เปลี่ยนรหัสผ่าน</h1>
 <br>
@@ -209,19 +211,15 @@
 
 
 </div>
-
+</div>
                     <br>
 </form>
-<br>
-<br>
-<br>
-<br>
 </div>
+
 
 <h1 style="background-color:#FFFFCC" class="w3-center">  </h1>
 <h1 style="background-color:#FFCC66" class="w3-center">  </h1>
 <h1 style="background-color:#FF9966" class="w3-center">  </h1>     
-</div>
 
 
 
@@ -233,11 +231,11 @@
 
 
 
-    <footer class="w3-container w3-theme w3-padding-4" style="padding-left:24px" >
-      <h3 >ติดต่อสำนักงานหอพักนักศึกษาในกำกับ </h3>
-      <p>ที่อยู่ : สำนักงานหอพักนักศึกษาในกำกับ มหาวิทยาลัยสงขลานครินทร์ วิทยาเขตภูเก็ต 1,2, และ 3 --80 หมู่ 1 ถนนวิชิตสงคราม ตำบลกะทู้ อำเภอกะทู้ จังหวัดภูเก็ต 83120</p>
+    <footer class="w3-container w3-theme w3-padding-4 w3-bottom" style="padding-left:16px" >
+      <p>ติดต่อสำนักงานหอพักนักศึกษาในกำกับ มอ.ภูเก็ต : 076-248-006 ถึง 20 </p>
+      <!-- <p>ที่อยู่ : สำนักงานหอพักนักศึกษาในกำกับ มหาวิทยาลัยสงขลานครินทร์ วิทยาเขตภูเก็ต 1,2, และ 3 --80 หมู่ 1 ถนนวิชิตสงคราม ตำบลกะทู้ อำเภอกะทู้ จังหวัดภูเก็ต 83120</p>
       <p>หมายเลขโทรศัพท์ : สำนักงานหอพักนักศึกษาในกำกับฯ 1,2 = 076-248-006 ถึง 20 , สำนักงานหอพักนักศึกษาในกำกับ 3 = 076-361-501</p>
-      <p><i>เปิดให้บริการทุกวัน ตั้งแต่เวลา 08.00 – 22.30 น.</i></p>
+      <p><i>เปิดให้บริการทุกวัน ตั้งแต่เวลา 08.00 – 22.30 น.</i></p> -->
     </footer>
 
   </div>

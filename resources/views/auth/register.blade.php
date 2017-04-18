@@ -12,7 +12,7 @@
     </div>
 
     <header class="w3-container w3-theme w3-padding-24" style="padding-left:24px" >
-      <h1 class="w3-xxxlarge w3-padding-5">Dormitory Repairing System for PSU</h1>
+      <h1 class="w3-xxxlarge w3-padding-16">Dormitory Repairing System for PSU</h1>
     </header>
 
 
@@ -115,8 +115,8 @@
 
 
 
-<div class="w3-container w3-padding-16 w3-card-2" style="background-color:#eee">
-    <br>
+<div class="w3-container w3-padding-32" style="padding-left:32px">
+
     
 
     <h1 class="w3-center">สมัครสมาชิก</h1>
@@ -201,7 +201,7 @@
                             </div>
                         </div>
 
- <br>
+
            <!--  <p>  
                 <label>Confirm Password</label>
                 <input type="password" class="w3-input w3-hover-sand" name="password">
@@ -232,7 +232,22 @@
             <br>
         </form>
         <br>
-      
+     <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+ 
     </div>
 
     <h1 style="background-color:#FFFFCC" class="w3-center">  </h1>
