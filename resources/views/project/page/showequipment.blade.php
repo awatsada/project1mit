@@ -34,12 +34,12 @@
 
   <div class="w3-container w3-padding-32" style="padding-left:32px">
     <h2>รายละเอียดการแจ้งซ่อมทั่วไป</h2> 
-    <a class="w3-btn w3-teal" href="{{url('getpdf')}}/{{$Eq->id_equipment}}">Export PDF</a>
-   <!--  <form class="w3-container" action="re/report" enctype="multipart/form-data" method="post">
+    <!-- <a class="w3-btn w3-teal" href="{{url('getpdf')}}/{{$Eq->id_equipment}}">Export PDF</a> -->
+    <form class="w3-container" action="{{url('sh/recordequipment')}}/{{$Eq->id_equipment}}" enctype="multipart/form-data" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <p>
               <button class="w3-btn w3-yellow w3-border" type="submit" >Export PDF</button></p>
-            </form> -->
+            </form>
 <!-- <a class="w3-btn w3-blue" href="{{url('re/report')}}/{{$Eq->id_equipment}}">Print</a> -->
     <hr>
 
@@ -85,7 +85,7 @@
               <!-- <p><strong>อุปกรณ์ : </strong><i>{{$v->equipment}}</i></p>  -->
               <p><strong>รายละเอียดอุปกรณ์ : </strong><i>{{$v->detail_equipment}}</i></p> 
              
-            </div>detail_equipment
+            </div>
             @if ($v->photo_repair)
             <strong>ภาพอุปกรณ์  </strong>
             <h1><img src="{{asset('upload/repair/')}}/{{$v->photo_repair}}" class="w3-border w3-padding-4 w3-padding-tiny" alt="Norway" style="width:30%"></h1>  
@@ -106,7 +106,9 @@
         <form action="{{url('sh/recordequipment')}}/{{$Eq->id_equipment}}" method="get">
          <p><center><button class="w3-btn w3-pink">บันทึกการซ่อม</button></center></p>
        </form>
-  
+     <br>
+ 
+
 
      </div> 
      </div> 

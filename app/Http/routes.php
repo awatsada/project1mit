@@ -113,6 +113,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('update_record_uncomplete/{id}', 'HomeController@update_record_uncomplete');
     Route::get('delete_record_uncomplete/{id}', 'HomeController@delete_record_uncomplete');
 
+    Route::post('sh/recordequipment/{id}', 'HomeController@getPDF');
 
 /////////////////////*********************************///////////////////////ห
     Route::post('search', 'HomeController@search');
